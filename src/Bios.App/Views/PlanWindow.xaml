@@ -1,0 +1,57 @@
+<ui:FluentWindow x:Class="Bios.App.Views.PlanWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+                 Title="Plan"
+                 Width="980" Height="620"
+                 WindowStartupLocation="CenterOwner"
+                 ExtendsContentIntoTitleBar="True"
+                 WindowBackdropType="Mica"
+                 ResizeMode="CanResize">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ui:TitleBar Grid.Row="0" x:Name="TitleBarControl" Title="Plan" />
+
+        <TextBlock Grid.Row="1"
+                   x:Name="HeaderText"
+                   Margin="20,8,20,12"
+                   FontSize="14"
+                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                   TextWrapping="Wrap" />
+
+        <DataGrid Grid.Row="2"
+                  x:Name="Grid"
+                  Margin="16,0,16,0"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal"
+                  SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Réglage" Binding="{Binding TweakName}" Width="1.4*" />
+                <DataGridTextColumn Header="Paramètre" Binding="{Binding Question}" Width="1.6*" />
+                <DataGridTextColumn Header="Menu" Binding="{Binding Menu}" Width="1.2*" />
+                <DataGridTextColumn Header="Actuel" Binding="{Binding Old}" Width="1.2*" />
+                <DataGridTextColumn Header="Cible" Binding="{Binding Target}" Width="0.9*" />
+                <DataGridTextColumn Header="État" Binding="{Binding Status}" Width="0.8*" />
+                <DataGridTextColumn x:Name="VerifyColumn" Header="Vérifié" Binding="{Binding VerifyStatus}" Width="0.7*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="16">
+            <TextBlock x:Name="SummaryText"
+                       VerticalAlignment="Center"
+                       Margin="0,0,16,0"
+                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+            <ui:Button Content="Fermer" MinWidth="100" Click="OnClose" />
+        </StackPanel>
+    </Grid>
+</ui:FluentWindow>

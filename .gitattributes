@@ -1,0 +1,15 @@
+# Normalize text line endings, keep binaries intact
+* text=auto
+
+*.cs    text
+*.xaml  text
+*.csproj text
+*.json  text
+*.md    text
+*.yml   text
+
+# Binary assets — never touch
+*.exe   binary
+*.sys   binary
+*.ico   binary
+*.cap   binary

@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <RootNamespace>Bios.App</RootNamespace>
+    <AssemblyName>BiosTuner</AssemblyName>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Assets\app.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <Product>BIOS Tuner</Product>
+    <Company>BiosTuner</Company>
+    <!-- Single-file self-contained publish settings (also overridable on the CLI) -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>true</SelfContained>
+    <PublishSingleFile>true</PublishSingleFile>
+    <IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+    <EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+    <SatelliteResourceLanguages>en;fr</SatelliteResourceLanguages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="WPF-UI" Version="3.0.5" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+  </ItemGroup>
+
+  <!-- SCEWIN binaries + catalog are embedded so the app ships as a single .exe.
+       They are extracted to %LOCALAPPDATA%\BiosTuner\scewin at runtime. -->
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\tools\scewin\SCEWIN_64.exe">
+      <LogicalName>Bios.App.scewin.SCEWIN_64.exe</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\tools\scewin\amifldrv64.sys">
+      <LogicalName>Bios.App.scewin.amifldrv64.sys</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\tools\scewin\amigendrv64.sys">
+      <LogicalName>Bios.App.scewin.amigendrv64.sys</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\catalog\catalog.json">
+      <LogicalName>Bios.App.catalog.json</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

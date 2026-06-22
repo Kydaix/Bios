@@ -1,0 +1,24 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+publish/
+publish_test/
+*.user
+
+# Rider / IDEA
+.idea/
+*.sln.iml
+
+# VS
+.vs/
+
+# Logs / local runs
+*.log
+runs/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# NOTE: tools/scewin/*.exe and *.sys ARE intentionally tracked — they are
+# embedded into the single-file build. See README (AMI SCEWIN licensing).
