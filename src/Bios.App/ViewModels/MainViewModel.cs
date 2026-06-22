@@ -125,7 +125,19 @@ public partial class MainViewModel : ObservableObject
             var rows = PlanService.BuildPlan(_currentBlocks, clone, PlanService.Flatten(new[] { tv.Model }), mutate: false);
             tv.UpdateDiff(rows);
         }
+
+        // Already-conform tweaks are auto-checked so the UI reflects the current BIOS state.
+        // (Conform tweaks contribute zero changes, so Apply still writes only the real diff.)
+        _suppressExclusivity = true;
+        foreach (var tv in AllTweaks)
+        {
+            if (tv.IsConform)
+                tv.IsSelected = true;
+        }
+        _suppressExclusivity = false;
+
         RecomputeSelectionCount();
+        foreach (var c in Categories) c.RaiseSelectedCount();
     }
 
     // ----------------------------------------------------------------- Preview
@@ -157,10 +169,25 @@ public partial class MainViewModel : ObservableObject
             return;
         }
 
-        // Always work from a FRESH export, then preview before writing.
+        // Preview against the current import to know how many REAL changes there are.
+        var previewClone = (string[])_currentLines.Clone();
+        var previewRows = PlanService.BuildPlan(_currentBlocks, previewClone,
+            PlanService.Flatten(selected.Select(t => t.Model)), mutate: false);
+        int pendingChanges = previewRows.Count(r => r.WillChange);
+
+        if (pendingChanges == 0)
+        {
+            _ui.Info("Rien à appliquer",
+                "Tous les réglages sélectionnés sont déjà conformes au BIOS actuel.\n\n" +
+                "Aucune écriture n'est nécessaire.");
+            return;
+        }
+
+        // Always work from a FRESH export, then write only the diff.
         bool confirmed = _ui.Confirm(
             "Appliquer au BIOS ?",
-            $"{selected.Count} réglage(s) sélectionné(s) vont être écrits dans les variables UEFI via SCEWIN.\n\n" +
+            $"{pendingChanges} nouveau(x) changement(s) seront écrits dans les variables UEFI via SCEWIN " +
+            $"(sur {selected.Count} réglage(s) sélectionné(s), le reste est déjà conforme).\n\n" +
             "Une sauvegarde de l'état actuel est créée automatiquement.\n" +
             "Un REDÉMARRAGE sera nécessaire pour appliquer les changements.\n\n" +
             "Continuer ?");
@@ -175,7 +202,13 @@ public partial class MainViewModel : ObservableObject
             var lines = File.ReadAllLines(before).ToList();
             var blocks = ScewinParser.ParseBlocks(lines);
 
+            // Mutate only the lines that actually change; conform rules are a no-op on the file.
             var rows = PlanService.BuildPlan(blocks, lines, PlanService.Flatten(selected.Select(t => t.Model)), mutate: true);
+            var changedRows = rows.Where(r => r.WillChange).ToList();
+
+            // No diff against the fresh export -> nothing to write, skip the import entirely.
+            if (changedRows.Count == 0)
+                return (changedRows, File.ReadAllLines(before), runDir, false);
 
             string target = Path.Combine(runDir, "target.txt");
             File.WriteAllLines(target, lines);
@@ -189,29 +222,37 @@ public partial class MainViewModel : ObservableObject
             string after = Path.Combine(runDir, "after.txt");
             _runner.Export(after);
             var afterLines = File.ReadAllLines(after);
-            VerifyService.Verify(afterLines, rows);
+            VerifyService.Verify(afterLines, changedRows);
 
-            RunStore.WritePlanCsv(Path.Combine(runDir, "plan.csv"), rows);
+            RunStore.WritePlanCsv(Path.Combine(runDir, "plan.csv"), changedRows);
 
-            return (rows, afterLines, runDir);
+            return (changedRows, afterLines, runDir, true);
         },
         result =>
         {
             // Refresh diffs against the post-apply state.
-            _currentLines = result.afterLines;
-            _currentBlocks = ScewinParser.ParseBlocks(result.afterLines);
+            _currentLines = result.Item2;
+            _currentBlocks = ScewinParser.ParseBlocks(result.Item2);
             IsImported = true;
             RefreshAllDiffs();
 
-            int changed = result.rows.Count(r => r.Status == "applied");
-            int mismatch = result.rows.Count(r => r.VerifyStatus == "mismatch");
-            StatusText = $"Appliqué : {changed} modifié(s), {mismatch} non vérifié(s). Sauvegarde : {Path.GetFileName(result.runDir)}.";
+            if (!result.Item4)
+            {
+                _ui.Info("Rien à appliquer",
+                    "Le BIOS était déjà conforme au moment de l'écriture. Aucune modification effectuée.");
+                StatusText = "Aucun changement à appliquer (BIOS déjà conforme).";
+                return;
+            }
 
-            _ui.ShowPlan("Résultat — vérifiez puis REDÉMARREZ", result.rows, showVerify: true);
+            int changed = result.Item1.Count;
+            int mismatch = result.Item1.Count(r => r.VerifyStatus == "mismatch");
+            StatusText = $"Appliqué : {changed} changement(s), {mismatch} non vérifié(s). Sauvegarde : {Path.GetFileName(result.Item3)}.";
+
+            _ui.ShowPlan("Résultat — nouveaux changements appliqués, vérifiez puis REDÉMARREZ", result.Item1, showVerify: true);
 
             if (mismatch == 0)
                 _ui.Info("Terminé",
-                    "Tous les changements ont été écrits et vérifiés.\n\n" +
+                    $"{changed} changement(s) écrit(s) et vérifié(s).\n\n" +
                     "REDÉMARREZ pour les appliquer. Après reboot, validez la stabilité " +
                     "(Observateur d'événements → aucun WHEA-Logger ; y-cruncher / OCCT).");
             else

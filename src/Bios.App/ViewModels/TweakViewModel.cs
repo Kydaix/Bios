@@ -44,6 +44,12 @@ public partial class TweakViewModel : ObservableObject
     /// <summary>Plan rows computed for this tweak against the current export (no mutation).</summary>
     public IReadOnlyList<PlanRow> Diff { get; private set; } = Array.Empty<PlanRow>();
 
+    /// <summary>
+    /// True when the tweak has at least one applicable rule and none of them require a change:
+    /// the BIOS already matches this tweak's target. Such tweaks are auto-checked after an import.
+    /// </summary>
+    public bool IsConform => HasImport && ApplicableCount > 0 && ChangeCount == 0;
+
     public void UpdateDiff(IReadOnlyList<PlanRow> rows)
     {
         Diff = rows;
@@ -52,13 +58,17 @@ public partial class TweakViewModel : ObservableObject
         ApplicableCount = rows.Count(r => r.Status != "skipped");
 
         int missing = rows.Count(r => r.Status == "skipped");
-        if (ChangeCount == 0 && missing == 0)
-            DiffSummary = "Déjà conforme — aucun changement";
-        else if (ChangeCount == 0 && missing > 0)
-            DiffSummary = $"Déjà conforme ({missing} option(s) absente(s) de ce BIOS)";
+        if (ChangeCount == 0 && ApplicableCount > 0 && missing == 0)
+            DiffSummary = "Déjà conforme — coché (aucune écriture)";
+        else if (ChangeCount == 0 && ApplicableCount > 0)
+            DiffSummary = $"Déjà conforme — coché ({missing} option(s) absente(s) de ce BIOS)";
+        else if (ChangeCount == 0)
+            DiffSummary = "Non applicable sur ce BIOS";
         else
-            DiffSummary = $"{ChangeCount} paramètre(s) seront modifiés"
+            DiffSummary = $"{ChangeCount} paramètre(s) à modifier"
                           + (missing > 0 ? $", {missing} absent(s)" : "");
+
+        OnPropertyChanged(nameof(IsConform));
     }
 
     public void ClearDiff()
@@ -68,5 +78,6 @@ public partial class TweakViewModel : ObservableObject
         ChangeCount = 0;
         ApplicableCount = 0;
         DiffSummary = "";
+        OnPropertyChanged(nameof(IsConform));
     }
 }
