@@ -1,16 +1,29 @@
-name: build
+name: release
 
+# Chaque push sur main publie automatiquement une nouvelle version :
+#  - versioning auto (v1.0.<run_number>)
+#  - build de l'exe single-file
+#  - création du tag + de la release (avec l'exe)
+#  - nettoyage des anciennes releases/tags, caches, artifacts et vieux runs
 on:
   push:
     branches: [ main ]
-    tags: [ 'v*' ]
-  pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write   # créer/supprimer releases + tags
+  actions: write    # supprimer caches, artifacts, runs
+
+concurrency:
+  group: release-main
+  cancel-in-progress: true
+
 jobs:
-  build:
+  release:
     runs-on: windows-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERSION: v1.0.${{ github.run_number }}
 
     steps:
       - name: Checkout
@@ -21,25 +34,65 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore
-        run: dotnet restore Bios.sln
-
       - name: Publish single-file exe
-        run: >
-          dotnet publish src/Bios.App/Bios.App.csproj
-          -c Release -r win-x64 -o publish
-          -p:DebugType=None -p:DebugSymbols=false
+        shell: pwsh
+        run: |
+          dotnet publish src/Bios.App/Bios.App.csproj `
+            -c Release -r win-x64 -o publish `
+            -p:Version=1.0.${{ github.run_number }} `
+            -p:DebugType=None -p:DebugSymbols=false
+          if ($LASTEXITCODE -ne 0) { throw "publish failed" }
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: BiosTuner
-          path: publish/BiosTuner.exe
-          if-no-files-found: error
+      - name: Create release ${{ env.VERSION }}
+        shell: pwsh
+        run: |
+          # Si on relance un run avec le même numéro, on repart propre.
+          gh release delete $env:VERSION --yes --cleanup-tag 2>$null
+          gh release create $env:VERSION publish/BiosTuner.exe `
+            --target $env:GITHUB_SHA `
+            --title "BIOS Tuner $env:VERSION" `
+            --generate-notes
+          if ($LASTEXITCODE -ne 0) { throw "release create failed" }
 
-      - name: Create release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v2
-        with:
-          files: publish/BiosTuner.exe
-          generate_release_notes: true
+      - name: Delete previous releases and tags (keep current)
+        shell: pwsh
+        run: |
+          $keep = $env:VERSION
+          $tags = gh release list --limit 200 --json tagName --jq '.[].tagName'
+          foreach ($t in $tags) {
+            if ($t -and $t -ne $keep) {
+              Write-Host "Removing old release/tag $t"
+              gh release delete $t --yes --cleanup-tag 2>$null
+            }
+          }
+          exit 0
+
+      - name: Delete all Actions caches
+        shell: pwsh
+        run: |
+          $ids = gh cache list --limit 200 --json id --jq '.[].id'
+          foreach ($id in $ids) {
+            if ($id) { gh cache delete $id 2>$null }
+          }
+          exit 0
+
+      - name: Delete all run artifacts
+        shell: pwsh
+        run: |
+          $repo = $env:GITHUB_REPOSITORY
+          $ids = gh api "repos/$repo/actions/artifacts" --paginate --jq '.artifacts[].id'
+          foreach ($id in $ids) {
+            if ($id) { gh api -X DELETE "repos/$repo/actions/artifacts/$id" 2>$null }
+          }
+          exit 0
+
+      - name: Delete old workflow runs (keep latest 10)
+        shell: pwsh
+        run: |
+          $repo = $env:GITHUB_REPOSITORY
+          $old = gh api "repos/$repo/actions/runs?per_page=100" `
+            --jq '.workflow_runs | sort_by(.created_at) | reverse | .[10:] | .[].id'
+          foreach ($id in $old) {
+            if ($id) { gh api -X DELETE "repos/$repo/actions/runs/$id" 2>$null }
+          }
+          exit 0

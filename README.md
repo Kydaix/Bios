@@ -70,16 +70,20 @@ dotnet publish src/Bios.App/Bios.App.csproj -c Release -r win-x64 -o publish
 
 Produit un unique `publish/BiosTuner.exe` (self-contained, aucune install .NET requise).
 
-### Via GitHub Actions
+### Via GitHub Actions (release automatique)
 
-Le workflow [`.github/workflows/build.yml`](.github/workflows/build.yml) construit l'exe sur
-`windows-latest` à chaque push sur `main` et le publie en *artifact*.
-Pousser un tag `vX.Y.Z` crée en plus une **Release GitHub** avec l'exe attaché :
+Le workflow [`.github/workflows/build.yml`](.github/workflows/build.yml) est entièrement automatisé :
+**chaque push sur `main`** déclenche une nouvelle version, sans action manuelle.
 
-```powershell
-git tag v1.0.0
-git push origin v1.0.0
-```
+À chaque push sur `main`, le workflow :
+
+1. **versionne automatiquement** : `v1.0.<numéro de run>` (monotone, injecté aussi dans l'exe) ;
+2. construit le `BiosTuner.exe` single-file sur `windows-latest` ;
+3. crée le **tag** et la **Release GitHub** avec l'exe attaché (notes générées auto) ;
+4. **nettoie** : supprime les anciennes releases + tags (ne garde que la dernière),
+   tous les caches Actions, tous les artifacts, et les runs au-delà des 10 plus récents.
+
+Aucun `git tag` manuel n'est nécessaire — il suffit de pousser sur `main`.
 
 ---
 
