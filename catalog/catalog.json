@@ -16,9 +16,21 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "Above 4G Decoding", "code": "01", "reason": "Requis pour le mapping BAR des GPU modernes." },
-            { "question": "Resize BAR Support", "code": "01", "reason": "Autorise l'acces complet au BAR du GPU." },
-            { "question": "Launch CSM", "code": "00", "reason": "Requis par ReBAR et le boot UEFI pur." }
+            {
+              "question": "Above 4G Decoding",
+              "code": "01",
+              "reason": "Requis pour le mapping BAR des GPU modernes."
+            },
+            {
+              "question": "Resize BAR Support",
+              "code": "01",
+              "reason": "Autorise l'acces complet au BAR du GPU."
+            },
+            {
+              "question": "Launch CSM",
+              "code": "00",
+              "reason": "Requis par ReBAR et le boot UEFI pur."
+            }
           ]
         },
         {
@@ -29,8 +41,16 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "Global C-state Control", "code": "00", "reason": "Evite les transitions d'etats de veille profonds du CPU." },
-            { "question": "Power Supply Idle Control", "code": "00", "reason": "Typical Current Idle : evite le comportement basse conso au repos." }
+            {
+              "question": "Global C-state Control",
+              "code": "00",
+              "reason": "Evite les transitions d'etats de veille profonds du CPU."
+            },
+            {
+              "question": "Power Supply Idle Control",
+              "code": "00",
+              "reason": "Typical Current Idle : evite le comportement basse conso au repos."
+            }
           ]
         },
         {
@@ -41,8 +61,16 @@
           "recommended": false,
           "verified": true,
           "rules": [
-            { "question": "IOMMU", "code": "00", "reason": "Desactive le surcout de remapping DMA sans virtualisation." },
-            { "question": "SVM Mode", "code": "00", "reason": "Desactive la virtualisation CPU pour un profil 100% jeu." }
+            {
+              "question": "IOMMU",
+              "code": "00",
+              "reason": "Desactive le surcout de remapping DMA sans virtualisation."
+            },
+            {
+              "question": "SVM Mode",
+              "code": "00",
+              "reason": "Desactive la virtualisation CPU pour un profil 100% jeu."
+            }
           ]
         },
         {
@@ -53,7 +81,11 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "TSME", "code": "00", "reason": "Desactive le chiffrement transparent de la memoire." }
+            {
+              "question": "TSME",
+              "code": "00",
+              "reason": "Desactive le chiffrement transparent de la memoire."
+            }
           ]
         },
         {
@@ -64,8 +96,16 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "Integrated Graphics", "code": "00", "reason": "Setup GPU dedie uniquement." },
-            { "question": "iGPU Configuration", "code": "00", "reason": "Setup GPU dedie uniquement." }
+            {
+              "question": "Integrated Graphics",
+              "code": "00",
+              "reason": "Setup GPU dedie uniquement."
+            },
+            {
+              "question": "iGPU Configuration",
+              "code": "00",
+              "reason": "Setup GPU dedie uniquement."
+            }
           ]
         },
         {
@@ -76,13 +116,41 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "ASPM Support", "code": "00", "reason": "Desactive l'ASPM PCIe." },
-            { "question": "Native ASPM", "code": "00", "reason": "Empeche l'ASPM controle par l'OS." },
-            { "question": "CPU PCIE ASPM Mode Control", "code": "00", "reason": "Desactive les entrees ASPM PCIe du CPU." },
-            { "question": "PCIe Power Management Features", "code": "00", "reason": "Desactive le groupe de fonctions d'economie PCIe." },
-            { "question": "Clock Power Management(CLKREQ#)", "code": "00", "reason": "Desactive la gestion d'energie CLKREQ." },
-            { "question": "Clock Power Management", "code": "00", "reason": "Desactive la gestion d'energie CLKREQ." },
-            { "question": "PM L1 SS", "code": "00", "reason": "Desactive les sous-etats L1 du PCIe." }
+            {
+              "question": "ASPM Support",
+              "code": "00",
+              "reason": "Desactive l'ASPM PCIe."
+            },
+            {
+              "question": "Native ASPM",
+              "code": "00",
+              "reason": "Empeche l'ASPM controle par l'OS."
+            },
+            {
+              "question": "CPU PCIE ASPM Mode Control",
+              "code": "00",
+              "reason": "Desactive les entrees ASPM PCIe du CPU."
+            },
+            {
+              "question": "PCIe Power Management Features",
+              "code": "00",
+              "reason": "Desactive le groupe de fonctions d'economie PCIe."
+            },
+            {
+              "question": "Clock Power Management(CLKREQ#)",
+              "code": "00",
+              "reason": "Desactive la gestion d'energie CLKREQ."
+            },
+            {
+              "question": "Clock Power Management",
+              "code": "00",
+              "reason": "Desactive la gestion d'energie CLKREQ."
+            },
+            {
+              "question": "PM L1 SS",
+              "code": "00",
+              "reason": "Desactive les sous-etats L1 du PCIe."
+            }
           ]
         },
         {
@@ -93,8 +161,16 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "FCH Spread Spectrum", "code": "00", "reason": "Desactive le spread spectrum du chipset." },
-            { "question": "Clock Spread Spectrum", "code": "02", "reason": "Desactive le spread spectrum de l'horloge carte mere." }
+            {
+              "question": "FCH Spread Spectrum",
+              "code": "00",
+              "reason": "Desactive le spread spectrum du chipset."
+            },
+            {
+              "question": "Clock Spread Spectrum",
+              "code": "02",
+              "reason": "Desactive le spread spectrum de l'horloge carte mere."
+            }
           ]
         },
         {
@@ -105,7 +181,11 @@
           "recommended": false,
           "verified": true,
           "rules": [
-            { "question": "Latency Under Load (LUL)", "code": "00", "reason": "Garde le comportement latency-under-load actif pour les charges memoire lourdes." }
+            {
+              "question": "Latency Under Load (LUL)",
+              "code": "00",
+              "reason": "Garde le comportement latency-under-load actif pour les charges memoire lourdes."
+            }
           ]
         },
         {
@@ -116,12 +196,36 @@
           "recommended": false,
           "verified": true,
           "rules": [
-            { "question": "Pluton Support", "code": "00", "reason": "Desactive le processeur de securite Pluton." },
-            { "question": "Secured-core Auto enablement", "code": "00", "reason": "Empeche l'activation auto du secured-core." },
-            { "question": "DRTM Support", "code": "00", "reason": "Desactive le dynamic root of trust." },
-            { "question": "SMM Isolation Support", "code": "00", "reason": "Desactive l'isolation SMM." },
-            { "question": "SecureBio Support", "code": "00", "reason": "Desactive la biometrie firmware." },
-            { "question": "SecureBio Camera Support", "code": "00", "reason": "Desactive la biometrie camera firmware." }
+            {
+              "question": "Pluton Support",
+              "code": "00",
+              "reason": "Desactive le processeur de securite Pluton."
+            },
+            {
+              "question": "Secured-core Auto enablement",
+              "code": "00",
+              "reason": "Empeche l'activation auto du secured-core."
+            },
+            {
+              "question": "DRTM Support",
+              "code": "00",
+              "reason": "Desactive le dynamic root of trust."
+            },
+            {
+              "question": "SMM Isolation Support",
+              "code": "00",
+              "reason": "Desactive l'isolation SMM."
+            },
+            {
+              "question": "SecureBio Support",
+              "code": "00",
+              "reason": "Desactive la biometrie firmware."
+            },
+            {
+              "question": "SecureBio Camera Support",
+              "code": "00",
+              "reason": "Desactive la biometrie camera firmware."
+            }
           ]
         }
       ]
@@ -134,16 +238,40 @@
       "tweaks": [
         {
           "id": "pbo_base",
-          "name": "PBO Advanced + limites carte mere + Scalar 3X",
-          "description": "Active PBO en mode Advanced avec les limites PPT/TDC/EDC de la carte mere et un Scalar manuel 3X. Premiere etape perf CPU. Augmente boost et conso/temperature.",
+          "name": "PBO Advanced + limites carte mère + Scalar 10X",
+          "description": "Active PBO en mode Advanced avec les limites PPT/TDC/EDC de la carte mere et un Scalar manuel 10X. Premiere etape perf CPU. Augmente boost et conso/temperature.",
           "risk": "Medium",
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "Precision Boost Overdrive", "token": "9D", "offset": "9A", "code": "02", "reason": "Mode PBO Advanced (menu AMD Overclocking)." },
-            { "question": "PBO Limits", "token": "9E", "offset": "9B", "code": "01", "reason": "Limites PPT/TDC/EDC carte mere (menu AMD Overclocking)." },
-            { "question": "Precision Boost Overdrive Scalar Ctrl", "token": "A2", "offset": "A8", "code": "01", "reason": "Controle scalar manuel (menu AMD Overclocking)." },
-            { "question": "Precision Boost Overdrive Scalar", "token": "A3", "offset": "A9", "code": "12C", "reason": "Scalar 3X (valeur actuelle, menu AMD Overclocking)." }
+            {
+              "question": "Precision Boost Overdrive",
+              "token": "9D",
+              "offset": "9A",
+              "code": "02",
+              "reason": "Mode PBO Advanced (menu AMD Overclocking)."
+            },
+            {
+              "question": "PBO Limits",
+              "token": "9E",
+              "offset": "9B",
+              "code": "01",
+              "reason": "Limites PPT/TDC/EDC carte mere (menu AMD Overclocking)."
+            },
+            {
+              "question": "Precision Boost Overdrive Scalar Ctrl",
+              "token": "A2",
+              "offset": "A8",
+              "code": "01",
+              "reason": "Controle scalar manuel (menu AMD Overclocking)."
+            },
+            {
+              "question": "Precision Boost Overdrive Scalar",
+              "token": "A3",
+              "offset": "A9",
+              "code": "3E8",
+              "reason": "Scalar 10X (max, comme l'outil) — menu AMD Overclocking."
+            }
           ]
         },
         {
@@ -154,8 +282,20 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "CPU Boost Clock Override", "token": "A4", "offset": "AD", "code": "01", "reason": "Override de boost positif (menu AMD Overclocking)." },
-            { "question": "Max CPU Boost Clock Override(+)", "token": "A5", "offset": "AE", "value": "200", "reason": "+200 MHz de boost (valeur actuelle, menu AMD Overclocking)." }
+            {
+              "question": "CPU Boost Clock Override",
+              "token": "A4",
+              "offset": "AD",
+              "code": "01",
+              "reason": "Override de boost positif (menu AMD Overclocking)."
+            },
+            {
+              "question": "Max CPU Boost Clock Override(+)",
+              "token": "A5",
+              "offset": "AE",
+              "value": "200",
+              "reason": "+200 MHz de boost (valeur actuelle, menu AMD Overclocking)."
+            }
           ]
         },
         {
@@ -166,9 +306,27 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "Curve Optimizer", "token": "AF", "offset": "B6", "code": "01", "reason": "Curve Optimizer all-core (menu AMD Overclocking)." },
-            { "question": "All Core Curve Optimizer Sign", "token": "B0", "offset": "B7", "code": "01", "reason": "Offset negatif (menu AMD Overclocking)." },
-            { "question": "All Core Curve Optimizer Magnitude", "token": "B1", "offset": "B8", "value": "30", "reason": "Magnitude CO -30 (menu AMD Overclocking)." }
+            {
+              "question": "Curve Optimizer",
+              "token": "AF",
+              "offset": "B6",
+              "code": "01",
+              "reason": "Curve Optimizer all-core (menu AMD Overclocking)."
+            },
+            {
+              "question": "All Core Curve Optimizer Sign",
+              "token": "B0",
+              "offset": "B7",
+              "code": "01",
+              "reason": "Offset negatif (menu AMD Overclocking)."
+            },
+            {
+              "question": "All Core Curve Optimizer Magnitude",
+              "token": "B1",
+              "offset": "B8",
+              "value": "30",
+              "reason": "Magnitude CO -30 (menu AMD Overclocking)."
+            }
           ]
         },
         {
@@ -179,14 +337,62 @@
           "recommended": true,
           "verified": true,
           "rules": [
-            { "question": "Precision Boost Overdrive", "token": "2FD0", "offset": "46C", "code": "FF", "reason": "Reset ASUS Ai Tweaker PBO -> Auto." },
-            { "question": "Precision Boost Overdrive Scalar", "token": "7D", "offset": "485", "code": "00", "reason": "Reset ASUS Ai Tweaker scalar -> Auto." },
-            { "question": "CPU Boost Clock Override", "token": "7F", "offset": "48A", "code": "FF", "reason": "Reset ASUS Ai Tweaker boost override -> Auto." },
-            { "question": "Max CPU Boost Clock Override(+)", "token": "2FD6", "offset": "D46", "value": "Auto", "reason": "Reset ASUS Ai Tweaker boost -> Auto." },
-            { "question": "Max CPU Boost Clock Override(+)", "token": "80", "offset": "48B", "value": "0", "reason": "Reset du miroir numerique ASUS -> 0." },
-            { "question": "Curve Optimizer", "token": "C9", "offset": "6BC", "code": "00", "reason": "Reset ASUS Ai Tweaker Curve Optimizer -> Auto." },
-            { "question": "All Core Curve Optimizer Sign", "token": "CA", "offset": "6BD", "code": "00", "reason": "Reset ASUS Ai Tweaker CO sign -> defaut." },
-            { "question": "All Core Curve Optimizer Magnitude", "token": "CB", "offset": "6BE", "value": "0", "reason": "Reset ASUS Ai Tweaker CO magnitude -> 0." }
+            {
+              "question": "Precision Boost Overdrive",
+              "token": "2FD0",
+              "offset": "46C",
+              "code": "FF",
+              "reason": "Reset ASUS Ai Tweaker PBO -> Auto."
+            },
+            {
+              "question": "Precision Boost Overdrive Scalar",
+              "token": "7D",
+              "offset": "485",
+              "code": "00",
+              "reason": "Reset ASUS Ai Tweaker scalar -> Auto."
+            },
+            {
+              "question": "CPU Boost Clock Override",
+              "token": "7F",
+              "offset": "48A",
+              "code": "FF",
+              "reason": "Reset ASUS Ai Tweaker boost override -> Auto."
+            },
+            {
+              "question": "Max CPU Boost Clock Override(+)",
+              "token": "2FD6",
+              "offset": "D46",
+              "value": "Auto",
+              "reason": "Reset ASUS Ai Tweaker boost -> Auto."
+            },
+            {
+              "question": "Max CPU Boost Clock Override(+)",
+              "token": "80",
+              "offset": "48B",
+              "value": "0",
+              "reason": "Reset du miroir numerique ASUS -> 0."
+            },
+            {
+              "question": "Curve Optimizer",
+              "token": "C9",
+              "offset": "6BC",
+              "code": "00",
+              "reason": "Reset ASUS Ai Tweaker Curve Optimizer -> Auto."
+            },
+            {
+              "question": "All Core Curve Optimizer Sign",
+              "token": "CA",
+              "offset": "6BD",
+              "code": "00",
+              "reason": "Reset ASUS Ai Tweaker CO sign -> defaut."
+            },
+            {
+              "question": "All Core Curve Optimizer Magnitude",
+              "token": "CB",
+              "offset": "6BE",
+              "value": "0",
+              "reason": "Reset ASUS Ai Tweaker CO magnitude -> 0."
+            }
           ]
         }
       ]
@@ -205,11 +411,31 @@
           "recommended": false,
           "verified": false,
           "rules": [
-            { "question": "Power Down Enable", "code": "00", "reason": "Desactive le power-down DDR pour moins de latence." },
-            { "question": "UCLK DIV1 MODE", "code": "01", "reason": "Force UCLK=MEMCLK." },
-            { "question": "Gear Down Mode", "code": "01", "reason": "Desactive le gear-down la ou c'est supporte." },
-            { "question": "Memory Context Restore", "code": "00", "reason": "Retraine la memoire a chaque boot (stabilite pendant le tuning)." },
-            { "question": "Fclk VDCI Mode Pref", "code": "FF", "reason": "Garde le chemin Auto plus faible latence plutot que Predictive." }
+            {
+              "question": "Power Down Enable",
+              "code": "00",
+              "reason": "Desactive le power-down DDR pour moins de latence."
+            },
+            {
+              "question": "UCLK DIV1 MODE",
+              "code": "01",
+              "reason": "Force UCLK=MEMCLK."
+            },
+            {
+              "question": "Gear Down Mode",
+              "code": "01",
+              "reason": "Desactive le gear-down la ou c'est supporte."
+            },
+            {
+              "question": "Memory Context Restore",
+              "code": "00",
+              "reason": "Retraine la memoire a chaque boot (stabilite pendant le tuning)."
+            },
+            {
+              "question": "Fclk VDCI Mode Pref",
+              "code": "FF",
+              "reason": "Garde le chemin Auto plus faible latence plutot que Predictive."
+            }
           ]
         },
         {
@@ -221,11 +447,41 @@
           "verified": false,
           "exclusiveGroup": "fclk",
           "rules": [
-            { "question": "Infinity Fabric Frequency and Dividers", "token": "149", "offset": "269", "code": "32", "reason": "FCLK 2067 MHz (menu AMD CBS)." },
-            { "question": "Infinity Fabric Frequency and Dividers", "token": "9A", "offset": "94", "code": "813", "reason": "FCLK 2067 MHz (menu AMD Overclocking)." },
-            { "question": "FCLK Frequency", "token": "3013", "offset": "862", "code": "813", "reason": "FCLK 2067 MHz (chemin ASUS AI Tweaker)." },
-            { "question": "Fclk VDCI Mode Pref", "token": "9C", "offset": "216", "code": "FF", "reason": "Garde le chemin Auto/SyncFifo/Bypass." },
-            { "question": "SyncFifo Mode Override", "token": "14A", "offset": "26D", "code": "01", "reason": "Garde SyncFifo tel qu'entraine par le BIOS." }
+            {
+              "question": "Infinity Fabric Frequency and Dividers",
+              "token": "149",
+              "offset": "269",
+              "code": "32",
+              "reason": "FCLK 2067 MHz (menu AMD CBS)."
+            },
+            {
+              "question": "Infinity Fabric Frequency and Dividers",
+              "token": "9A",
+              "offset": "94",
+              "code": "813",
+              "reason": "FCLK 2067 MHz (menu AMD Overclocking)."
+            },
+            {
+              "question": "FCLK Frequency",
+              "token": "3013",
+              "offset": "862",
+              "code": "813",
+              "reason": "FCLK 2067 MHz (chemin ASUS AI Tweaker)."
+            },
+            {
+              "question": "Fclk VDCI Mode Pref",
+              "token": "9C",
+              "offset": "216",
+              "code": "FF",
+              "reason": "Garde le chemin Auto/SyncFifo/Bypass."
+            },
+            {
+              "question": "SyncFifo Mode Override",
+              "token": "14A",
+              "offset": "26D",
+              "code": "01",
+              "reason": "Garde SyncFifo tel qu'entraine par le BIOS."
+            }
           ]
         },
         {
@@ -237,11 +493,41 @@
           "verified": false,
           "exclusiveGroup": "fclk",
           "rules": [
-            { "question": "Infinity Fabric Frequency and Dividers", "token": "149", "offset": "269", "code": "33", "reason": "FCLK 2100 MHz (menu AMD CBS)." },
-            { "question": "Infinity Fabric Frequency and Dividers", "token": "9A", "offset": "94", "code": "834", "reason": "FCLK 2100 MHz (menu AMD Overclocking)." },
-            { "question": "FCLK Frequency", "token": "3013", "offset": "862", "code": "834", "reason": "FCLK 2100 MHz (chemin ASUS AI Tweaker)." },
-            { "question": "Fclk VDCI Mode Pref", "token": "9C", "offset": "216", "code": "FF", "reason": "Garde le chemin Auto/SyncFifo/Bypass." },
-            { "question": "SyncFifo Mode Override", "token": "14A", "offset": "26D", "code": "01", "reason": "Garde SyncFifo tel qu'entraine par le BIOS." }
+            {
+              "question": "Infinity Fabric Frequency and Dividers",
+              "token": "149",
+              "offset": "269",
+              "code": "33",
+              "reason": "FCLK 2100 MHz (menu AMD CBS)."
+            },
+            {
+              "question": "Infinity Fabric Frequency and Dividers",
+              "token": "9A",
+              "offset": "94",
+              "code": "834",
+              "reason": "FCLK 2100 MHz (menu AMD Overclocking)."
+            },
+            {
+              "question": "FCLK Frequency",
+              "token": "3013",
+              "offset": "862",
+              "code": "834",
+              "reason": "FCLK 2100 MHz (chemin ASUS AI Tweaker)."
+            },
+            {
+              "question": "Fclk VDCI Mode Pref",
+              "token": "9C",
+              "offset": "216",
+              "code": "FF",
+              "reason": "Garde le chemin Auto/SyncFifo/Bypass."
+            },
+            {
+              "question": "SyncFifo Mode Override",
+              "token": "14A",
+              "offset": "26D",
+              "code": "01",
+              "reason": "Garde SyncFifo tel qu'entraine par le BIOS."
+            }
           ]
         },
         {
@@ -253,11 +539,41 @@
           "verified": false,
           "exclusiveGroup": "fclk",
           "rules": [
-            { "question": "Infinity Fabric Frequency and Dividers", "token": "149", "offset": "269", "code": "34", "reason": "FCLK 2133 MHz (menu AMD CBS)." },
-            { "question": "Infinity Fabric Frequency and Dividers", "token": "9A", "offset": "94", "code": "855", "reason": "FCLK 2133 MHz (menu AMD Overclocking)." },
-            { "question": "FCLK Frequency", "token": "3013", "offset": "862", "code": "855", "reason": "FCLK 2133 MHz (chemin ASUS AI Tweaker)." },
-            { "question": "Fclk VDCI Mode Pref", "token": "9C", "offset": "216", "code": "FF", "reason": "Garde le chemin Auto/SyncFifo/Bypass." },
-            { "question": "SyncFifo Mode Override", "token": "14A", "offset": "26D", "code": "01", "reason": "Garde SyncFifo tel qu'entraine par le BIOS." }
+            {
+              "question": "Infinity Fabric Frequency and Dividers",
+              "token": "149",
+              "offset": "269",
+              "code": "34",
+              "reason": "FCLK 2133 MHz (menu AMD CBS)."
+            },
+            {
+              "question": "Infinity Fabric Frequency and Dividers",
+              "token": "9A",
+              "offset": "94",
+              "code": "855",
+              "reason": "FCLK 2133 MHz (menu AMD Overclocking)."
+            },
+            {
+              "question": "FCLK Frequency",
+              "token": "3013",
+              "offset": "862",
+              "code": "855",
+              "reason": "FCLK 2133 MHz (chemin ASUS AI Tweaker)."
+            },
+            {
+              "question": "Fclk VDCI Mode Pref",
+              "token": "9C",
+              "offset": "216",
+              "code": "FF",
+              "reason": "Garde le chemin Auto/SyncFifo/Bypass."
+            },
+            {
+              "question": "SyncFifo Mode Override",
+              "token": "14A",
+              "offset": "26D",
+              "code": "01",
+              "reason": "Garde SyncFifo tel qu'entraine par le BIOS."
+            }
           ]
         },
         {
@@ -269,11 +585,41 @@
           "verified": false,
           "exclusiveGroup": "fclk",
           "rules": [
-            { "question": "Infinity Fabric Frequency and Dividers", "token": "149", "offset": "269", "code": "35", "reason": "FCLK 2167 MHz (menu AMD CBS)." },
-            { "question": "Infinity Fabric Frequency and Dividers", "token": "9A", "offset": "94", "code": "877", "reason": "FCLK 2167 MHz (menu AMD Overclocking)." },
-            { "question": "FCLK Frequency", "token": "3013", "offset": "862", "code": "877", "reason": "FCLK 2167 MHz (chemin ASUS AI Tweaker)." },
-            { "question": "Fclk VDCI Mode Pref", "token": "9C", "offset": "216", "code": "FF", "reason": "Garde le chemin Auto/SyncFifo/Bypass." },
-            { "question": "SyncFifo Mode Override", "token": "14A", "offset": "26D", "code": "01", "reason": "Garde SyncFifo tel qu'entraine par le BIOS." }
+            {
+              "question": "Infinity Fabric Frequency and Dividers",
+              "token": "149",
+              "offset": "269",
+              "code": "35",
+              "reason": "FCLK 2167 MHz (menu AMD CBS)."
+            },
+            {
+              "question": "Infinity Fabric Frequency and Dividers",
+              "token": "9A",
+              "offset": "94",
+              "code": "877",
+              "reason": "FCLK 2167 MHz (menu AMD Overclocking)."
+            },
+            {
+              "question": "FCLK Frequency",
+              "token": "3013",
+              "offset": "862",
+              "code": "877",
+              "reason": "FCLK 2167 MHz (chemin ASUS AI Tweaker)."
+            },
+            {
+              "question": "Fclk VDCI Mode Pref",
+              "token": "9C",
+              "offset": "216",
+              "code": "FF",
+              "reason": "Garde le chemin Auto/SyncFifo/Bypass."
+            },
+            {
+              "question": "SyncFifo Mode Override",
+              "token": "14A",
+              "offset": "26D",
+              "code": "01",
+              "reason": "Garde SyncFifo tel qu'entraine par le BIOS."
+            }
           ]
         },
         {
@@ -285,8 +631,20 @@
           "verified": false,
           "exclusiveGroup": "trefi",
           "rules": [
-            { "question": "Refresh Interval", "token": "301C", "offset": "22AE", "value": "60000", "reason": "tREFI affiche a 60000." },
-            { "question": "Refresh Interval", "token": "1C3", "offset": "878", "value": "60000", "reason": "tREFI numerique a 60000." }
+            {
+              "question": "Refresh Interval",
+              "token": "301C",
+              "offset": "22AE",
+              "value": "60000",
+              "reason": "tREFI affiche a 60000."
+            },
+            {
+              "question": "Refresh Interval",
+              "token": "1C3",
+              "offset": "878",
+              "value": "60000",
+              "reason": "tREFI numerique a 60000."
+            }
           ]
         },
         {
@@ -298,8 +656,20 @@
           "verified": false,
           "exclusiveGroup": "trefi",
           "rules": [
-            { "question": "Refresh Interval", "token": "301C", "offset": "22AE", "value": "65535", "reason": "tREFI affiche au max 65535." },
-            { "question": "Refresh Interval", "token": "1C3", "offset": "878", "value": "65535", "reason": "tREFI numerique au max 65535." }
+            {
+              "question": "Refresh Interval",
+              "token": "301C",
+              "offset": "22AE",
+              "value": "65535",
+              "reason": "tREFI affiche au max 65535."
+            },
+            {
+              "question": "Refresh Interval",
+              "token": "1C3",
+              "offset": "878",
+              "value": "65535",
+              "reason": "tREFI numerique au max 65535."
+            }
           ]
         },
         {
@@ -310,32 +680,142 @@
           "recommended": false,
           "verified": false,
           "rules": [
-            { "question": "Twr", "token": "301B", "offset": "2286", "value": "48", "reason": "tWR affiche a 48." },
-            { "question": "Twr", "token": "1C2", "offset": "876", "value": "48", "reason": "tWR numerique a 48." }
+            {
+              "question": "Twr",
+              "token": "301B",
+              "offset": "2286",
+              "value": "48",
+              "reason": "tWR affiche a 48."
+            },
+            {
+              "question": "Twr",
+              "token": "1C2",
+              "offset": "876",
+              "value": "48",
+              "reason": "tWR numerique a 48."
+            }
           ]
         },
         {
           "id": "nitro",
           "name": "DDR5 Nitro low-latency",
-          "description": "Force le mode Nitro avec timings PHY internes bas. Risque si la marge de training des 4 DIMM DDR5-6200 est faible.",
+          "description": "Force le mode Nitro avec timings PHY internes bas. Risque si la marge de training des 4 DIMM DDR5-6200 est faible. Valeurs alignées sur l'outil AMD Hidden Tweaks.",
           "risk": "Experimental",
           "recommended": false,
           "verified": false,
           "rules": [
-            { "question": "DDR5 Nitro Mode", "token": "20", "offset": "1B2", "code": "01", "reason": "Active les controles Nitro (menu AMD CBS)." },
-            { "question": "DDR5 Nitro Mode", "token": "20C", "offset": "8D7", "code": "01", "reason": "Active les controles Nitro (menu ASUS)." },
-            { "question": "DDR5 Robust Training Mode", "token": "21", "offset": "1B3", "code": "00", "reason": "Desactive le robust training apres baseline stable." },
-            { "question": "DDR5 Robust Training Mode", "token": "20D", "offset": "8D8", "code": "00", "reason": "Desactive le robust training apres baseline stable." },
-            { "question": "Nitro RX Data", "token": "22", "offset": "1B4", "code": "01", "reason": "Timing RX bas." },
-            { "question": "Nitro RX Data", "token": "20E", "offset": "8D9", "code": "01", "reason": "Timing RX bas." },
-            { "question": "Nitro TX Data", "token": "23", "offset": "1B5", "code": "01", "reason": "Timing TX bas avec marge." },
-            { "question": "Nitro TX Data", "token": "20F", "offset": "8DA", "code": "01", "reason": "Timing TX bas avec marge." },
-            { "question": "Nitro Control Line", "token": "24", "offset": "1B6", "code": "01", "reason": "Timing commande/controle bas." },
-            { "question": "Nitro Control Line", "token": "210", "offset": "8DB", "code": "01", "reason": "Timing commande/controle bas." },
-            { "question": "Nitro Rx Burst Length", "token": "25", "offset": "1B7", "code": "00", "reason": "Burst RX le plus court." },
-            { "question": "Nitro Rx Burst Length", "token": "211", "offset": "8DC", "code": "00", "reason": "Burst RX le plus court." },
-            { "question": "Nitro Tx Burst Length", "token": "26", "offset": "1B8", "code": "00", "reason": "Burst TX le plus court." },
-            { "question": "Nitro Tx Burst Length", "token": "212", "offset": "8DD", "code": "00", "reason": "Burst TX le plus court." }
+            {
+              "question": "DDR5 Nitro Mode",
+              "token": "20",
+              "offset": "1B2",
+              "code": "01",
+              "reason": "Active les controles Nitro (menu AMD CBS)."
+            },
+            {
+              "question": "DDR5 Nitro Mode",
+              "token": "20C",
+              "offset": "8D7",
+              "code": "01",
+              "reason": "Active les controles Nitro (menu ASUS)."
+            },
+            {
+              "question": "DDR5 Robust Training Mode",
+              "token": "21",
+              "offset": "1B3",
+              "code": "01",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (01)."
+            },
+            {
+              "question": "DDR5 Robust Training Mode",
+              "token": "20D",
+              "offset": "8D8",
+              "code": "01",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (01)."
+            },
+            {
+              "question": "Nitro RX Data",
+              "token": "22",
+              "offset": "1B4",
+              "code": "01",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (01)."
+            },
+            {
+              "question": "Nitro RX Data",
+              "token": "20E",
+              "offset": "8D9",
+              "code": "01",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (01)."
+            },
+            {
+              "question": "Nitro TX Data",
+              "token": "23",
+              "offset": "1B5",
+              "code": "03",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (03)."
+            },
+            {
+              "question": "Nitro TX Data",
+              "token": "20F",
+              "offset": "8DA",
+              "code": "03",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (03)."
+            },
+            {
+              "question": "Nitro Control Line",
+              "token": "24",
+              "offset": "1B6",
+              "code": "01",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (01)."
+            },
+            {
+              "question": "Nitro Control Line",
+              "token": "210",
+              "offset": "8DB",
+              "code": "01",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (01)."
+            },
+            {
+              "question": "Nitro Rx Burst Length",
+              "token": "25",
+              "offset": "1B7",
+              "code": "03",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (03)."
+            },
+            {
+              "question": "Nitro Rx Burst Length",
+              "token": "211",
+              "offset": "8DC",
+              "code": "03",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (03)."
+            },
+            {
+              "question": "Nitro Tx Burst Length",
+              "token": "26",
+              "offset": "1B8",
+              "code": "03",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (03)."
+            },
+            {
+              "question": "Nitro Tx Burst Length",
+              "token": "212",
+              "offset": "8DD",
+              "code": "03",
+              "reason": "Valeur reprise de l'outil AMD Hidden Tweaks (03)."
+            },
+            {
+              "question": "Nitro DFE Vref Offset Limits",
+              "token": "27",
+              "offset": "1D8",
+              "code": "01",
+              "reason": "Limites d'offset Vref DFE actives (repris de l'outil)."
+            },
+            {
+              "question": "Nitro DFE Vref Offset Limits",
+              "token": "213",
+              "offset": "8DE",
+              "code": "01",
+              "reason": "Limites d'offset Vref DFE actives (repris de l'outil)."
+            }
           ]
         }
       ]
@@ -354,12 +834,659 @@
           "recommended": false,
           "verified": false,
           "rules": [
-            { "question": "PSPP Policy", "code": "01", "reason": "PCIe Speed Power Policy en mode performance." },
-            { "question": "Extended Tag", "code": "01", "reason": "Autorise les tags requester 8 bits." },
-            { "question": "BIOS Hot-Plug Support", "code": "00", "reason": "Desactive le hot-plug firmware." },
-            { "question": "Unpopulated Links", "code": "01", "reason": "Desactive les liens PCIe non peuples." },
-            { "question": "Chipset PCIE(G1) CTLE Optimization", "code": "01", "reason": "Force l'optimisation CTLE PCIe chipset." },
-            { "question": "PCIEX16(G5) Link Mode", "code": "05", "reason": "Force le slot GPU principal en Gen5." }
+            {
+              "question": "PSPP Policy",
+              "code": "01",
+              "reason": "PCIe Speed Power Policy en mode performance."
+            },
+            {
+              "question": "Extended Tag",
+              "code": "01",
+              "reason": "Autorise les tags requester 8 bits."
+            },
+            {
+              "question": "BIOS Hot-Plug Support",
+              "code": "00",
+              "reason": "Desactive le hot-plug firmware."
+            },
+            {
+              "question": "Unpopulated Links",
+              "code": "01",
+              "reason": "Desactive les liens PCIe non peuples."
+            },
+            {
+              "question": "Chipset PCIE(G1) CTLE Optimization",
+              "code": "01",
+              "reason": "Force l'optimisation CTLE PCIe chipset."
+            },
+            {
+              "question": "PCIEX16(G5) Link Mode",
+              "code": "05",
+              "reason": "Force le slot GPU principal en Gen5."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cpu_perf",
+      "name": "Cœurs & cache CPU (perf)",
+      "description": "Réglages cœur/cache repris de l'outil AMD Hidden Tweaks : prefetchers, prédiction de branche, gestion des cœurs préférés. Orientés performance brute.",
+      "risk": "Low",
+      "tweaks": [
+        {
+          "id": "prefetchers",
+          "name": "Activer tous les prefetchers matériels",
+          "description": "Active les 6 prefetchers L1/L2 (Stream, Stride, Region, Burst, Up/Down). Améliore le débit mémoire dans la plupart des jeux.",
+          "risk": "Low",
+          "recommended": true,
+          "verified": true,
+          "rules": [
+            {
+              "question": "L1 Stream HW Prefetcher",
+              "code": "01",
+              "reason": "Prefetcher L1 Stream actif."
+            },
+            {
+              "question": "L2 Stream HW Prefetcher",
+              "code": "01",
+              "reason": "Prefetcher L2 Stream actif."
+            },
+            {
+              "question": "L1 Stride Prefetcher",
+              "code": "01",
+              "reason": "Prefetcher L1 Stride actif."
+            },
+            {
+              "question": "L1 Region Prefetcher",
+              "code": "01",
+              "reason": "Prefetcher L1 Region actif."
+            },
+            {
+              "question": "L1 Burst Prefetch Mode",
+              "code": "01",
+              "reason": "Mode burst prefetch L1 actif."
+            },
+            {
+              "question": "L2 Up/Down Prefetcher",
+              "code": "01",
+              "reason": "Prefetcher L2 Up/Down actif."
+            }
+          ]
+        },
+        {
+          "id": "core_perf",
+          "name": "Cœurs préférés, NUMA L3, prédicteur de branche",
+          "description": "Active CPPC Dynamic Preferred Cores, déclare chaque CCX comme domaine NUMA (cache L3 par CCD), active le Corrector Branch Predictor et le mode SoC/Uncore OC.",
+          "risk": "Low",
+          "recommended": true,
+          "verified": true,
+          "rules": [
+            {
+              "question": "CPPC Dynamic Preferred Cores",
+              "code": "01",
+              "reason": "Sélection dynamique des meilleurs cœurs."
+            },
+            {
+              "question": "ACPI SRAT L3 Cache As NUMA Domain",
+              "code": "01",
+              "reason": "Expose chaque CCX comme domaine NUMA."
+            },
+            {
+              "question": "Corrector Branch Predictor",
+              "code": "01",
+              "reason": "Réduit les mauvaises prédictions sur code à branches lourdes."
+            },
+            {
+              "question": "SoC/Uncore OC Mode",
+              "code": "01",
+              "reason": "Force le mode OC SoC/uncore (Infinity Fabric/IMC)."
+            }
+          ]
+        },
+        {
+          "id": "mwait_off",
+          "name": "Désactiver MONITOR/MWAIT",
+          "description": "Rend les opcodes MONITOR/MWAIT invalides : empêche certains états d'attente du CPU. Peut réduire la latence mais augmente la conso idle.",
+          "risk": "Medium",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "MONITOR and MWAIT disable",
+              "code": "01",
+              "reason": "Désactive MONITOR/MWAIT."
+            }
+          ]
+        },
+        {
+          "id": "core_aggressive",
+          "name": "Opcache / Streaming Stores / L3 DFLL (agressif)",
+          "description": "Reprend les choix agressifs de l'outil : désactive l'opcache, les streaming stores, le stretch L3 DFLL et le profil 'core tunings gaming'. Effets variables, à tester.",
+          "risk": "Experimental",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "Opcache Control",
+              "code": "00",
+              "reason": "Désactive l'opcache (choix de l'outil)."
+            },
+            {
+              "question": "Streaming Stores Control",
+              "code": "00",
+              "reason": "Désactive les streaming stores."
+            },
+            {
+              "question": "Stretch mode for L3 DFLL",
+              "code": "00",
+              "reason": "Désactive le stretch mode L3 DFLL."
+            },
+            {
+              "question": "Core tunings Configuration for gaming",
+              "code": "00",
+              "reason": "Désactive le profil core tunings gaming."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "power_adv",
+      "name": "Économies d'énergie avancées",
+      "description": "Désactive les états de veille profonds par périphérique (D3), le power/clock gating et divers mécanismes d'économie qui ajoutent de la latence de réveil. Repris de l'outil.",
+      "risk": "Low",
+      "tweaks": [
+        {
+          "id": "soc_d3_off",
+          "name": "Désactiver les états D3 SOC/PCIe",
+          "description": "Désactive la mise en veille profonde (D3) des blocs SOC (GPU, audio, USB, ACP) et des ponts PCIe internes / tunneling USB4. Réveil périphérique plus rapide.",
+          "risk": "Low",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "ACPI D3 Support",
+              "code": "00",
+              "reason": "Désactive l'ACPI D3 (USB4)."
+            },
+            {
+              "question": "ACPI D3 Support",
+              "code": "00",
+              "reason": "Désactive l'ACPI D3 (USB4, 2e occurrence)."
+            },
+            {
+              "question": "Internal PCIe GPP 0 D3",
+              "code": "00",
+              "reason": "Désactive le D3 du pont PCIe GPP 0."
+            },
+            {
+              "question": "Internal PCIe GPP 2 D3",
+              "code": "00",
+              "reason": "Désactive le D3 du pont PCIe GPP 2."
+            },
+            {
+              "question": "SOC GPU D3",
+              "code": "00",
+              "reason": "Désactive le D3 du GPU SOC."
+            },
+            {
+              "question": "SOC HD Audio D3",
+              "code": "00",
+              "reason": "Désactive le D3 de l'audio HD SOC."
+            },
+            {
+              "question": "SOC USB3.1 D3",
+              "code": "00",
+              "reason": "Désactive le D3 USB3.1 SOC."
+            },
+            {
+              "question": "SOC ACP D3",
+              "code": "00",
+              "reason": "Désactive le D3 ACP SOC."
+            },
+            {
+              "question": "SOC Azalia D3",
+              "code": "00",
+              "reason": "Désactive le D3 Azalia SOC."
+            },
+            {
+              "question": "SOC USB2.0 D3",
+              "code": "00",
+              "reason": "Désactive le D3 USB2.0 SOC."
+            },
+            {
+              "question": "SOC USB3.1 for USB4 D3",
+              "code": "00",
+              "reason": "Désactive le D3 USB3.1-for-USB4 SOC."
+            },
+            {
+              "question": "SOC USB4 D3",
+              "code": "00",
+              "reason": "Désactive le D3 USB4 SOC."
+            },
+            {
+              "question": "Internal USB4 PCIe Tunneling D3",
+              "code": "00",
+              "reason": "Désactive le D3 du tunneling PCIe USB4."
+            },
+            {
+              "question": "SOC USB4 PCIe Endpoint D3",
+              "code": "00",
+              "reason": "Désactive le D3 de l'endpoint PCIe USB4."
+            }
+          ]
+        },
+        {
+          "id": "power_gating_off",
+          "name": "Désactiver power/clock gating & C-states profonds",
+          "description": "Coupe le power/clock gating ACP, le D3Cold, les DF C-states, la déclaration C1 ACPI, le deep sleep NPU et abaisse l'état de veille ACPI. Moins de transitions, plus de latence stable.",
+          "risk": "Low",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "ACP Power Gating",
+              "code": "00",
+              "reason": "Désactive le power gating ACP."
+            },
+            {
+              "question": "ACP CLock Gating",
+              "code": "00",
+              "reason": "Désactive le clock gating ACP."
+            },
+            {
+              "question": "D3Cold Support",
+              "code": "00",
+              "reason": "Désactive le D3Cold du slot PCIe."
+            },
+            {
+              "question": "ACPI Sleep State",
+              "code": "00",
+              "reason": "Abaisse l'état de veille ACPI."
+            },
+            {
+              "question": "ACPI _CST C1 Declaration",
+              "code": "00",
+              "reason": "Ne déclare pas le C1 à l'OS."
+            },
+            {
+              "question": "DF Cstates",
+              "code": "00",
+              "reason": "Désactive les C-states du Data Fabric."
+            },
+            {
+              "question": "NPU Deep Sleep Enable",
+              "code": "00",
+              "reason": "Désactive le deep sleep du NPU."
+            }
+          ]
+        },
+        {
+          "id": "misc_power",
+          "name": "Hibernation, SmartShift, horloges inutilisées",
+          "description": "Désactive l'hibernation, SmartShift, STAPM Boost et le PME Turn-Off ; coupe les horloges GPP inutilisées et active GFXOFF (sans impact sur un GPU dédié).",
+          "risk": "Low",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "Enable Hibernation",
+              "value": "0",
+              "reason": "Désactive l'hibernation (S4)."
+            },
+            {
+              "question": "SmartShift Enable",
+              "code": "00",
+              "reason": "Désactive SmartShift (A+A)."
+            },
+            {
+              "question": "STAPM Boost",
+              "code": "00",
+              "reason": "Désactive STAPM Boost."
+            },
+            {
+              "question": "PME Turn Off Support",
+              "code": "00",
+              "reason": "Désactive l'envoi PME_Turn_Off."
+            },
+            {
+              "question": "Unused GPP Clocks Off",
+              "code": "01",
+              "reason": "Coupe les horloges PCIe GPP inutilisées."
+            },
+            {
+              "question": "GFXOFF",
+              "code": "01",
+              "reason": "Active GFXOFF (mise hors tension iGPU au repos)."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ras",
+      "name": "Fiabilité & rapport d'erreurs (RAS)",
+      "description": "Désactive les mécanismes de détection/rapport d'erreurs (watchdog, AER, MCA, ECC…) pour réduire l'overhead. ATTENTION : baisse la robustesse, profil jeu uniquement.",
+      "risk": "Medium",
+      "tweaks": [
+        {
+          "id": "error_reporting_off",
+          "name": "Désactiver watchdog & rapport d'erreurs",
+          "description": "Coupe le watchdog cœur, le gel des files DF sur erreur, l'ECRC PCIe, l'AER, le PFEH, les seuils MCA et divers messages firmware. Réduit l'overhead RAS.",
+          "risk": "Medium",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "Core Watchdog Timer Enable",
+              "code": "00",
+              "reason": "Désactive le watchdog cœur."
+            },
+            {
+              "question": "Freeze DF module queues on error",
+              "code": "00",
+              "reason": "Ne gèle pas les files DF sur erreur."
+            },
+            {
+              "question": "PCIe All Port ECRC",
+              "code": "00",
+              "reason": "Désactive l'ECRC sur tous les ports PCIe."
+            },
+            {
+              "question": "Advanced Error Reporting (AER)",
+              "code": "00",
+              "reason": "Désactive l'AER PCIe."
+            },
+            {
+              "question": "Log Transparent Errors",
+              "code": "00",
+              "reason": "Ne journalise pas les erreurs transparentes."
+            },
+            {
+              "question": "Platform First Error Handling",
+              "code": "00",
+              "reason": "Désactive le PFEH."
+            },
+            {
+              "question": "MCA error thresh enable",
+              "code": "00",
+              "reason": "Désactive le seuillage d'erreurs MCA."
+            },
+            {
+              "question": "MCA FruText",
+              "code": "00",
+              "reason": "Désactive MCA FruText."
+            },
+            {
+              "question": "Persistence mode for legacy endpoints",
+              "code": "00",
+              "reason": "Désactive la persistance pour endpoints legacy."
+            },
+            {
+              "question": "SMART Self Test",
+              "value": "0",
+              "reason": "Désactive le self-test S.M.A.R.T."
+            },
+            {
+              "question": "Option ROM Messages",
+              "code": "00",
+              "reason": "Masque les messages des option ROM."
+            },
+            {
+              "question": "ABL Console Out Control",
+              "code": "00",
+              "reason": "Désactive la sortie console ABL."
+            }
+          ]
+        },
+        {
+          "id": "ecc_off",
+          "name": "Désactiver ECC & scrambling mémoire",
+          "description": "Désactive l'ECC, le data scramble, l'injection d'erreur et le PPIN. Léger gain de latence/bande passante mémoire, robustesse réduite.",
+          "risk": "Medium",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "ECC",
+              "code": "00",
+              "reason": "Désactive l'ECC mémoire."
+            },
+            {
+              "question": "Data Scramble",
+              "code": "00",
+              "reason": "Désactive le scrambling des données."
+            },
+            {
+              "question": "Disable Memory Error Injection",
+              "code": "01",
+              "reason": "Désactive l'injection d'erreur mémoire."
+            },
+            {
+              "question": "PPIN Opt-in",
+              "code": "00",
+              "reason": "Désactive le PPIN."
+            }
+          ]
+        },
+        {
+          "id": "pcie_ari",
+          "name": "PCIe ARI",
+          "description": "Désactive l'ARI PCIe (Alternative Routing-ID) comme le fait l'outil.",
+          "risk": "Low",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "PCIe ARI Support",
+              "code": "00",
+              "reason": "Désactive l'ARI."
+            },
+            {
+              "question": "PCIe ARI Enumeration",
+              "code": "00",
+              "reason": "Désactive l'énumération ARI."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "connectivity",
+      "name": "Connectique & périphériques",
+      "description": "Désactive les contrôleurs et services périphériques inutiles en jeu (USB4, SR-IOV, pile réseau UEFI, PXE, alim USB en veille, utilitaires ASUS).",
+      "risk": "Low",
+      "tweaks": [
+        {
+          "id": "usb4_off",
+          "name": "Désactiver USB4 (ASM4242)",
+          "description": "Désactive le contrôleur USB4 ASM4242 et le support USB4 natif.",
+          "risk": "Low",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "USB4 (ASM4242 Controller) Support",
+              "code": "00",
+              "reason": "Désactive le contrôleur USB4."
+            },
+            {
+              "question": "Native USB4",
+              "code": "00",
+              "reason": "Désactive l'USB4 natif."
+            }
+          ]
+        },
+        {
+          "id": "io_off",
+          "name": "SR-IOV, pile réseau, PXE, alim USB veille, utilitaires ASUS",
+          "description": "Désactive SR-IOV, la pile réseau UEFI, la ROM PXE LAN, l'alimentation USB en S4/S5 et l'auto-installation des utilitaires ASUS.",
+          "risk": "Low",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "SR-IOV Support",
+              "code": "00",
+              "reason": "Désactive SR-IOV."
+            },
+            {
+              "question": "Network Stack",
+              "code": "00",
+              "reason": "Désactive la pile réseau UEFI."
+            },
+            {
+              "question": "Onboard PCIE LAN PXE ROM",
+              "code": "00",
+              "reason": "Désactive la ROM PXE du LAN."
+            },
+            {
+              "question": "USB power delivery in S4 state",
+              "code": "00",
+              "reason": "Coupe l'alim USB en S4."
+            },
+            {
+              "question": "USB power delivery in Soft Off state (S5)",
+              "code": "00",
+              "reason": "Coupe l'alim USB en S5."
+            },
+            {
+              "question": "Auto Install ASUS Utilities",
+              "code": "00",
+              "reason": "Désactive l'auto-install des utilitaires ASUS."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vrm",
+      "name": "Alimentation DIGI+ VRM (agressif)",
+      "description": "Reprend le comportement de l'outil sur l'étage d'alimentation : phases VRM toujours actives (réponse transitoire maximale). Plus de chaleur VRM, à activer manuellement.",
+      "risk": "High",
+      "tweaks": [
+        {
+          "id": "vrm_extreme",
+          "name": "Phases VRM CPU/SoC en Extreme",
+          "description": "Force CPU Power Phase/Duty Control et VDDSOC Power Phase/Duty Control sur Extreme : toutes les phases VRM actives en permanence. Meilleure réponse transitoire, VRM plus chauds.",
+          "risk": "High",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "CPU Power Phase Control",
+              "code": "03",
+              "reason": "Phases VRM CPU = Extreme."
+            },
+            {
+              "question": "CPU Power Duty Control",
+              "code": "01",
+              "reason": "Duty VRM CPU = Extreme."
+            },
+            {
+              "question": "VDDSOC Power Phase Control",
+              "code": "03",
+              "reason": "Phases VRM VDDSOC = Extreme."
+            },
+            {
+              "question": "VDDSOC Power Duty Control",
+              "code": "01",
+              "reason": "Duty VRM VDDSOC = Extreme."
+            }
+          ]
+        },
+        {
+          "id": "vrm_protect",
+          "name": "Prochot VRM & Peak Current Control",
+          "description": "Garde la protection Prochot VRM et le Peak Current Control actifs (sécurité d'alimentation).",
+          "risk": "Low",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "Prochot VRM Throttling",
+              "code": "01",
+              "reason": "Throttling VRM sur Prochot actif."
+            },
+            {
+              "question": "Peak Current Control",
+              "code": "01",
+              "reason": "Peak Current Control actif."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "misc",
+      "name": "Divers (repris de l'outil)",
+      "description": "Réglages variés repris de l'outil AMD Hidden Tweaks et n'entrant pas dans les autres catégories.",
+      "risk": "Low",
+      "tweaks": [
+        {
+          "id": "misc_flags",
+          "name": "Drapeaux divers",
+          "description": "Désactive App Compatibility Database, Processor Aggregator Device, Setup Mode, SMEE, le mode LN2, le loopback PCIe, le Memory P-state ; conserve le contrôle SEV.",
+          "risk": "Low",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "App Compatibility Database",
+              "code": "00",
+              "reason": "Désactive la base de compatibilité applicative."
+            },
+            {
+              "question": "Processor Aggregator Device",
+              "code": "00",
+              "reason": "Désactive le Processor Aggregator Device."
+            },
+            {
+              "question": "Setup Mode",
+              "code": "00",
+              "reason": "Mode setup par défaut."
+            },
+            {
+              "question": "SMEE",
+              "code": "00",
+              "reason": "Désactive le secure memory encryption enable."
+            },
+            {
+              "question": "LN2 Mode",
+              "code": "00",
+              "reason": "Désactive le mode LN2."
+            },
+            {
+              "question": "PCIe loopback Mode",
+              "code": "00",
+              "reason": "Désactive le mode loopback PCIe."
+            },
+            {
+              "question": "Memory P-state",
+              "code": "00",
+              "reason": "Désactive les P-states mémoire."
+            },
+            {
+              "question": "SEV Control",
+              "code": "01",
+              "reason": "Reprend le contrôle SEV de l'outil."
+            }
+          ]
+        },
+        {
+          "id": "led_state",
+          "name": "LED en fonctionnement",
+          "description": "Comportement des LED quand le système est en marche (repris tel quel de l'outil).",
+          "risk": "Safe",
+          "recommended": false,
+          "verified": true,
+          "rules": [
+            {
+              "question": "When system is in working state",
+              "code": "03",
+              "reason": "Comportement LED en fonctionnement (valeur outil)."
+            }
           ]
         }
       ]

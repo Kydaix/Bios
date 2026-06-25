@@ -1,0 +1,258 @@
+value types: {'int': 240, 'str': 14}
+value counts: {0: 195, 3: 5, 1: 31, 19: 2, 2: 5, 'Extreme': 6, 'Disabled': 1, 'Advanced': 1, 'Motherboard': 1, 'Manual': 1, '10X': 1, 'Enabled (Positive)': 1, 200: 1, 'All Cores': 1, 'Negative': 1, 5: 1}
+
+=== name = value (all 254) ===
+       0  App Compatibility Database
+       0  Processor Aggregator Device
+       0  Secured-core Auto enablement
+       0  DRTM Support
+       0  SMM Isolation Support
+       0  ABL Console Out Control
+       0  Pluton Security Processor
+       0  Pluton Support
+       0  SecureBio Support
+       0  SecureBio Camera Support
+       0  Enable Hibernation
+       3        When system is in working state
+       0  RGB Fusion
+       0  LEDs in System Power On State
+       0  RGB Light
+       0  USB4 (ASM4242 Controller) Support
+       0  Native USB4
+       0  Discrete USB4 Support
+       0  Thunderbolt/USB4 (Intel� JHL8540 controller) Support
+       0  SR-IOV Support
+       0  Serial(COM) Port
+       0  Parallel Port
+       0  Spread Spectrum
+       0  Global C-state Control
+       0  CPPC
+       0  CPPC Preferred Cores
+       0  CC1
+       0  TSME
+       0  ACPI Standby State
+       0  ASPM Support
+       0  AB Clock Gating
+       0  I2C 0 D3 Support
+       0  I2C 1 D3 Support
+       0  I2C 2 D3 Support
+       0  I2C 3 D3 Support
+       0  I2C 4 D3 Support
+       0  I2C 5 D3 Support
+       0  UART 0 D3 Support
+       0  UART 1 D3 Support
+       0  UART 2 D3 Support
+       0  UART 3 D3 Support
+       0  SATA D3 Support
+       0  EHCI D3 Support
+       0  XHCI D3 Support
+       0  SD D3 Support
+       0  Chipset Power Saving Features
+       0  SB Clock Spread Spectrum
+       0  _OSC For PCI0
+       0  USB Phy Power Down
+       0  SB C1E Support
+       0  ACPI Sleep State
+       0  ACP Power Gating
+       0  ACP CLock Gating
+       0  Wake on PME
+       0  Thunderbolt Support
+       0  D3Cold Support
+       0  SMEE
+       0  ACPI _CST C1 Declaration
+       0  Core Watchdog Timer Enable
+       0  Freeze DF module queues on error
+       0  CC6 memory region encryption
+       0  DRAM scrub time
+       0  Poison scrubber control
+       0  Redirect scrubber control
+       0  GMI encryption control
+       0  xGMI encryption control
+       0  ACS Enable
+       0  PCIe ARI Support
+       0  PCIe ARI Enumeration
+       0  Enable AER Cap
+       0  D3 Cold Support
+       0  ASPM Mode Control
+       0  PM L1 SS
+       0  ECC
+       0  DRAM ECC Enable
+       0  DRAM UECC Retry
+       0  Data Scramble
+       0  DMAr Support
+       0  CPU PCIE ASPM Mode Control
+       1  Extended Tag
+       1  SoC/Uncore OC Mode
+       0  Option ROM Messages
+       0  PSPP Policy
+      19  4-link xGMI max speed
+      19  3-link xGMI max speed
+       1  APBDIS
+       0  DF Cstates
+       0  PCIe All Port ECRC
+       0  Advanced Error Reporting (AER)
+       0  NPU Deep Sleep Enable
+       0  PCIe Power Management Features
+       2  Clock Spread Spectrum
+       0  SMART Self Test
+       0  Native ASPM
+       2  LCLK DPM
+       2  LCLK DPM Enhanced PCIe Detection
+       0  Data Poisoning
+       0  DRAM Post Package Repair
+       0  RCD Parity
+       0  Write CRC Enable
+       0  AMD Cool&Quiet function
+       0  Port 60/64 Emulation
+       0  Wake on LAN
+       0  ASPM Control for CPU PCIe
+       1  L1 Stream HW Prefetcher
+       1  L2 Stream HW Prefetcher
+       1  L1 Stride Prefetcher
+       1  L1 Region Prefetcher
+       1  L1 Burst Prefetch Mode
+       1  L2 Up/Down Prefetcher
+       0  FEATURE FCLK DPM
+       0    Hotplug Mode(Dev#1/Func#1)
+       0    ASPM Mode(Dev#1/Func#2)
+       0    Hotplug Mode(Dev#1/Func#2)
+       0    ASPM Mode(Dev#2/Func#1)
+       0    Hotplug Mode(Dev#2/Func#1)
+       0    ASPM Mode(Dev#2/Func#2)
+       0    Hotplug Mode(Dev#2/Func#2)
+       0    ASPM Mode(Device4)
+       0    Hotplug Mode(Device4)
+       0    ASPM Mode(Device5)
+       0    Hotplug Mode(Device5)
+       0    ASPM Mode(Device6)
+       0    Hotplug Mode(Device6)
+       0    ASPM Mode(Device7)
+       0    Hotplug Mode(Device7)
+       0   Hotplug Mode(Dev#1/Func#1)
+       0   ASPM Mode(Dev#1/Func#2)
+       0   Hotplug Mode(Dev#1/Func#2)
+       0   ASPM Mode(Dev#2/Func#1)
+       0   Hotplug Mode(Dev#2/Func#1)
+       0   ASPM Mode(Dev#2/Func#2)
+       0   Hotplug Mode(Dev#2/Func#2)
+       0   ASPM Mode(Device4)
+       0   Hotplug Mode(Device4)
+       0   ASPM Mode(Device5)
+       0   Hotplug Mode(Device5)
+       0   ASPM Mode(Device6)
+       0   Hotplug Mode(Device6)
+       0   ASPM Mode(Device7)
+       0   Hotplug Mode(Device7)
+       0  ASPM Mode(Dev#1/Func#1)
+       0  ASPM Mode(Dev#1/Func#2)
+       0  ASPM Mode(Dev#2/Func#1)
+       0  ASPM Mode(Dev#2/Func#2)
+       0  ASPM Mode Control(Device4)
+       0  ASPM Mode Control(Device5)
+       0  ASPM Mode Control(Device6)
+       0  ASPM Mode Control(Device7)
+       0  ASPM
+       0  PCIe ASPM Mode
+       1  Extended Synch
+       1  CPPC Dynamic Preferred Cores
+       1  MONITOR and MWAIT disable
+       0  ACPI D3 Support
+       0   ACPI D3 Support
+       0  Internal PCIe GPP 0 D3
+       0    SOC GPU D3
+       0    SOC HD Audio D3
+       0    SOC USB3.1 D3
+       0    SOC ACP D3
+       0    SOC Azalia D3
+       0    Internal PCIe GPP 2 D3
+       0    SOC USB2.0 D3
+       0    SOC USB3.1 for USB4 D3
+       0    SOC USB4 D3
+       0  Internal USB4 PCIe Tunneling D3
+       0    SOC USB4 PCIe Endpoint D3
+       1  SEV Control
+       0  SmartShift Enable
+       0  STAPM Boost
+       1  GFXOFF
+       0  PCIe loopback Mode
+       0  Loopback Mode
+       0  Log Transparent Errors
+       0  Latency Under Load (LUL)
+       1  Disable Memory Error Injection
+       0  Power Supply Idle Control
+       0  FCH Spread Spectrum
+       1  Power Loading
+       0  Platform First Error Handling
+       0  MCA error thresh enable
+       0  MCA FruText
+       2  Spread Spectrum Control
+       0  PCIE Spread Spectrum Clocking
+       0  CPU Spread Spectrum Clocking
+       0  Chipset SATA Port Hot Plug
+       0  PME Turn Off Support
+       0  Serial(COM) Port0
+       0  Serial Port 1
+       0  Serial Port
+       0  Parallel(LPT) Port
+       1  Re-Size BAR Support
+       1  Unused GPP Clocks Off
+       0  Clock Power Management(CLKREQ#)
+       0  Keyboard Wake Up From S3
+       0  Mouse Wake Up From S3
+       1  Prochot VRM Throttling
+       1  Peak Current Control
+       0  MicroSoft Security Level 2
+       0  L3 DFLL Stretch Mode
+       0  Stretch mode for L3 DFLL
+       1  ACPI SRAT L3 Cache As NUMA Domain
+       1  Corrector Branch Predictor
+       0  Persistence mode for legacy endpoints
+       0  BIOS Hot-Plug Support
+       1  Unpopulated Links
+       0  Core Tuning Config
+       0  Core tunings Configuration for gaming
+       2  DDR5 Auto Booster
+       0  Gigabyte Utilities Downloader
+       0  Download & Install ARMOURY CRATE app
+       0  Download & Install MyASUS service & app
+       0  MSI Driver Utility Installer
+       0  Setup Mode
+       0  Memory P-state
+       0  USB power delivery in Soft Off state (S5)
+       1  ASUS Performance Enhancement
+       3  Performance Enhancer
+       1  Chipset PCIE(G1) CTLE Optimization
+       0  Graphics Card Detection
+       0  USB power delivery in S4 state
+       0  Opcache Control
+       0  Streaming Stores Control
+       0  LN2 Mode
+       0  PPIN Opt-in
+       0  Network Stack
+       1  SyncFifo Mode Override
+       0  Auto Install ASUS Utilities
+'Extreme'  CPU Power Phase Control
+'Extreme'  CPU Power Duty Control
+'Extreme'  VDDSOC Power Phase Control
+'Extreme'  VDDSOC Power Duty Control
+'Extreme'  VDDCR CPU Power Phase Control
+'Extreme'  VDDCR CPU Power Duty Control
+'Disabled'    VRM Spread Spectrum
+       0  Onboard PCIE LAN PXE ROM
+'Advanced'  Precision Boost Overdrive
+'Motherboard'  PBO Limits
+'Manual'  Precision Boost Overdrive Scalar Ctrl
+   '10X'  Precision Boost Overdrive Scalar
+'Enabled (Positive)'  CPU Boost Clock Override
+     200  Max CPU Boost Clock Override(+)
+'All Cores'  Curve Optimizer
+'Negative'  All Core Curve Optimizer Sign
+       5  All Core Curve Optimizer Magnitude
+       1  DDR5 Nitro Mode
+       1    DDR5 Robust Training Mode
+       1    Nitro RX Data
+       3    Nitro TX Data
+       1    Nitro Control Line
+       3    Nitro Rx Burst Length
+       3    Nitro Tx Burst Length
+       1    Nitro DFE Vref Offset Limits

@@ -1,0 +1,265 @@
+# Comparaison  exe(254)  vs  catalog projet
+- exe total settings : 254
+- questions distinctes catalog : 58
+- en COMMUN : 40
+- seulement projet : 18
+- seulement exe : 195
+
+## EN COMMUN (question | valeur exe | cible projet)
+- 'All Core Curve Optimizer Magnitude'  exe=5  | projet: cpu/curve_neg30=30; cpu/asus_neutralize=0
+- 'All Core Curve Optimizer Sign'  exe='Negative'  | projet: cpu/curve_neg30=01; cpu/asus_neutralize=00
+- 'ASPM Support'  exe=0  | projet: base/aspm=00
+- 'BIOS Hot-Plug Support'  exe=0  | projet: pcie/pcie_latency=00
+- 'Chipset PCIE(G1) CTLE Optimization'  exe=1  | projet: pcie/pcie_latency=01
+- 'Clock Power Management(CLKREQ#)'  exe=0  | projet: base/aspm=00
+- 'Clock Spread Spectrum'  exe=2  | projet: base/spread=02
+- 'CPU Boost Clock Override'  exe='Enabled (Positive)'  | projet: cpu/pbo_boost=01; cpu/asus_neutralize=FF
+- 'CPU PCIE ASPM Mode Control'  exe=0  | projet: base/aspm=00
+- 'Curve Optimizer'  exe='All Cores'  | projet: cpu/curve_neg30=01; cpu/asus_neutralize=00
+- 'DDR5 Nitro Mode'  exe=1  | projet: memory/nitro=01; memory/nitro=01
+- '  DDR5 Robust Training Mode'  exe=1  | projet: memory/nitro=00; memory/nitro=00
+- 'DRTM Support'  exe=0  | projet: base/security_off=00
+- 'Extended Tag'  exe=1  | projet: pcie/pcie_latency=01
+- 'FCH Spread Spectrum'  exe=0  | projet: base/spread=00
+- 'Global C-state Control'  exe=0  | projet: base/cstates=00
+- 'Latency Under Load (LUL)'  exe=0  | projet: base/lul=00
+- 'Max CPU Boost Clock Override(+)'  exe=200  | projet: cpu/pbo_boost=200; cpu/asus_neutralize=Auto; cpu/asus_neutralize=0
+- 'Native ASPM'  exe=0  | projet: base/aspm=00
+- '  Nitro Control Line'  exe=1  | projet: memory/nitro=01; memory/nitro=01
+- '  Nitro Rx Burst Length'  exe=3  | projet: memory/nitro=00; memory/nitro=00
+- '  Nitro RX Data'  exe=1  | projet: memory/nitro=01; memory/nitro=01
+- '  Nitro Tx Burst Length'  exe=3  | projet: memory/nitro=00; memory/nitro=00
+- '  Nitro TX Data'  exe=3  | projet: memory/nitro=01; memory/nitro=01
+- 'PBO Limits'  exe='Motherboard'  | projet: cpu/pbo_base=01
+- 'PCIe Power Management Features'  exe=0  | projet: base/aspm=00
+- 'Pluton Support'  exe=0  | projet: base/security_off=00
+- 'PM L1 SS'  exe=0  | projet: base/aspm=00
+- 'Power Supply Idle Control'  exe=0  | projet: base/cstates=00
+- 'Precision Boost Overdrive'  exe='Advanced'  | projet: cpu/pbo_base=02; cpu/asus_neutralize=FF
+- 'Precision Boost Overdrive Scalar'  exe='10X'  | projet: cpu/pbo_base=12C; cpu/asus_neutralize=00
+- 'Precision Boost Overdrive Scalar Ctrl'  exe='Manual'  | projet: cpu/pbo_base=01
+- 'PSPP Policy'  exe=0  | projet: pcie/pcie_latency=01
+- 'SecureBio Camera Support'  exe=0  | projet: base/security_off=00
+- 'SecureBio Support'  exe=0  | projet: base/security_off=00
+- 'Secured-core Auto enablement'  exe=0  | projet: base/security_off=00
+- 'SMM Isolation Support'  exe=0  | projet: base/security_off=00
+- 'SyncFifo Mode Override'  exe=1  | projet: memory/fclk_2067=01; memory/fclk_2100=01; memory/fclk_2133=01; memory/fclk_2167=01
+- 'TSME'  exe=0  | projet: base/tsme=00
+- 'Unpopulated Links'  exe=1  | projet: pcie/pcie_latency=01
+
+## SEULEMENT DANS NOTRE PROJET (pas dans l'exe)
+- 'Above 4G Decoding'  (base/rebar=01)
+- 'Clock Power Management'  (base/aspm=00)
+- 'FCLK Frequency'  (memory/fclk_2067=813; memory/fclk_2100=834; memory/fclk_2133=855; memory/fclk_2167=877)
+- 'Fclk VDCI Mode Pref'  (memory/mem_latency=FF; memory/fclk_2067=FF; memory/fclk_2100=FF; memory/fclk_2133=FF; memory/fclk_2167=FF)
+- 'Gear Down Mode'  (memory/mem_latency=01)
+- 'iGPU Configuration'  (base/igpu=00)
+- 'Infinity Fabric Frequency and Dividers'  (memory/fclk_2067=32; memory/fclk_2067=813; memory/fclk_2100=33; memory/fclk_2100=834; memory/fclk_2133=34; memory/fclk_2133=855; memory/fclk_2167=35; memory/fclk_2167=877)
+- 'Integrated Graphics'  (base/igpu=00)
+- 'IOMMU'  (base/virt=00)
+- 'Launch CSM'  (base/rebar=00)
+- 'Memory Context Restore'  (memory/mem_latency=00)
+- 'PCIEX16(G5) Link Mode'  (pcie/pcie_latency=05)
+- 'Power Down Enable'  (memory/mem_latency=00)
+- 'Refresh Interval'  (memory/trefi_60000=60000; memory/trefi_60000=60000; memory/trefi_65535=65535; memory/trefi_65535=65535)
+- 'Resize BAR Support'  (base/rebar=01)
+- 'SVM Mode'  (base/virt=00)
+- 'Twr'  (memory/twr_48=48; memory/twr_48=48)
+- 'UCLK DIV1 MODE'  (memory/mem_latency=01)
+
+## SEULEMENT DANS L'EXE (254-set, pas chez nous)
+- '3-link xGMI max speed' = 19
+- '4-link xGMI max speed' = 19
+- '_OSC For PCI0' = 0
+- 'AB Clock Gating' = 0
+- 'ABL Console Out Control' = 0
+- 'ACP CLock Gating' = 0
+- 'ACP Power Gating' = 0
+- 'ACPI _CST C1 Declaration' = 0
+- ' ACPI D3 Support' = 0
+- 'ACPI Sleep State' = 0
+- 'ACPI SRAT L3 Cache As NUMA Domain' = 1
+- 'ACPI Standby State' = 0
+- 'ACS Enable' = 0
+- 'Advanced Error Reporting (AER)' = 0
+- 'AMD Cool&Quiet function' = 0
+- 'APBDIS' = 1
+- 'App Compatibility Database' = 0
+- 'ASPM' = 0
+- 'ASPM Control for CPU PCIe' = 0
+- 'ASPM Mode Control' = 0
+- 'ASPM Mode Control(Device4)' = 0
+- 'ASPM Mode Control(Device5)' = 0
+- 'ASPM Mode Control(Device6)' = 0
+- 'ASPM Mode Control(Device7)' = 0
+- 'ASPM Mode(Dev#1/Func#1)' = 0
+- 'ASPM Mode(Dev#1/Func#2)' = 0
+- 'ASPM Mode(Dev#2/Func#1)' = 0
+- 'ASPM Mode(Dev#2/Func#2)' = 0
+- ' ASPM Mode(Device4)' = 0
+- ' ASPM Mode(Device5)' = 0
+- ' ASPM Mode(Device6)' = 0
+- ' ASPM Mode(Device7)' = 0
+- 'ASUS Performance Enhancement' = 1
+- 'Auto Install ASUS Utilities' = 0
+- 'CC1' = 0
+- 'CC6 memory region encryption' = 0
+- 'Chipset Power Saving Features' = 0
+- 'Chipset SATA Port Hot Plug' = 0
+- 'Core Tuning Config' = 0
+- 'Core tunings Configuration for gaming' = 0
+- 'Core Watchdog Timer Enable' = 0
+- 'Corrector Branch Predictor' = 1
+- 'CPPC' = 0
+- 'CPPC Dynamic Preferred Cores' = 1
+- 'CPPC Preferred Cores' = 0
+- 'CPU Power Duty Control' = 'Extreme'
+- 'CPU Power Phase Control' = 'Extreme'
+- 'CPU Spread Spectrum Clocking' = 0
+- 'D3 Cold Support' = 0
+- 'D3Cold Support' = 0
+- 'Data Poisoning' = 0
+- 'Data Scramble' = 0
+- 'DDR5 Auto Booster' = 2
+- 'DF Cstates' = 0
+- 'Disable Memory Error Injection' = 1
+- 'Discrete USB4 Support' = 0
+- 'DMAr Support' = 0
+- 'Download & Install ARMOURY CRATE app' = 0
+- 'Download & Install MyASUS service & app' = 0
+- 'DRAM ECC Enable' = 0
+- 'DRAM Post Package Repair' = 0
+- 'DRAM scrub time' = 0
+- 'DRAM UECC Retry' = 0
+- 'ECC' = 0
+- 'EHCI D3 Support' = 0
+- 'Enable AER Cap' = 0
+- 'Enable Hibernation' = 0
+- 'Extended Synch' = 1
+- 'FEATURE FCLK DPM' = 0
+- 'Freeze DF module queues on error' = 0
+- 'GFXOFF' = 1
+- 'Gigabyte Utilities Downloader' = 0
+- 'GMI encryption control' = 0
+- 'Graphics Card Detection' = 0
+- ' Hotplug Mode(Dev#1/Func#1)' = 0
+- ' Hotplug Mode(Dev#1/Func#2)' = 0
+- ' Hotplug Mode(Dev#2/Func#1)' = 0
+- ' Hotplug Mode(Dev#2/Func#2)' = 0
+- ' Hotplug Mode(Device4)' = 0
+- ' Hotplug Mode(Device5)' = 0
+- ' Hotplug Mode(Device6)' = 0
+- ' Hotplug Mode(Device7)' = 0
+- 'I2C 0 D3 Support' = 0
+- 'I2C 1 D3 Support' = 0
+- 'I2C 2 D3 Support' = 0
+- 'I2C 3 D3 Support' = 0
+- 'I2C 4 D3 Support' = 0
+- 'I2C 5 D3 Support' = 0
+- 'Internal PCIe GPP 0 D3' = 0
+- '  Internal PCIe GPP 2 D3' = 0
+- 'Internal USB4 PCIe Tunneling D3' = 0
+- 'Keyboard Wake Up From S3' = 0
+- 'L1 Burst Prefetch Mode' = 1
+- 'L1 Region Prefetcher' = 1
+- 'L1 Stream HW Prefetcher' = 1
+- 'L1 Stride Prefetcher' = 1
+- 'L2 Stream HW Prefetcher' = 1
+- 'L2 Up/Down Prefetcher' = 1
+- 'L3 DFLL Stretch Mode' = 0
+- 'LCLK DPM' = 2
+- 'LCLK DPM Enhanced PCIe Detection' = 2
+- 'LEDs in System Power On State' = 0
+- 'LN2 Mode' = 0
+- 'Log Transparent Errors' = 0
+- 'Loopback Mode' = 0
+- 'MCA error thresh enable' = 0
+- 'MCA FruText' = 0
+- 'Memory P-state' = 0
+- 'MicroSoft Security Level 2' = 0
+- 'MONITOR and MWAIT disable' = 1
+- 'Mouse Wake Up From S3' = 0
+- 'MSI Driver Utility Installer' = 0
+- 'Native USB4' = 0
+- 'Network Stack' = 0
+- '  Nitro DFE Vref Offset Limits' = 1
+- 'NPU Deep Sleep Enable' = 0
+- 'Onboard PCIE LAN PXE ROM' = 0
+- 'Opcache Control' = 0
+- 'Option ROM Messages' = 0
+- 'Parallel Port' = 0
+- 'Parallel(LPT) Port' = 0
+- 'PCIe All Port ECRC' = 0
+- 'PCIe ARI Enumeration' = 0
+- 'PCIe ARI Support' = 0
+- 'PCIe ASPM Mode' = 0
+- 'PCIe loopback Mode' = 0
+- 'PCIE Spread Spectrum Clocking' = 0
+- 'Peak Current Control' = 1
+- 'Performance Enhancer' = 3
+- 'Persistence mode for legacy endpoints' = 0
+- 'Platform First Error Handling' = 0
+- 'Pluton Security Processor' = 0
+- 'PME Turn Off Support' = 0
+- 'Poison scrubber control' = 0
+- 'Port 60/64 Emulation' = 0
+- 'Power Loading' = 1
+- 'PPIN Opt-in' = 0
+- 'Processor Aggregator Device' = 0
+- 'Prochot VRM Throttling' = 1
+- 'RCD Parity' = 0
+- 'Re-Size BAR Support' = 1
+- 'Redirect scrubber control' = 0
+- 'RGB Fusion' = 0
+- 'RGB Light' = 0
+- 'SATA D3 Support' = 0
+- 'SB C1E Support' = 0
+- 'SB Clock Spread Spectrum' = 0
+- 'SD D3 Support' = 0
+- 'Serial Port' = 0
+- 'Serial Port 1' = 0
+- 'Serial(COM) Port' = 0
+- 'Serial(COM) Port0' = 0
+- 'Setup Mode' = 0
+- 'SEV Control' = 1
+- 'SMART Self Test' = 0
+- 'SmartShift Enable' = 0
+- 'SMEE' = 0
+- '  SOC ACP D3' = 0
+- '  SOC Azalia D3' = 0
+- '  SOC GPU D3' = 0
+- '  SOC HD Audio D3' = 0
+- '  SOC USB2.0 D3' = 0
+- '  SOC USB3.1 D3' = 0
+- '  SOC USB3.1 for USB4 D3' = 0
+- '  SOC USB4 D3' = 0
+- '  SOC USB4 PCIe Endpoint D3' = 0
+- 'SoC/Uncore OC Mode' = 1
+- 'Spread Spectrum' = 0
+- 'Spread Spectrum Control' = 2
+- 'SR-IOV Support' = 0
+- 'STAPM Boost' = 0
+- 'Streaming Stores Control' = 0
+- 'Stretch mode for L3 DFLL' = 0
+- 'Thunderbolt Support' = 0
+- 'Thunderbolt/USB4 (Intel� JHL8540 controller) Support' = 0
+- 'UART 0 D3 Support' = 0
+- 'UART 1 D3 Support' = 0
+- 'UART 2 D3 Support' = 0
+- 'UART 3 D3 Support' = 0
+- 'Unused GPP Clocks Off' = 1
+- 'USB Phy Power Down' = 0
+- 'USB power delivery in S4 state' = 0
+- 'USB power delivery in Soft Off state (S5)' = 0
+- 'USB4 (ASM4242 Controller) Support' = 0
+- 'VDDCR CPU Power Duty Control' = 'Extreme'
+- 'VDDCR CPU Power Phase Control' = 'Extreme'
+- 'VDDSOC Power Duty Control' = 'Extreme'
+- 'VDDSOC Power Phase Control' = 'Extreme'
+- '  VRM Spread Spectrum' = 'Disabled'
+- 'Wake on LAN' = 0
+- 'Wake on PME' = 0
+- '      When system is in working state' = 3
+- 'Write CRC Enable' = 0
+- 'xGMI encryption control' = 0
+- 'XHCI D3 Support' = 0
