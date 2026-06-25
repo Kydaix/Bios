@@ -29,11 +29,17 @@ public static class VerifyService
             bool ok;
             string target = row.Target;
             if (target.StartsWith("[", StringComparison.Ordinal))
+            {
+                // option target "[code]..." — current state must start with that code
                 ok = actual.StartsWith(target, StringComparison.OrdinalIgnoreCase);
-            else if (target.StartsWith("<", StringComparison.Ordinal) || target.StartsWith("\"", StringComparison.Ordinal))
-                ok = string.Equals(actual.Trim(), target.Trim(), StringComparison.OrdinalIgnoreCase);
+            }
             else
-                ok = false;
+            {
+                // value target — compare ignoring the delimiter style (<>, quotes, or bare)
+                string a = actual.Trim().Trim('<', '>', '"').Trim();
+                string t = target.Trim().Trim('<', '>', '"').Trim();
+                ok = string.Equals(a, t, StringComparison.OrdinalIgnoreCase);
+            }
 
             row.VerifyStatus = ok ? "ok" : "mismatch";
         }

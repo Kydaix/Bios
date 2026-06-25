@@ -160,14 +160,20 @@ public static partial class ScewinParser
 
     public static string RenderValue(ScewinBlock block, string value)
     {
-        string raw = value.Trim();
-        if (raw.StartsWith("<", StringComparison.Ordinal) || raw.StartsWith("\"", StringComparison.Ordinal))
-            return raw;
+        // Normalise the incoming value: strip any delimiters the caller may have supplied.
+        string raw = value.Trim().Trim('<', '>').Trim('"').Trim();
 
+        // Match the existing field's delimiter convention so the written line stays
+        // byte-compatible with what SCEWIN exported. Fields come in three flavours:
+        //   Value ="Auto"   (quoted string)
+        //   Value =<48>     (angle-bracketed numeric)
+        //   Value =0        (bare numeric/hex, e.g. Enable Hibernation, SMART Self Test)
         string current = block.Value.Trim();
         if (current.StartsWith("\"", StringComparison.Ordinal))
-            return "\"" + raw.Trim('"') + "\"";
-        return "<" + raw.Trim('<', '>') + ">";
+            return "\"" + raw + "\"";
+        if (current.StartsWith("<", StringComparison.Ordinal))
+            return "<" + raw + ">";
+        return raw;
     }
 
     public static (bool touched, string message, string rendered) SetValue(IList<string> lines, ScewinBlock block, string value)
