@@ -807,14 +807,14 @@
               "token": "27",
               "offset": "1D8",
               "code": "01",
-              "reason": "Limites d'offset Vref DFE actives (repris de l'outil)."
+              "reason": "Désactive la limite d'offset Vref DFE (code 01 = Disable, plus de marge, comme l'outil)."
             },
             {
               "question": "Nitro DFE Vref Offset Limits",
               "token": "213",
               "offset": "8DE",
               "code": "01",
-              "reason": "Limites d'offset Vref DFE actives (repris de l'outil)."
+              "reason": "Désactive la limite d'offset Vref DFE (code 01 = Disable, plus de marge, comme l'outil)."
             }
           ]
         }
@@ -925,7 +925,7 @@
             {
               "question": "CPPC Dynamic Preferred Cores",
               "code": "01",
-              "reason": "Sélection dynamique des meilleurs cœurs."
+              "reason": "Mode 'Cache' (code 01) pour la sélection des cœurs préférés, comme l'outil."
             },
             {
               "question": "ACPI SRAT L3 Cache As NUMA Domain",
@@ -961,31 +961,31 @@
         },
         {
           "id": "core_aggressive",
-          "name": "Opcache / Streaming Stores / L3 DFLL (agressif)",
-          "description": "Reprend les choix agressifs de l'outil : désactive l'opcache, les streaming stores, le stretch L3 DFLL et le profil 'core tunings gaming'. Effets variables, à tester.",
-          "risk": "Experimental",
+          "name": "Opcache & Streaming Stores activés, L3 DFLL/Core tunings",
+          "description": "Reprend les choix de l'outil : garde l'opcache et les streaming stores ACTIVÉS (code 00 = Enabled), désactive le stretch mode L3 DFLL et passe le profil core tunings sur Legacy. Effets variables.",
+          "risk": "Low",
           "recommended": false,
           "verified": true,
           "rules": [
             {
               "question": "Opcache Control",
               "code": "00",
-              "reason": "Désactive l'opcache (choix de l'outil)."
+              "reason": "Opcache = Enabled (code 00, comme l'outil)."
             },
             {
               "question": "Streaming Stores Control",
               "code": "00",
-              "reason": "Désactive les streaming stores."
+              "reason": "Streaming stores = Enabled (code 00, comme l'outil)."
             },
             {
               "question": "Stretch mode for L3 DFLL",
               "code": "00",
-              "reason": "Désactive le stretch mode L3 DFLL."
+              "reason": "Désactive le stretch mode L3 DFLL (code 00 = Disabled)."
             },
             {
               "question": "Core tunings Configuration for gaming",
               "code": "00",
-              "reason": "Désactive le profil core tunings gaming."
+              "reason": "Profil core tunings = Legacy (code 00)."
             }
           ]
         }
@@ -1231,7 +1231,7 @@
             {
               "question": "Option ROM Messages",
               "code": "00",
-              "reason": "Masque les messages des option ROM."
+              "reason": "Conserve l'affichage courant des messages option ROM (Keep Current)."
             },
             {
               "question": "ABL Console Out Control",
@@ -1398,21 +1398,21 @@
         },
         {
           "id": "vrm_protect",
-          "name": "Prochot VRM & Peak Current Control",
-          "description": "Garde la protection Prochot VRM et le Peak Current Control actifs (sécurité d'alimentation).",
-          "risk": "Low",
+          "name": "DÉSACTIVER Prochot VRM & Peak Current Control (risqué)",
+          "description": "ATTENTION : reprend le choix de l'outil (code 01 = Disable). DÉSACTIVE le throttling VRM sur Prochot — le CPU ne sera plus bridé si les VRM surchauffent — ET désactive le Peak Current Control. Retire deux protections d'alimentation au profit de la réponse transitoire. À n'activer qu'avec un refroidissement VRM sérieux.",
+          "risk": "High",
           "recommended": false,
           "verified": true,
           "rules": [
             {
               "question": "Prochot VRM Throttling",
               "code": "01",
-              "reason": "Throttling VRM sur Prochot actif."
+              "reason": "Disable : retire le bridage CPU sur surchauffe VRM (comme l'outil)."
             },
             {
               "question": "Peak Current Control",
               "code": "01",
-              "reason": "Peak Current Control actif."
+              "reason": "Disable : désactive le Peak Current Control (comme l'outil)."
             }
           ]
         }
@@ -1427,7 +1427,7 @@
         {
           "id": "misc_flags",
           "name": "Drapeaux divers",
-          "description": "Désactive App Compatibility Database, Processor Aggregator Device, Setup Mode, SMEE, le mode LN2, le loopback PCIe, le Memory P-state ; conserve le contrôle SEV.",
+          "description": "Désactive App Compatibility Database, Processor Aggregator Device, SMEE, le mode LN2, le loopback PCIe, le Memory P-state et SEV (code 01 = Disable) ; Setup Mode en mode avancé.",
           "risk": "Low",
           "recommended": false,
           "verified": true,
@@ -1470,14 +1470,14 @@
             {
               "question": "SEV Control",
               "code": "01",
-              "reason": "Reprend le contrôle SEV de l'outil."
+              "reason": "Désactive SEV (code 01 = Disable, comme l'outil)."
             }
           ]
         },
         {
           "id": "led_state",
-          "name": "LED en fonctionnement",
-          "description": "Comportement des LED quand le système est en marche (repris tel quel de l'outil).",
+          "name": "Éteindre l'éclairage Aura (système en marche)",
+          "description": "Met l'éclairage RGB Aura sur 'Aura Off' quand le système fonctionne (code 03, repris de l'outil). Purement cosmétique.",
           "risk": "Safe",
           "recommended": false,
           "verified": true,
@@ -1485,7 +1485,7 @@
             {
               "question": "When system is in working state",
               "code": "03",
-              "reason": "Comportement LED en fonctionnement (valeur outil)."
+              "reason": "Aura Off en fonctionnement (code 03, comme l'outil)."
             }
           ]
         }

@@ -1,0 +1,197 @@
+# AUDIT complet — 179 règles
+
+- règles sans flag: 179
+- mismatch vs exe (résolution autoritaire): 6
+- divergence multi-bloc / code manquant: 0
+- règles value-type: 13
+
+## MISMATCH vs résolution exe (à examiner)
+- [cpu/asus_neutralize] 'Precision Boost Overdrive': mon code=255 dec | exe=2 (Advanced)
+- [cpu/asus_neutralize] 'Precision Boost Overdrive Scalar': mon code=0 dec | exe=1000 (10X)
+- [cpu/asus_neutralize] 'CPU Boost Clock Override': mon code=255 dec | exe=1 (Enabled (Positive))
+- [cpu/asus_neutralize] 'Curve Optimizer': mon code=0 dec | exe=1 (All Cores)
+- [cpu/asus_neutralize] 'All Core Curve Optimizer Sign': mon code=0 dec | exe=1 (Negative)
+- [pcie/pcie_latency] 'PSPP Policy': mon code=1 dec | exe=0 (Disabled)
+
+## DIVERGENCE multi-bloc / code manquant
+
+## TOUTES LES RÈGLES (question -> cible[label] | exe | help)
+- [base/rebar] 'Above 4G Decoding' -> 01 ['Enabled'] x1  | Enables or Disables 64bit capable Devices to be Decoded in Above 4G Address Spac
+- [base/rebar] 'Resize BAR Support' -> 01 ['Enabled'] x1  | If the system has Resize BAR capable PCIe Devices, this option Enables or Disabl
+- [base/rebar] 'Launch CSM' -> 00 ['Disabled'] x1  | CSM(compatibility support module)  [Enabled]: For a better compatibility, enable
+- [base/cstates] 'Global C-state Control' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Controls IO based C-state generation and DF C-states.
+- [base/cstates] 'Power Supply Idle Control' -> 00 ['Typical Current Idle'] x1 exe=OK(Typical Current Idle) | Power Supply Idle Control.
+- [base/virt] 'IOMMU' -> 00 ['Disabled'] x1  | Enable/Disable IOMMU
+- [base/virt] 'SVM Mode' -> 00 ['Disabled'] x1  | Enable/disable CPU Virtualization
+- [base/tsme] 'TSME' -> 00 ['Disabled'] x1 exe=OK(Disabled) | No help string
+- [base/igpu] 'Integrated Graphics' -> 00 ['Disabled'] x1  | Enable Integrate Graphics Controller
+- [base/igpu] 'iGPU Configuration' -> 00 ['iGPU Disabled'] x1  | UMA Mode
+- [base/aspm] 'ASPM Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Set the ASPM Level:  Force L0s - Force all links to L0s State  AUTO - BIOS auto 
+- [base/aspm] 'Native ASPM' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled - OS Controlled ASPM, Disabled - BIOS Controlled ASPM
+- [base/aspm] 'CPU PCIE ASPM Mode Control' -> 00 ['Disabled'] x1 exe=OK(Disabled) | CPU PCIE ASPM Mode Control
+- [base/aspm] 'PCIe Power Management Features' -> 00 ['Disable'] x1 exe=OK(Disable) | No help string
+- [base/aspm] 'Clock Power Management(CLKREQ#)' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable or disable CLKREQ#
+- [base/aspm] 'Clock Power Management' -> 00 ['Disabled'] x1  | If supported by hardware and set to [Enabled], the device is permitted to use CL
+- [base/aspm] 'PM L1 SS' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable for PM L1 SS and ASPM L1 SS
+- [base/spread] 'FCH Spread Spectrum' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Select whether or not Enable the Spread Spectrum Feature
+- [base/spread] 'Clock Spread Spectrum' -> 02 ['Disabled'] x1 exe=OK(Disabled) | Enable/Disable Clock Spread Spectrum
+- [base/lul] 'Latency Under Load (LUL)' -> 00 ['Enabled'] x1 exe=OK(Enabled) | Enabling may improve latency in heavy BW scenarios.  May slightly reduce peak CC
+- [base/security_off] 'Pluton Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | This option is used to enable/disable Pluton device
+- [base/security_off] 'Secured-core Auto enablement' -> 00 ['Disabled'] x1 exe=OK(Disabled) | If set to Disable, AGESA will delete EFI variable [BuiltAsSecuredCorePC] if dete
+- [base/security_off] 'DRTM Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable DRTM
+- [base/security_off] 'SMM Isolation Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable SMM Isolation (as known as SMM Supervisor)
+- [base/security_off] 'SecureBio Support' -> 00 ['Disable'] x1 exe=OK(Disable) | Switch to turn off Secure BIO, when set to FALSE, it will turn off Secure BIO,  
+- [base/security_off] 'SecureBio Camera Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Select the SecureBio camera type  Select which type of camera need be reported i
+- [cpu/pbo_base] 'Precision Boost Overdrive' -> 02 ['Advanced'] x1 exe=OK(Advanced) | Precision Boost Overdrive:    Enabled: Allows Processor to run beyond defined va
+- [cpu/pbo_base] 'PBO Limits' -> 01 ['Motherboard'] x1 exe=OK(Motherboard) | Default: Loads AMD default socket power (PPT), electrically-limited VRM current 
+- [cpu/pbo_base] 'Precision Boost Overdrive Scalar Ctrl' -> 01 ['Manual'] x1 exe=OK(Manual) | Precision Boost Overdrive Scalar Ctrl
+- [cpu/pbo_base] 'Precision Boost Overdrive Scalar' -> 3E8 ['10X'] x1 exe=OK(10X) | Overrides the AMD default silicon health management to potentially achieve highe
+- [cpu/pbo_boost] 'CPU Boost Clock Override' -> 01 ['Enabled (Positive)'] x1 exe=OK(Enabled (Positive)) | Increases (Positive) or Decreases (Negative) the maximum CPU frequency that may 
+- [cpu/pbo_boost] 'Max CPU Boost Clock Override(+)' -> 200 [] x1  | Increases the maximum CPU frequency that may be automatically achieved by the Pr
+- [cpu/curve_neg30] 'Curve Optimizer' -> 01 ['All Cores'] x1 exe=OK(All Cores) | Allows the user to shift the Voltage / Frequency (AVFS) curve to include higher 
+- [cpu/curve_neg30] 'All Core Curve Optimizer Sign' -> 01 ['Negative'] x1 exe=OK(Negative) | Determines the direction of the curve shift on all cores. Positive shifts the cu
+- [cpu/curve_neg30] 'All Core Curve Optimizer Magnitude' -> 30 [] x1  | Determines the magnitude of the curve shift to be made (entered in whole numbers
+- [cpu/asus_neutralize] 'Precision Boost Overdrive' -> FF ['Auto'] x1 exe=DIFF(exe:2/Advanced vs mine:255) | Precision Boost Overdrive:    Enabled: Allows Processor to run beyond defined va
+- [cpu/asus_neutralize] 'Precision Boost Overdrive Scalar' -> 00 ['Auto'] x1 exe=DIFF(exe:1000/10X vs mine:0) | Disabled:Part runs with a scalar of 1X, i.e. normal operation.    Manual = Part 
+- [cpu/asus_neutralize] 'CPU Boost Clock Override' -> FF ['Auto'] x1 exe=DIFF(exe:1/Enabled (Positive) vs mine:255) | Increases (Positive) or Decreases (Negative) the maximum CPU frequency that may 
+- [cpu/asus_neutralize] 'Max CPU Boost Clock Override(+)' -> Auto [] x1  | Increases the maximum CPU frequency that may be automatically achieved by the Pr
+- [cpu/asus_neutralize] 'Max CPU Boost Clock Override(+)' -> 0 [] x1  | Increases the maximum CPU frequency that may be automatically achieved by the Pr
+- [cpu/asus_neutralize] 'Curve Optimizer' -> 00 ['Auto'] x1 exe=DIFF(exe:1/All Cores vs mine:0) | Allows the user to shift the Voltage / Frequency (AVFS) curve to include higher 
+- [cpu/asus_neutralize] 'All Core Curve Optimizer Sign' -> 00 ['Positive'] x1 exe=DIFF(exe:1/Negative vs mine:0) | Determines the direction of the curve shift on all cores. Positive shifts the cu
+- [cpu/asus_neutralize] 'All Core Curve Optimizer Magnitude' -> 0 [] x1  | Determines the magnitude of the curve shift to be made (entered in whole numbers
+- [memory/mem_latency] 'Power Down Enable' -> 00 ['Disabled'] x3  | Enable or disable DDR power down mode
+- [memory/mem_latency] 'UCLK DIV1 MODE' -> 01 ['UCLK=MEMCLK'] x2  | Set UCLK DIV mode
+- [memory/mem_latency] 'Gear Down Mode' -> 01 ['Disabled'] x1  | Gear Down Mode
+- [memory/mem_latency] 'Memory Context Restore' -> 00 ['Disabled'] x2  | Configure the memory context restore mode. When enabled, DRAM re-retraining is a
+- [memory/mem_latency] 'Fclk VDCI Mode Pref' -> FF ['Auto'] x1  | Predictive: Force VDCI predictive mode. Higher latency, but better stability at 
+- [memory/fclk_2067] 'Infinity Fabric Frequency and Dividers' -> 32 ['2067 MHz'] x1  | No help string
+- [memory/fclk_2067] 'Infinity Fabric Frequency and Dividers' -> 813 ['2067 MHz'] x1  | Set Infinity Fabric frequency (FCLK) Auto: FCLK = MCLK. Manual: FCLK must be les
+- [memory/fclk_2067] 'FCLK Frequency' -> 813 ['2067 MHz'] x1  | Specifies the FCLK frequency.
+- [memory/fclk_2067] 'Fclk VDCI Mode Pref' -> FF ['Auto'] x1  | Predictive: Force VDCI predictive mode. Higher latency, but better stability at 
+- [memory/fclk_2067] 'SyncFifo Mode Override' -> 01 ['Disable'] x1 exe=OK(Disable) | Auto:Disable SyncFifo Mode.
+- [memory/fclk_2100] 'Infinity Fabric Frequency and Dividers' -> 33 ['2100 MHz'] x1  | No help string
+- [memory/fclk_2100] 'Infinity Fabric Frequency and Dividers' -> 834 ['2100 MHz'] x1  | Set Infinity Fabric frequency (FCLK) Auto: FCLK = MCLK. Manual: FCLK must be les
+- [memory/fclk_2100] 'FCLK Frequency' -> 834 ['2100 MHz'] x1  | Specifies the FCLK frequency.
+- [memory/fclk_2100] 'Fclk VDCI Mode Pref' -> FF ['Auto'] x1  | Predictive: Force VDCI predictive mode. Higher latency, but better stability at 
+- [memory/fclk_2100] 'SyncFifo Mode Override' -> 01 ['Disable'] x1 exe=OK(Disable) | Auto:Disable SyncFifo Mode.
+- [memory/fclk_2133] 'Infinity Fabric Frequency and Dividers' -> 34 ['2133 MHz'] x1  | No help string
+- [memory/fclk_2133] 'Infinity Fabric Frequency and Dividers' -> 855 ['2133 MHz'] x1  | Set Infinity Fabric frequency (FCLK) Auto: FCLK = MCLK. Manual: FCLK must be les
+- [memory/fclk_2133] 'FCLK Frequency' -> 855 ['2133 MHz'] x1  | Specifies the FCLK frequency.
+- [memory/fclk_2133] 'Fclk VDCI Mode Pref' -> FF ['Auto'] x1  | Predictive: Force VDCI predictive mode. Higher latency, but better stability at 
+- [memory/fclk_2133] 'SyncFifo Mode Override' -> 01 ['Disable'] x1 exe=OK(Disable) | Auto:Disable SyncFifo Mode.
+- [memory/fclk_2167] 'Infinity Fabric Frequency and Dividers' -> 35 ['2167 MHz'] x1  | No help string
+- [memory/fclk_2167] 'Infinity Fabric Frequency and Dividers' -> 877 ['2167 MHz'] x1  | Set Infinity Fabric frequency (FCLK) Auto: FCLK = MCLK. Manual: FCLK must be les
+- [memory/fclk_2167] 'FCLK Frequency' -> 877 ['2167 MHz'] x1  | Specifies the FCLK frequency.
+- [memory/fclk_2167] 'Fclk VDCI Mode Pref' -> FF ['Auto'] x1  | Predictive: Force VDCI predictive mode. Higher latency, but better stability at 
+- [memory/fclk_2167] 'SyncFifo Mode Override' -> 01 ['Disable'] x1 exe=OK(Disable) | Auto:Disable SyncFifo Mode.
+- [memory/trefi_60000] 'Refresh Interval' -> 60000 [] x1  | Refresh Interval
+- [memory/trefi_60000] 'Refresh Interval' -> 60000 [] x1  | Refresh Interval
+- [memory/trefi_65535] 'Refresh Interval' -> 65535 [] x1  | Refresh Interval
+- [memory/trefi_65535] 'Refresh Interval' -> 65535 [] x1  | Refresh Interval
+- [memory/twr_48] 'Twr' -> 48 [] x1  | DRAM WRITE to READ Delay, the value stepping is 6.
+- [memory/twr_48] 'Twr' -> 48 [] x1  | DRAM WRITE to READ Delay, the value stepping is 6.
+- [memory/nitro] 'DDR5 Nitro Mode' -> 01 ['Enable'] x1 exe=OK(Enable) | Can improve overclocked memory support for modules over 6000Mt/s with potential 
+- [memory/nitro] 'DDR5 Nitro Mode' -> 01 ['Enabled'] x1 exe=OK(Enable) | Can improve overclocked memory support for modules over 6000Mt/s with potential 
+- [memory/nitro] 'DDR5 Robust Training Mode' -> 01 ['Enable'] x1 exe=OK(Enable) | A more comprehensive memory training algorithm that increases boot time but can 
+- [memory/nitro] 'DDR5 Robust Training Mode' -> 01 ['Enabled'] x1 exe=OK(Enable) | A more comprehensive memory training algorithm that increases boot time but can 
+- [memory/nitro] 'Nitro RX Data' -> 01 ['1'] x1 exe=OK(1) | Configures the RX timing between memory controller and PHY.  Higher value may en
+- [memory/nitro] 'Nitro RX Data' -> 01 ['1'] x1 exe=OK(1) | Configures the RX timing between memory controller and PHY.  Higher value may en
+- [memory/nitro] 'Nitro TX Data' -> 03 ['3'] x1 exe=OK(3) | Configures the TX timing between memory controller and PHY. Higher value may ena
+- [memory/nitro] 'Nitro TX Data' -> 03 ['3'] x1 exe=OK(3) | Configures the TX timing between memory controller and PHY. Higher value may ena
+- [memory/nitro] 'Nitro Control Line' -> 01 ['1'] x1 exe=OK(1) | Configures the command timing latency between the memory controller and PHY. Hig
+- [memory/nitro] 'Nitro Control Line' -> 01 ['1'] x1 exe=OK(1) | Configures the command timing latency between the memory controller and PHY. Hig
+- [memory/nitro] 'Nitro Rx Burst Length' -> 03 ['8X'] x1 exe=OK(8X) | DQ Training Pattern Length -    Higher number results in more robust training an
+- [memory/nitro] 'Nitro Rx Burst Length' -> 03 ['8x'] x1 exe=OK(8X) | DQ Training Pattern Length -    Higher number results in more robust training an
+- [memory/nitro] 'Nitro Tx Burst Length' -> 03 ['8X'] x1 exe=OK(8X) | DQ Training Pattern Length -    Higher number results in more robust training an
+- [memory/nitro] 'Nitro Tx Burst Length' -> 03 ['8x'] x1 exe=OK(8X) | DQ Training Pattern Length -    Higher number results in more robust training an
+- [memory/nitro] 'Nitro DFE Vref Offset Limits' -> 01 ['Disable'] x1 exe=OK(Disable) | Disabling the TxDFE/RxDEF Vref offset limit to give them more margin for those e
+- [memory/nitro] 'Nitro DFE Vref Offset Limits' -> 01 ['Disabled'] x1 exe=OK(Disable) | Disabling the TxDFE/RxDEF Vref offset limit to give them more margin for those e
+- [pcie/pcie_latency] 'PSPP Policy' -> 01 ['Performance'] x1 exe=DIFF(exe:0/Disabled vs mine:1) | PSPP - PCIe Speed Power Policy  PSPP - Balanced  AC Policy = PCIe Gen 5 devices 
+- [pcie/pcie_latency] 'Extended Tag' -> 01 ['Enabled'] x1 exe=OK(Enabled) | If ENABLED allows Device to use 8-bit Tag field as a requester.
+- [pcie/pcie_latency] 'BIOS Hot-Plug Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | If ENABLED allows BIOS build in Hot-Plug support. Use this feature if OS does no
+- [pcie/pcie_latency] 'Unpopulated Links' -> 01 ['Disabled'] x1 exe=OK(Disabled) | In order to save power, software will disable unpopulated PCI Express links, if 
+- [pcie/pcie_latency] 'Chipset PCIE(G1) CTLE Optimization' -> 01 ['Enabled'] x1 exe=OK(Enabled) | CTLE (Continuous-Time Linear Equalizer) is commonly used in PCIe receivers to co
+- [pcie/pcie_latency] 'PCIEX16(G5) Link Mode' -> 05 ['GEN 5'] x1  | Link Speed for PCIEX16(G5) Slot.
+- [cpu_perf/prefetchers] 'L1 Stream HW Prefetcher' -> 01 ['Enable'] x1 exe=OK(Enable) | Option to Enable | Disable L1 Stream HW Prefetcher
+- [cpu_perf/prefetchers] 'L2 Stream HW Prefetcher' -> 01 ['Enable'] x1 exe=OK(Enable) | Option to Enable | Disable L2 Stream HW Prefetcher
+- [cpu_perf/prefetchers] 'L1 Stride Prefetcher' -> 01 ['Enable'] x1 exe=OK(Enable) | Uses memory access history of individual instructions to fetch additional lines 
+- [cpu_perf/prefetchers] 'L1 Region Prefetcher' -> 01 ['Enable'] x1 exe=OK(Enable) | Uses memory access history to fetch additional lines when the data access for a 
+- [cpu_perf/prefetchers] 'L1 Burst Prefetch Mode' -> 01 ['Enable'] x1 exe=OK(Enable) | Option to Enable | Disable L1 Burst Prefetch Mode
+- [cpu_perf/prefetchers] 'L2 Up/Down Prefetcher' -> 01 ['Enable'] x1 exe=OK(Enable) | Uses memory access history to determine whether to fetch the next or previous li
+- [cpu_perf/core_perf] 'CPPC Dynamic Preferred Cores' -> 01 ['Cache'] x1 exe=OK(Cache) | No help string
+- [cpu_perf/core_perf] 'ACPI SRAT L3 Cache As NUMA Domain' -> 01 ['Enabled'] x1 exe=OK(Enabled) | Enabled: Each CCX in the system will be declared as a separate NUMA domain.  Dis
+- [cpu_perf/core_perf] 'Corrector Branch Predictor' -> 01 ['Enabled'] x1 exe=OK(Enabled) | Enabling for branch heavy codes may reduce conditional branch mispredicts
+- [cpu_perf/core_perf] 'SoC/Uncore OC Mode' -> 01 ['Enabled'] x1 exe=OK(Enabled) | Forces CPU SoC/uncore components (e.g. Infinity Fabric, memory, and integrated g
+- [cpu_perf/mwait_off] 'MONITOR and MWAIT disable' -> 01 ['Enabled'] x1 exe=OK(Enabled) | The MONITOR, MWAIT, MONITORX, and MWAITX opcodes become invalid, when Enabled.
+- [cpu_perf/core_aggressive] 'Opcache Control' -> 00 ['Enabled'] x1 exe=OK(Enabled) | Enables or disables the Opcache
+- [cpu_perf/core_aggressive] 'Streaming Stores Control' -> 00 ['Enabled'] x1 exe=OK(Enabled) | Enables or disables the streaming stores functionality
+- [cpu_perf/core_aggressive] 'Stretch mode for L3 DFLL' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Stretch mode for L3 DFLL
+- [cpu_perf/core_aggressive] 'Core tunings Configuration for gaming' -> 00 ['Legacy'] x1 exe=OK(Legacy) | Core tunings Configuration for gaming
+- [power_adv/soc_d3_off] 'ACPI D3 Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Disable or enable USB4 (ASM4242 Controller) ACPI D3 Support
+- [power_adv/soc_d3_off] 'ACPI D3 Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Disable or enable USB4 (ASM4242 Controller) ACPI D3 Support
+- [power_adv/soc_d3_off] 'Internal PCIe GPP 0 D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled Internal PCIe GPP Bridge 0 D3
+- [power_adv/soc_d3_off] 'Internal PCIe GPP 2 D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled Internal PCIe GPP Bridge 2 D3
+- [power_adv/soc_d3_off] 'SOC GPU D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC GPU D3
+- [power_adv/soc_d3_off] 'SOC HD Audio D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC HD Audio D3
+- [power_adv/soc_d3_off] 'SOC USB3.1 D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC USB3.1 0 D3
+- [power_adv/soc_d3_off] 'SOC ACP D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC ACP D3
+- [power_adv/soc_d3_off] 'SOC Azalia D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC Azalia D3
+- [power_adv/soc_d3_off] 'SOC USB2.0 D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC USB2.0 D3
+- [power_adv/soc_d3_off] 'SOC USB3.1 for USB4 D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC USB3.1 for USB4 D3
+- [power_adv/soc_d3_off] 'SOC USB4 D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC USB4 D3
+- [power_adv/soc_d3_off] 'Internal USB4 PCIe Tunneling D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled Internal USB4 PCIe Tunneling D3 and add into PEP Device Dependency List
+- [power_adv/soc_d3_off] 'SOC USB4 PCIe Endpoint D3' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabled SOC USB4 PCIe Endpoint D3
+- [power_adv/power_gating_off] 'ACP Power Gating' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable or Disable ACP Power Gating
+- [power_adv/power_gating_off] 'ACP CLock Gating' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable or Disable ACP CLOCK Gating
+- [power_adv/power_gating_off] 'D3Cold Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable/Disable PCIe x8 Slot D3Cold
+- [power_adv/power_gating_off] 'ACPI Sleep State' -> 00 ['Suspend Disabled'] x1 exe=OK(Suspend Disabled) | Select the highest ACPI sleep state the system will enter when the SUSPEND butto
+- [power_adv/power_gating_off] 'ACPI _CST C1 Declaration' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Determines whether or not to declare the C1 state to the OS.
+- [power_adv/power_gating_off] 'DF Cstates' -> 00 ['Disabled'] x1 exe=OK(Disabled) | When DF Cstate feature is enabled, FW programs the registers required to enable 
+- [power_adv/power_gating_off] 'NPU Deep Sleep Enable' -> 00 ['Disabled'] x1 exe=OK(Disabled) | No help string
+- [power_adv/misc_power] 'Enable Hibernation' -> 0 [] x1  | Enables or Disables System ability to Hibernate (OS/S4 Sleep State). This option
+- [power_adv/misc_power] 'SmartShift Enable' -> 00 ['Disable'] x1 exe=OK(Disable) | A+A Support Enable
+- [power_adv/misc_power] 'STAPM Boost' -> 00 ['0'] x1 exe=OK(0) | 0 = STAPM Boost Disabled  1 = STAPM Boost Enabled
+- [power_adv/misc_power] 'PME Turn Off Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable to support sending PME_Turn_Off message to Discrete GPU when going to D3C
+- [power_adv/misc_power] 'Unused GPP Clocks Off' -> 01 ['Enabled'] x1 exe=OK(Enabled) | Turn Unused GPP Clocks Off
+- [power_adv/misc_power] 'GFXOFF' -> 01 ['Enable'] x1 exe=OK(Enable) | Enable = Enable the feature  Disable = Disable the feature
+- [ras/error_reporting_off] 'Core Watchdog Timer Enable' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable or disable CPU Watchdog Timer
+- [ras/error_reporting_off] 'Freeze DF module queues on error' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Disabling this option sets DF:DfGlobalCtrl[DisImmSyncFloodOnFatalError]  Enables
+- [ras/error_reporting_off] 'PCIe All Port ECRC' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable/Disable PCIE all port ECRC
+- [ras/error_reporting_off] 'Advanced Error Reporting (AER)' -> 00 ['Not Supported'] x1 exe=OK(Not Supported) | Enable/Disable support for Advanced Error Reporting (AER)
+- [ras/error_reporting_off] 'Log Transparent Errors' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Log transparent errors in MCA in addition to debug registers.
+- [ras/error_reporting_off] 'Platform First Error Handling' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable/disable PFEH, cloak individual banks, and mask deferred error interrupts 
+- [ras/error_reporting_off] 'MCA error thresh enable' -> 00 ['False'] x1 exe=OK(False) | Enable MCA error thresholding.
+- [ras/error_reporting_off] 'MCA FruText' -> 00 ['False'] x1 exe=OK(False) | Enable MCA FruText
+- [ras/error_reporting_off] 'Persistence mode for legacy endpoints' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable/Disable persistence mode for legacy endpoints  Enable this option if some
+- [ras/error_reporting_off] 'SMART Self Test' -> 0 [] x1  | The S.M.A.R.T.(self-monitoring, analysis and reporting technology) is a monitor 
+- [ras/error_reporting_off] 'Option ROM Messages' -> 00 ['Keep Current'] x1 exe=OK(Keep Current) | [Force BIOS]: The option ROM messages will be shown during the POST(power-on sel
+- [ras/error_reporting_off] 'ABL Console Out Control' -> 00 ['Disable'] x1 exe=OK(Disable) | Enable : Enable ConsoleOut Function for ABL  Disable : Disable ConsoleOut Functi
+- [ras/ecc_off] 'ECC' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Use this option to enable / disable ECC. Auto will set ECC to enable.
+- [ras/ecc_off] 'Data Scramble' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Data scrambling: DataScrambleEn
+- [ras/ecc_off] 'Disable Memory Error Injection' -> 01 ['True'] x1 exe=OK(True) | True: UMC::CH::MiscCfg[DisErrInj]=1
+- [ras/ecc_off] 'PPIN Opt-in' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Turn on PPIN feature
+- [ras/pcie_ari] 'PCIe ARI Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable/Disable ARI
+- [ras/pcie_ari] 'PCIe ARI Enumeration' -> 00 ['Disable'] x1 exe=OK(Disable) | ARI Forwarding Enable for each downstream port
+- [connectivity/usb4_off] 'USB4 (ASM4242 Controller) Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Disable or enable USB4 (ASM4242 Controller) PCIe slot
+- [connectivity/usb4_off] 'Native USB4' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable or disable USB4 (ASM4242 Controller) Native USB4 support
+- [connectivity/io_off] 'SR-IOV Support' -> 00 ['Disabled'] x1 exe=OK(Disabled) | If system has SR-IOV capable PCIe Devices, this option Enables or Disables Singl
+- [connectivity/io_off] 'Network Stack' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable/Disable UEFI Network Stack
+- [connectivity/io_off] 'Onboard PCIE LAN PXE ROM' -> 00 ['Disabled'] x1 exe=OK(Disabled) | The Onboard PCIE LAN PXE ROM
+- [connectivity/io_off] 'USB power delivery in S4 state' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Use this option to disable USB power when your PC is in the S4 state
+- [connectivity/io_off] 'USB power delivery in Soft Off state (S5)' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Use this option to disable USB power when your PC is in the S5 state
+- [connectivity/io_off] 'Auto Install ASUS Utilities' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enabling this allows for the automatic download, installation, and configuration
+- [vrm/vrm_extreme] 'CPU Power Phase Control' -> 03 ['Extreme'] x1 exe=OK(Extreme) | [Standard]: The number of active phases is controlled by the CPU.  [Optimized]: 
+- [vrm/vrm_extreme] 'CPU Power Duty Control' -> 01 ['Extreme'] x1 exe=OK(Extreme) | CPU power Duty Control adjusts the current and thermal of every VRM phase compon
+- [vrm/vrm_extreme] 'VDDSOC Power Phase Control' -> 03 ['Extreme'] x1 exe=OK(Extreme) | VDDSOC Power Phase Control
+- [vrm/vrm_extreme] 'VDDSOC Power Duty Control' -> 01 ['Extreme'] x1 exe=OK(Extreme) | VDDSOC Power Duty Control adjusts the current and thermal of every VRM phase com
+- [vrm/vrm_protect] 'Prochot VRM Throttling' -> 01 ['Disable'] x2 exe=OK(Disable) | Disabling Prochot will disable the VRMs ability to throttle the CPU when the vol
+- [vrm/vrm_protect] 'Peak Current Control' -> 01 ['Disable'] x2 exe=OK(Disable) | Enable or Disable PCC Feature
+- [misc/misc_flags] 'App Compatibility Database' -> 00 ['Disabled'] x1 exe=OK(Disabled) | No help string
+- [misc/misc_flags] 'Processor Aggregator Device' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable/Disable Processor Aggregator Device
+- [misc/misc_flags] 'Setup Mode' -> 00 ['Advanced Mode'] x1 exe=OK(Advanced Mode) | Default setup mode
+- [misc/misc_flags] 'SMEE' -> 00 ['Disable'] x1 exe=OK(Disable) | Control secure memory encryption enable
+- [misc/misc_flags] 'LN2 Mode' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enables settings that provide additional stability at extreme cold operating tem
+- [misc/misc_flags] 'PCIe loopback Mode' -> 00 ['Disabled'] x1 exe=OK(Disabled) | Enable/Disable PcieLoopBackMode
+- [misc/misc_flags] 'Memory P-state' -> 00 ['Disabled'] x2 exe=OK(Disabled) | No help string
+- [misc/misc_flags] 'SEV Control' -> 01 ['Disable'] x1 exe=OK(Disable) | Can be used to disable SEV. To re-enable SEV, a POWER CYCLE is needed after sele
+- [misc/led_state] 'When system is in working state' -> 03 ['Aura Off'] x1 exe=OK(Aura Off) | [All On]: RGB LEDs and Functional LEDs will behave normally.   [Stealth Mode]: A
