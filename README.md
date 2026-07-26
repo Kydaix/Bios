@@ -48,7 +48,6 @@ Les copies du menu **ASUS Ai/Extreme Tweaker** sont remises sur **Auto** (tweak
 
 | Catégorie | Contenu | Risque |
 |---|---|---|
-| **Stabilité** | Contreparties « retour sûr » : annuler CO/PBO/Boost, réactiver Prochot VRM + Peak Current Control, réactiver le watchdog & WHEA, FCLK Auto | Sûr |
 | **Système & Latence** | ReBAR, C-states, virtualisation, TSME, iGPU, ASPM, Spread Spectrum, firmware sécurité | Sûr → Moyen |
 | **CPU – PBO (AMD OC)** | PBO Advanced + Scalar 3X, Boost +200 MHz, Curve Optimizer −30, neutralisation ASUS | Sûr → Élevé |
 | **Mémoire DDR5** | Latence (UCLK/Gear Down…), FCLK 2067→2167 (exclusifs), tREFI, tWR, Nitro | Expérimental |
@@ -56,20 +55,34 @@ Les copies du menu **ASUS Ai/Extreme Tweaker** sont remises sur **Auto** (tweak
 
 Les paliers **FCLK** et **tREFI** sont mutuellement exclusifs (radio) : sélectionner l'un désélectionne l'autre.
 
-### Revenir en arrière : la catégorie « Stabilité »
+### L'interrupteur décide dans les deux sens
 
-**Décocher un tweak n'annule rien** : seules les règles des tweaks *cochés* sont écrites dans
-le BIOS. Pour défaire un réglage, il faut cocher sa contrepartie dans la catégorie
-**Stabilité**, qui porte les valeurs de retour sûres (CO = 0, Boost +0 MHz, PBO stock,
-Prochot VRM & Peak Current Control réactivés, watchdog cœur & WHEA réactivés, FCLK Auto…).
+Un tweak **activé** écrit ses valeurs cibles. Un tweak **désactivé** remet chaque réglage qu'il
+occupe encore à la **valeur par défaut du BIOS** — il n'y a donc pas de catégorie « annuler » :
+pour défaire un réglage, on le désactive.
 
-Chaque contrepartie partage un `exclusiveGroup` avec le tweak agressif qu'elle annule :
-cocher `stab_curve_off` décoche automatiquement `curve_neg30`, et inversement.
+Un tweak désactivé qui n'est pas appliqué n'écrit rien : le plan ne contient que de vrais
+changements. Les tweaks **activés sont prioritaires** — un paramètre revendiqué par un tweak
+actif n'est jamais réinitialisé par un tweak désactivé qui le partage (cas des paliers FCLK).
+
+La valeur par défaut est résolue dans cet ordre :
+
+1. le champ `default` de la règle, dans `catalog.json` ;
+2. la ligne `BIOS Default` que SCEWIN exporte pour ce paramètre ;
+3. l'option libellée `Auto`, si elle existe.
+
+Si aucune des trois n'est disponible, **l'app n'invente rien** : le paramètre est laissé tel quel
+et signalé comme tel dans l'Aperçu et dans le pied de fenêtre. C'est le cas d'une trentaine
+d'entrées AMD CBS (états D3 du SOC, USB4, power gating) que ce firmware n'expose pas.
+
+Sur le BIOS 2402 de la machine cible, 179 règles se répartissent ainsi : 89 défauts fournis par
+le BIOS, 10 par le catalogue, 10 via une option `Auto`, 24 sans valeur par défaut connue.
 
 À utiliser en cas de **BSOD `CLOCK_WATCHDOG_TIMEOUT` (0x101)**, de `WHEA 0x124`, ou de freeze
-sous charge en rafales (builds Node/Vite/TypeScript). Voir
+sous charge en rafales (builds Node/Vite/TypeScript) : désactivez les tweaks en cause, appliquez,
+redémarrez. Voir
 [`analysis/CLOCK_WATCHDOG_TIMEOUT_2026-07-26.md`](analysis/CLOCK_WATCHDOG_TIMEOUT_2026-07-26.md)
-pour la chaîne causale et l'ordre d'application recommandé.
+pour la chaîne causale et l'ordre recommandé.
 
 Le catalogue peut être édité sans recompiler : placez un `catalog.json` **à côté de l'exe**,
 il prime sur la version embarquée.

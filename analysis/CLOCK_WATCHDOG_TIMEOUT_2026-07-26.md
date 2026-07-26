@@ -60,39 +60,52 @@ activement au lieu de se mettre en veille, tous les cœurs restent chauds), phas
 > Aucun minidump n'est écrit, d'où l'absence totale de trace exploitable après le BSOD.
 > À repasser à `7` (dump automatique) ou `3` (kernel) pour toute campagne de diagnostic.
 
-## Remédiation — catégorie « Stabilité » du catalogue
+## Remédiation — désactiver les tweaks en cause
 
-Décocher un tweak dans BiosTuner **n'annule rien** : `PlanService` n'écrit que les règles des
-tweaks cochés. Il faut donc des règles inverses explicites. La catégorie `stability`
-(en tête du catalogue) fournit ces contreparties, chacune en `exclusiveGroup` avec son tweak
-agressif — la cocher décoche automatiquement l'autre.
+Depuis la refonte du 26/07/2026, **désactiver un tweak le défait** : `PlanService` réécrit chaque
+paramètre qu'il occupe encore à la valeur par défaut du BIOS (voir README, « L'interrupteur décide
+dans les deux sens »). Il n'y a donc rien à cocher pour revenir en arrière — il faut décocher.
 
-### Vague 1 — arrêter les crashs (à appliquer d'un bloc)
+### Vague 1 — arrêter les crashs (à désactiver d'un bloc)
 
-| Tweak | Action |
-|---|---|
-| `stab_curve_off` | Curve Optimizer → 0 |
-| `stab_boost_off` | Boost Override → +0 MHz |
-| `stab_vrm_protect_on` | Prochot VRM + Peak Current Control → Enable |
-| `stab_ras_on` | Core Watchdog + AER + PFEH + MCA → Enabled |
-| `stab_mwait_on` | MONITOR/MWAIT → disponibles |
+| Tweak à désactiver | Ce qui est rétabli | Source du défaut |
+|---|---|---|
+| `curve_neg30` | Curve Optimizer → Disable, Sign → Positive, Magnitude → 0 | catalogue |
+| `pbo_boost` | Boost Override → Disabled, +0 MHz | catalogue |
+| `vrm_protect` | Prochot VRM & Peak Current Control → Auto | BIOS / Auto |
+| `error_reporting_off` | Core Watchdog, AER, PFEH, MCA, ECRC → valeurs BIOS | BIOS |
+| `mwait_off` | MONITOR/MWAIT → valeur BIOS | BIOS |
 
-Ces cinq tweaks sont marqués `recommended` : le bouton **Recommandé** les sélectionne.
-Redémarrer, puis relancer le build en boucle (`npm run build` × 20) pour valider.
+Soit **26 écritures** mesurées sur l'export du 23/07, toutes des retours au défaut. Appliquer,
+redémarrer, puis relancer le build en boucle (`npm run build` × 20) pour valider.
+
+`error_reporting_off` est le plus important pour la suite : tant qu'il est actif, aucune erreur
+matérielle n'est journalisée et le prochain crash restera aussi opaque que les précédents.
 
 ### Vague 2 — si le crash persiste
 
-`stab_pbo_off` (PBO complètement stock), `stab_vrm_phase_opt` (phases → Optimized / T.Probe),
-`stab_cstates_auto` (C-states → Auto).
+Désactiver `pbo_base` (PBO revient à Auto, Scalar 1X), `vrm_extreme` (phases VRM) et `cstates`.
 
 ### Vague 3 — mémoire / fabric
 
-`stab_fclk_auto`, `stab_nitro_off`. Si les BSOD deviennent des `0x124` ou des erreurs
-WHEA-Logger après réactivation du reporting, commencer directement par cette vague.
+Désactiver `fclk_2067`, `nitro`, `mem_latency`. Si les BSOD deviennent des `0x124` ou font
+apparaître des WHEA-Logger une fois le reporting réactivé, commencer directement par cette vague.
+
+### Limite connue : 24 paramètres non réinitialisables
+
+Ce firmware n'expose ni ligne `BIOS Default` ni option `Auto` pour 24 des paramètres actifs —
+essentiellement `soc_d3_off` (14), `power_gating_off` (3), `usb4_off` (2), `aspm` (2),
+`misc_power` (2), `misc_flags` (1). Les désactiver ne les remet donc pas par défaut : l'app le
+signale au lieu de deviner une valeur. Aucun de ces réglages n'est impliqué dans la chaîne causale
+du 0x101 ; pour les remettre réellement à zéro, il faut passer par un **Load Optimized Defaults**
+dans le BIOS ou un clear CMOS.
 
 ### Retour progressif vers la performance
 
 Une fois stable, remonter **un seul cran à la fois**, avec 48 h de validation entre chaque :
-`stab_curve_15` (CO −15) → `pbo_base` seul (sans boost override) → `pbo_boost`.
-Ne jamais recocher `vrm_protect` (Prochot/PCC désactivés) ni `error_reporting_off` : ces deux
-tweaks n'apportent aucun gain mesurable et suppriment les garde-fous et le diagnostic.
+`pbo_base` seul → `curve_neg30` avec une magnitude réduite (15 plutôt que 30, à éditer dans
+`catalog.json`) → `pbo_boost`. Ne jamais réactiver `vrm_protect` ni `error_reporting_off` : ces
+deux tweaks n'apportent aucun gain mesurable et suppriment les garde-fous et le diagnostic.
+
+> `curve_neg30` et `pbo_boost` ont été retirés du profil **Sélection recommandée** à la suite de
+> cet incident. Ils restent disponibles, mais ne sont plus proposés par défaut.

@@ -3,343 +3,15 @@
   "hardware": "ASUS ROG STRIX X870-A GAMING WIFI / Ryzen 7 9800X3D / RTX 5070 / 4x DDR5-6200 (DOCP I, CL30, 1.35V)",
   "categories": [
     {
-      "id": "stability",
-      "name": "Stabilité — annuler les réglages à risque",
-      "description": "Contreparties « retour sûr » des tweaks agressifs. À utiliser en cas de BSOD (CLOCK_WATCHDOG_TIMEOUT 0x101, WHEA 0x124), de freeze sous charge en rafales (builds Node/Vite/TypeScript, compilation, jeux) ou pour isoler un coupable. Décocher un tweak n'annule rien : seules les règles cochées sont écrites dans le BIOS, il faut donc cocher le tweak de stabilité correspondant. Chaque entrée est exclusive avec son tweak agressif : la cocher décoche automatiquement l'autre.",
-      "risk": "Safe",
-      "tweaks": [
-        {
-          "id": "stab_curve_off",
-          "name": "Annuler le Curve Optimizer (CO = 0)",
-          "description": "Remet l'undervolt Curve Optimizer à zéro (Disable / Positive / magnitude 0). Cause n°1 des CLOCK_WATCHDOG_TIMEOUT sur Ryzen X3D : un CO trop négatif fait décrocher un cœur pendant les phases de boost à faible charge, exactement le régime d'un build JS/TS (rafales courtes très parallélisées). À cocher en premier.",
-          "risk": "Safe",
-          "recommended": true,
-          "verified": true,
-          "exclusiveGroup": "co",
-          "rules": [
-            {
-              "question": "Curve Optimizer",
-              "token": "AF",
-              "offset": "B6",
-              "code": "00",
-              "reason": "Curve Optimizer désactivé (menu AMD Overclocking)."
-            },
-            {
-              "question": "All Core Curve Optimizer Sign",
-              "token": "B0",
-              "offset": "B7",
-              "code": "00",
-              "reason": "Signe remis sur Positive (neutre)."
-            },
-            {
-              "question": "All Core Curve Optimizer Magnitude",
-              "token": "B1",
-              "offset": "B8",
-              "value": "0",
-              "reason": "Magnitude remise à 0 : plus aucun undervolt."
-            }
-          ]
-        },
-        {
-          "id": "stab_curve_15",
-          "name": "Curve Optimizer all-core −15 (compromis)",
-          "description": "Palier intermédiaire : garde une partie du gain thermique du CO tout en reculant de −30 à −15. À essayer seulement après avoir validé la stabilité à CO = 0, pour retrouver du boost sans revenir à une marge nulle.",
-          "risk": "Low",
-          "recommended": false,
-          "verified": true,
-          "exclusiveGroup": "co",
-          "rules": [
-            {
-              "question": "Curve Optimizer",
-              "token": "AF",
-              "offset": "B6",
-              "code": "01",
-              "reason": "Curve Optimizer all-core (menu AMD Overclocking)."
-            },
-            {
-              "question": "All Core Curve Optimizer Sign",
-              "token": "B0",
-              "offset": "B7",
-              "code": "01",
-              "reason": "Offset négatif."
-            },
-            {
-              "question": "All Core Curve Optimizer Magnitude",
-              "token": "B1",
-              "offset": "B8",
-              "value": "15",
-              "reason": "Magnitude CO −15 : moitié moins agressif que −30."
-            }
-          ]
-        },
-        {
-          "id": "stab_boost_off",
-          "name": "Annuler le Boost Override (+0 MHz)",
-          "description": "Remet le plafond de boost au stock (Disabled, +0 MHz). Le +200 MHz combiné à un CO négatif pousse le CPU sur des points fréquence/tension jamais validés par AMD : c'est le second facteur des freezes sous charge en rafales.",
-          "risk": "Safe",
-          "recommended": true,
-          "verified": true,
-          "exclusiveGroup": "boost",
-          "rules": [
-            {
-              "question": "CPU Boost Clock Override",
-              "token": "A4",
-              "offset": "AD",
-              "code": "00",
-              "reason": "Boost override désactivé (menu AMD Overclocking)."
-            },
-            {
-              "question": "Max CPU Boost Clock Override(+)",
-              "token": "A5",
-              "offset": "AE",
-              "value": "0",
-              "reason": "Override remis à 0 MHz."
-            }
-          ]
-        },
-        {
-          "id": "stab_pbo_off",
-          "name": "Annuler PBO (retour stock : Disable + Scalar 1X)",
-          "description": "Désactive complètement Precision Boost Overdrive : limites Auto, Scalar Ctrl Auto, Scalar 1X. Le Scalar 10X autorise le CPU à tenir des tensions de boost bien plus longtemps, ce qui aggrave toute instabilité. Retour au comportement d'usine.",
-          "risk": "Safe",
-          "recommended": false,
-          "verified": true,
-          "exclusiveGroup": "pbo",
-          "rules": [
-            {
-              "question": "Precision Boost Overdrive",
-              "token": "9D",
-              "offset": "9A",
-              "code": "00",
-              "reason": "PBO désactivé (menu AMD Overclocking)."
-            },
-            {
-              "question": "PBO Limits",
-              "token": "9E",
-              "offset": "9B",
-              "code": "FF",
-              "reason": "Limites PPT/TDC/EDC remises sur Auto."
-            },
-            {
-              "question": "Precision Boost Overdrive Scalar Ctrl",
-              "token": "A2",
-              "offset": "A8",
-              "code": "FF",
-              "reason": "Contrôle du Scalar remis sur Auto."
-            },
-            {
-              "question": "Precision Boost Overdrive Scalar",
-              "token": "A3",
-              "offset": "A9",
-              "code": "64",
-              "reason": "Scalar remis à 1X (valeur stock)."
-            }
-          ]
-        },
-        {
-          "id": "stab_vrm_protect_on",
-          "name": "Réactiver Prochot VRM & Peak Current Control",
-          "description": "Rétablit les deux protections électriques du VRM désactivées par le tweak « Prochot VRM & Peak Current Control ». Sans elles, un pic de courant (tous les cœurs qui montent d'un coup au démarrage d'un build) provoque une chute de tension transitoire non régulée : un cœur rate son interruption d'horloge, d'où le 0x101. À cocher systématiquement en cas de crash.",
-          "risk": "Safe",
-          "recommended": true,
-          "verified": true,
-          "exclusiveGroup": "vrmprot",
-          "rules": [
-            {
-              "question": "Prochot VRM Throttling",
-              "code": "00",
-              "reason": "Throttling thermique VRM réactivé (tous les chemins de menu)."
-            },
-            {
-              "question": "Peak Current Control",
-              "code": "00",
-              "reason": "Limitation des pics de courant réactivée (tous les chemins de menu)."
-            }
-          ]
-        },
-        {
-          "id": "stab_vrm_phase_opt",
-          "name": "Phases VRM : Extreme → Optimized / T.Probe",
-          "description": "Remet le contrôle de phases et le duty cycle du VRM CPU et SoC sur un profil régulé (Optimized / T.Probe) au lieu d'Extreme. Réduit la chauffe des étages d'alimentation et rétablit l'équilibrage thermique entre phases.",
-          "risk": "Safe",
-          "recommended": false,
-          "verified": true,
-          "exclusiveGroup": "vrmphase",
-          "rules": [
-            {
-              "question": "CPU Power Phase Control",
-              "code": "02",
-              "reason": "Phases CPU en Optimized."
-            },
-            {
-              "question": "CPU Power Duty Control",
-              "code": "00",
-              "reason": "Duty CPU sur T.Probe (équilibrage thermique)."
-            },
-            {
-              "question": "VDDSOC Power Phase Control",
-              "code": "02",
-              "reason": "Phases SoC en Optimized."
-            },
-            {
-              "question": "VDDSOC Power Duty Control",
-              "code": "00",
-              "reason": "Duty SoC sur T.Probe."
-            }
-          ]
-        },
-        {
-          "id": "stab_ras_on",
-          "name": "Réactiver le watchdog cœur & le rapport d'erreurs (WHEA)",
-          "description": "Annule « Désactiver watchdog & rapport d'erreurs ». Indispensable pour diagnostiquer : avec le Core Watchdog Timer, l'AER, le PFEH et les seuils MCA désactivés, le matériel ne remonte plus rien à Windows — le journal WHEA-Logger reste vide même quand le CPU décroche, et le BSOD arrive sans cause identifiable. À cocher avant toute campagne de test.",
-          "risk": "Safe",
-          "recommended": true,
-          "verified": true,
-          "exclusiveGroup": "ras",
-          "rules": [
-            {
-              "question": "Core Watchdog Timer Enable",
-              "code": "01",
-              "reason": "Watchdog cœur réactivé."
-            },
-            {
-              "question": "Freeze DF module queues on error",
-              "code": "01",
-              "reason": "Gel des files DF sur erreur réactivé."
-            },
-            {
-              "question": "PCIe All Port ECRC",
-              "code": "01",
-              "reason": "Contrôle d'intégrité ECRC PCIe réactivé."
-            },
-            {
-              "question": "Advanced Error Reporting (AER)",
-              "code": "01",
-              "reason": "AER PCIe réactivé."
-            },
-            {
-              "question": "Log Transparent Errors",
-              "code": "01",
-              "reason": "Journalisation des erreurs corrigées réactivée."
-            },
-            {
-              "question": "Platform First Error Handling",
-              "code": "01",
-              "reason": "PFEH réactivé."
-            },
-            {
-              "question": "MCA error thresh enable",
-              "code": "01",
-              "reason": "Seuils MCA réactivés."
-            }
-          ]
-        },
-        {
-          "id": "stab_mwait_on",
-          "name": "Réactiver MONITOR/MWAIT",
-          "description": "Annule « Désactiver MONITOR/MWAIT ». Rendre ces opcodes invalides force les threads en attente à boucler activement : sur un build très parallélisé, tous les cœurs restent en C0 à haute fréquence, ce qui augmente la charge électrique et thermique au pire moment.",
-          "risk": "Safe",
-          "recommended": true,
-          "verified": true,
-          "exclusiveGroup": "idle_mwait",
-          "rules": [
-            {
-              "question": "MONITOR and MWAIT disable",
-              "code": "00",
-              "reason": "MONITOR/MWAIT redeviennent disponibles."
-            }
-          ]
-        },
-        {
-          "id": "stab_cstates_auto",
-          "name": "Remettre les C-States sur Auto",
-          "description": "Annule « Désactiver les C-States » : Global C-state Control et Power Supply Idle Control repassent sur Auto. Utile si le crash persiste après neutralisation du CO et du VRM — certaines révisions AGESA gèrent mal la sortie d'idle quand les C-states sont forcés à Disabled. Coût : quelques microsecondes de latence de réveil en plus.",
-          "risk": "Safe",
-          "recommended": false,
-          "verified": true,
-          "exclusiveGroup": "idle_cstates",
-          "rules": [
-            {
-              "question": "Global C-state Control",
-              "code": "03",
-              "reason": "C-states remis sur Auto."
-            },
-            {
-              "question": "Power Supply Idle Control",
-              "code": "FF",
-              "reason": "Comportement d'idle remis sur Auto."
-            }
-          ]
-        },
-        {
-          "id": "stab_fclk_auto",
-          "name": "FCLK sur Auto",
-          "description": "Annule tout palier Infinity Fabric manuel (2067/2100/2133/2167) et laisse l'AGESA choisir. Un FCLK forcé est plutôt une source de WHEA 0x124 que de 0x101, mais c'est la variable à neutraliser ensuite si les crashs persistent après le CPU et le VRM.",
-          "risk": "Safe",
-          "recommended": false,
-          "verified": true,
-          "exclusiveGroup": "fclk",
-          "rules": [
-            {
-              "question": "Infinity Fabric Frequency and Dividers",
-              "token": "149",
-              "offset": "269",
-              "code": "FF",
-              "reason": "FCLK Auto (menu AMD CBS)."
-            },
-            {
-              "question": "Infinity Fabric Frequency and Dividers",
-              "token": "9A",
-              "offset": "94",
-              "code": "FFFF",
-              "reason": "FCLK Auto (menu AMD Overclocking)."
-            },
-            {
-              "question": "FCLK Frequency",
-              "token": "3013",
-              "offset": "862",
-              "code": "00",
-              "reason": "FCLK Auto (chemin ASUS AI Tweaker)."
-            }
-          ]
-        },
-        {
-          "id": "stab_nitro_off",
-          "name": "Désactiver DDR5 Nitro",
-          "description": "Remet DDR5 Nitro Mode sur Disable sur les deux chemins de menu. Le training Nitro réduit les marges mémoire ; à neutraliser si l'instabilité subsiste une fois le CPU et le VRM revenus au stock.",
-          "risk": "Safe",
-          "recommended": false,
-          "verified": true,
-          "exclusiveGroup": "nitro",
-          "rules": [
-            {
-              "question": "DDR5 Nitro Mode",
-              "token": "20",
-              "offset": "1B2",
-              "code": "00",
-              "reason": "Nitro désactivé (menu AMD CBS)."
-            },
-            {
-              "question": "DDR5 Nitro Mode",
-              "token": "20C",
-              "offset": "8D7",
-              "code": "00",
-              "reason": "Nitro désactivé (chemin ASUS)."
-            }
-          ]
-        }
-      ]
-    },
-    {
       "id": "base",
-      "name": "Systeme & Latence de base",
-      "description": "Reglages firmware a faible risque orientes jeu : on desactive les economies d'energie et les fonctions de securite/virtualisation qui ajoutent de la latence, sans toucher a l'overclocking CPU/RAM.",
+      "name": "Système & latence de base",
+      "description": "Réglages firmware à faible risque orientés jeu : on désactive les économies d'énergie et les fonctions de sécurité/virtualisation qui ajoutent de la latence, sans toucher à l'overclocking CPU ni à la mémoire.",
       "risk": "Safe",
       "tweaks": [
         {
           "id": "rebar",
-          "name": "Resizable BAR (Above 4G + CSM off)",
-          "description": "Active le Resizable BAR : la carte graphique accede a toute la VRAM d'un coup. Necessite Above 4G Decoding active et le CSM desactive (boot UEFI pur). Gain de perf gratuit en jeu sur GPU recents.",
+          "name": "Resizable BAR (Above 4G + CSM désactivé)",
+          "description": "Donne à la carte graphique l'accès à toute sa VRAM en une fois. Nécessite Above 4G Decoding activé et le CSM désactivé (démarrage UEFI pur). Gain de performance gratuit en jeu sur les GPU récents.",
           "risk": "Safe",
           "recommended": true,
           "verified": true,
@@ -363,8 +35,8 @@
         },
         {
           "id": "cstates",
-          "name": "Desactiver les C-States / idle CPU profond",
-          "description": "Empeche le CPU d'entrer dans des etats de veille profonds. Reduit les pics de latence (1% low en jeu) au prix d'une conso/temperature idle un peu plus elevee.",
+          "name": "Désactiver les C-States / veille profonde du CPU",
+          "description": "Empêche le CPU d'entrer dans des états de veille profonds. Réduit les pics de latence (1 % low en jeu) au prix d'une consommation et d'une température au repos un peu plus élevées.",
           "risk": "Low",
           "recommended": true,
           "verified": true,
@@ -379,13 +51,12 @@
               "code": "00",
               "reason": "Typical Current Idle : evite le comportement basse conso au repos."
             }
-          ],
-          "exclusiveGroup": "idle_cstates"
+          ]
         },
         {
           "id": "virt",
-          "name": "Desactiver la virtualisation (IOMMU / SVM)",
-          "description": "Coupe la virtualisation CPU et le remapping DMA. A NE PAS activer si tu utilises des VM, WSL2, Hyper-V, Sandbox ou l'isolation noyau de Windows (memory integrity). Pure config jeu.",
+          "name": "Désactiver la virtualisation (IOMMU / SVM)",
+          "description": "Coupe la virtualisation CPU et le remapping DMA. À ne pas activer si vous utilisez des machines virtuelles, WSL2, Hyper-V, Sandbox ou l'isolation du noyau Windows (intégrité de la mémoire). Configuration 100 % jeu.",
           "risk": "Medium",
           "recommended": false,
           "verified": true,
@@ -404,8 +75,8 @@
         },
         {
           "id": "tsme",
-          "name": "Desactiver TSME (chiffrement memoire)",
-          "description": "Desactive le chiffrement transparent de la memoire. Leger gain de latence memoire, securite reduite (vol de donnees a chaud).",
+          "name": "Désactiver TSME (chiffrement mémoire)",
+          "description": "Désactive le chiffrement transparent de la mémoire. Supprime la petite pénalité de latence qu'il impose ; la mémoire n'est plus chiffrée au repos.",
           "risk": "Low",
           "recommended": true,
           "verified": true,
@@ -419,8 +90,8 @@
         },
         {
           "id": "igpu",
-          "name": "Desactiver l'iGPU (GPU integre)",
-          "description": "Setup 100% GPU dedie : libere des ressources et evite que Windows bascule sur le GPU integre. A ne pas faire si tu veux garder une sortie video de secours sur la carte mere.",
+          "name": "Désactiver l'iGPU (GPU intégré)",
+          "description": "Libère les ressources réservées au GPU intégré. À réserver aux configurations avec carte graphique dédiée : sans elle, plus aucune sortie vidéo.",
           "risk": "Low",
           "recommended": true,
           "verified": true,
@@ -439,8 +110,8 @@
         },
         {
           "id": "aspm",
-          "name": "Desactiver ASPM / PCIe power management",
-          "description": "Coupe toutes les economies d'energie PCIe (L1 substates, CLKREQ, etc.). Reduit la latence d'acces aux peripheriques PCIe (GPU, NVMe) au prix de la conso.",
+          "name": "Désactiver ASPM / gestion d'énergie PCIe",
+          "description": "Empêche les liens PCIe de passer en états basse consommation. Supprime les micro-latences de réveil sur le GPU et les SSD NVMe, au prix de quelques watts au repos.",
           "risk": "Low",
           "recommended": true,
           "verified": true,
@@ -484,8 +155,8 @@
         },
         {
           "id": "spread",
-          "name": "Desactiver le Spread Spectrum",
-          "description": "Coupe l'etalement de spectre des horloges (anti-EMI). Horloges plus propres/stables pour l'OC, marge de frequence legerement meilleure.",
+          "name": "Désactiver le Spread Spectrum",
+          "description": "Coupe la modulation d'horloge destinée à réduire les interférences électromagnétiques. Horloges plus stables, base plus saine pour l'overclocking.",
           "risk": "Low",
           "recommended": true,
           "verified": true,
@@ -505,7 +176,7 @@
         {
           "id": "lul",
           "name": "Latency Under Load (LUL)",
-          "description": "Conserve le comportement AMD 'Latency Under Load' adapte aux scenarios forte bande passante memoire.",
+          "description": "Garde le comportement latency-under-load actif : privilégie la latence à la bande passante quand la mémoire est fortement sollicitée.",
           "risk": "Low",
           "recommended": false,
           "verified": true,
@@ -519,8 +190,8 @@
         },
         {
           "id": "security_off",
-          "name": "Desactiver le firmware de securite (Pluton / DRTM / SMM / SecureBio)",
-          "description": "Desactive Pluton, secured-core, DRTM, isolation SMM et la biometrie firmware. Reduit le surcout SMM/securite. ATTENTION : baisse notable de la securite, peut bloquer certaines exigences entreprise/Windows.",
+          "name": "Désactiver le firmware de sécurité (Pluton / DRTM / SMM / SecureBio)",
+          "description": "Coupe le processeur de sécurité Pluton, le secured-core, le DRTM, l'isolation SMM et la biométrie firmware. Retire des couches de sécurité matérielle : à ne faire que sur une machine de jeu dédiée, jamais sur un poste professionnel.",
           "risk": "Medium",
           "recommended": false,
           "verified": true,
@@ -561,8 +232,8 @@
     },
     {
       "id": "cpu",
-      "name": "CPU - PBO (menu AMD Overclocking)",
-      "description": "Precision Boost Overdrive et Curve Optimizer, pilotes UNIQUEMENT via le menu AMD Overclocking (AGESA). Les copies ASUS Ai/Extreme Tweaker doivent rester sur Auto (voir 'Neutraliser copies ASUS'). Les tokens ne sont pas uniques : ces regles ciblent precisement (token, offset) du menu AMD OC.",
+      "name": "CPU — PBO (menu AMD Overclocking)",
+      "description": "Precision Boost Overdrive et Curve Optimizer, pilotés uniquement depuis le menu AMD Overclocking. Les copies du menu ASUS Ai Tweaker sont remises sur Auto pour éviter tout état ambigu. Montez un cran à la fois et validez la stabilité entre chaque.",
       "risk": "Medium",
       "tweaks": [
         {
@@ -599,15 +270,15 @@
               "token": "A3",
               "offset": "A9",
               "code": "3E8",
+              "default": "64",
               "reason": "Scalar 10X (max, comme l'outil) — menu AMD Overclocking."
             }
-          ],
-          "exclusiveGroup": "pbo"
+          ]
         },
         {
           "id": "pbo_boost",
           "name": "Boost Override +200 MHz",
-          "description": "Releve le plafond de boost de +200 MHz. A appliquer seulement apres validation de la stabilite de PBO Advanced. Retire du profil Recommande apres les BSOD CLOCK_WATCHDOG_TIMEOUT du 26/07/2026 (voir analysis/CLOCK_WATCHDOG_TIMEOUT_2026-07-26.md).",
+          "description": "Relève le plafond de boost de 200 MHz. À n'appliquer qu'après avoir validé la stabilité de PBO Advanced. Combiné à un Curve Optimizer négatif, pousse le CPU sur des points fréquence/tension jamais validés par AMD.",
           "risk": "Medium",
           "recommended": false,
           "verified": true,
@@ -617,6 +288,7 @@
               "token": "A4",
               "offset": "AD",
               "code": "01",
+              "default": "00",
               "reason": "Override de boost positif (menu AMD Overclocking)."
             },
             {
@@ -624,15 +296,15 @@
               "token": "A5",
               "offset": "AE",
               "value": "200",
+              "default": "0",
               "reason": "+200 MHz de boost (valeur actuelle, menu AMD Overclocking)."
             }
-          ],
-          "exclusiveGroup": "boost"
+          ]
         },
         {
           "id": "curve_neg30",
-          "name": "Curve Optimizer all-core -30",
-          "description": "Undervolt via Curve Optimizer all-core a -30. Agressif pour un X3D : meilleures frequences/temperatures mais peut crasher a l'idle ou en charge legere. Valider longuement (WHEA, y-cruncher, OCCT). Retire du profil Recommande apres les BSOD CLOCK_WATCHDOG_TIMEOUT du 26/07/2026 (voir analysis/CLOCK_WATCHDOG_TIMEOUT_2026-07-26.md).",
+          "name": "Curve Optimizer all-core −30",
+          "description": "Undervolt via Curve Optimizer, −30 sur tous les cœurs. Agressif pour un X3D : meilleures fréquences et températures, mais peut faire décrocher un cœur au repos ou en charge légère (BSOD CLOCK_WATCHDOG_TIMEOUT). À valider longuement (journal WHEA, y-cruncher, OCCT).",
           "risk": "High",
           "recommended": false,
           "verified": true,
@@ -642,6 +314,7 @@
               "token": "AF",
               "offset": "B6",
               "code": "01",
+              "default": "00",
               "reason": "Curve Optimizer all-core (menu AMD Overclocking)."
             },
             {
@@ -649,6 +322,7 @@
               "token": "B0",
               "offset": "B7",
               "code": "01",
+              "default": "00",
               "reason": "Offset negatif (menu AMD Overclocking)."
             },
             {
@@ -656,15 +330,15 @@
               "token": "B1",
               "offset": "B8",
               "value": "30",
+              "default": "0",
               "reason": "Magnitude CO -30 (menu AMD Overclocking)."
             }
-          ],
-          "exclusiveGroup": "co"
+          ]
         },
         {
           "id": "asus_neutralize",
-          "name": "Neutraliser les copies ASUS Ai Tweaker -> Auto",
-          "description": "Remet les doublons PBO/Boost/Curve Optimizer du menu ASUS Ai/Extreme Tweaker sur Auto, pour que le menu AMD Overclocking soit le seul a piloter le PBO. Indispensable pour eviter un etat ambigu. Ne touche pas au DIGI+ VRM ni au Medium Load Boostit.",
+          "name": "Neutraliser les copies ASUS Ai Tweaker",
+          "description": "Remet sur Auto les réglages PBO et Curve Optimizer dupliqués dans le menu ASUS Ai Tweaker, pour que seul le menu AMD Overclocking pilote le CPU. Évite deux sources de vérité contradictoires.",
           "risk": "Safe",
           "recommended": true,
           "verified": true,
@@ -695,6 +369,7 @@
               "token": "2FD6",
               "offset": "D46",
               "value": "Auto",
+              "default": "Auto",
               "reason": "Reset ASUS Ai Tweaker boost -> Auto."
             },
             {
@@ -731,14 +406,14 @@
     },
     {
       "id": "memory",
-      "name": "Memoire DDR5 (experimental)",
-      "description": "Tuning latence/bande passante DDR5. RISQUE ELEVE avec 4 DIMM a DDR5-6200 : marge de training faible. Appliquer une seule etape a la fois et valider (TM5/Karhu, y-cruncher, WHEA). Les paliers FCLK et tREFI sont exclusifs entre eux.",
+      "name": "Mémoire DDR5 (expérimental)",
+      "description": "Tuning latence et bande passante DDR5. Risque élevé avec 4 barrettes à DDR5-6200 : la marge de training est faible. Appliquez une seule étape à la fois et validez (TM5/Karhu, y-cruncher, journal WHEA). Les paliers FCLK et tREFI sont exclusifs entre eux.",
       "risk": "Experimental",
       "tweaks": [
         {
           "id": "mem_latency",
-          "name": "Latence memoire (Power Down off, UCLK=MEMCLK, Gear Down)",
-          "description": "Profil latence pour memoire deja stable : desactive le power-down DRAM, force UCLK=MEMCLK, ajuste gear-down et garde le retraining a chaque boot pendant le tuning.",
+          "name": "Latence mémoire (Power Down, UCLK=MEMCLK, Gear Down)",
+          "description": "Coupe le power down des barrettes, force le contrôleur mémoire au même rythme que la DRAM et active le Gear Down Mode. Gain de latence net, mais réduit la marge de training : à valider avec TM5 ou Karhu.",
           "risk": "Experimental",
           "recommended": false,
           "verified": false,
@@ -773,7 +448,7 @@
         {
           "id": "fclk_2067",
           "name": "FCLK manuel 2067 MHz",
-          "description": "Premier palier Infinity Fabric en 1:1 pour DDR5-6200. Cible les 3 menus (AMD CBS, AMD Overclocking, ASUS).",
+          "description": "Palier Infinity Fabric à 2067 MHz. Premier cran au-dessus de l'Auto ; le plus sûr des quatre. Un FCLK instable se manifeste par des erreurs WHEA plutôt que par un plantage franc.",
           "risk": "High",
           "recommended": false,
           "verified": false,
@@ -819,7 +494,7 @@
         {
           "id": "fclk_2100",
           "name": "FCLK manuel 2100 MHz",
-          "description": "Palier Infinity Fabric 2100 MHz. A utiliser seulement apres validation de 2067.",
+          "description": "Palier Infinity Fabric à 2100 MHz. À n'utiliser qu'après avoir validé 2067 MHz.",
           "risk": "High",
           "recommended": false,
           "verified": false,
@@ -865,7 +540,7 @@
         {
           "id": "fclk_2133",
           "name": "FCLK manuel 2133 MHz",
-          "description": "Cible pratique agressive pour DDR5-6200 en 1:1. A utiliser seulement apres validation de 2100.",
+          "description": "Palier Infinity Fabric à 2133 MHz. À n'utiliser qu'après avoir validé 2100 MHz.",
           "risk": "High",
           "recommended": false,
           "verified": false,
@@ -911,7 +586,7 @@
         {
           "id": "fclk_2167",
           "name": "FCLK manuel 2167 MHz (haut risque)",
-          "description": "Palier FCLK le plus eleve. Risque accru de WHEA / instabilite. Valider tres soigneusement avant de garder.",
+          "description": "Palier Infinity Fabric le plus haut du catalogue. Rarement stable avec 4 barrettes : attendez-vous à des erreurs WHEA ou à un échec de POST.",
           "risk": "Experimental",
           "recommended": false,
           "verified": false,
@@ -957,7 +632,7 @@
         {
           "id": "trefi_60000",
           "name": "tREFI 60000",
-          "description": "Allonge l'intervalle de refresh DDR5 a 60000. Gros impact latence/bande passante. Tester les erreurs memoire soigneusement.",
+          "description": "Espace les rafraîchissements mémoire : moins d'interruptions, meilleure bande passante effective. Sensible à la température des barrettes — à revalider en été comme en hiver.",
           "risk": "Experimental",
           "recommended": false,
           "verified": false,
@@ -968,6 +643,7 @@
               "token": "301C",
               "offset": "22AE",
               "value": "60000",
+              "default": "Auto",
               "reason": "tREFI affiche a 60000."
             },
             {
@@ -981,8 +657,8 @@
         },
         {
           "id": "trefi_65535",
-          "name": "tREFI 65535 (max)",
-          "description": "tREFI maximal. Risque le plus eleve d'erreurs memoire silencieuses si pas parfaitement stable.",
+          "name": "tREFI 65535 (maximum)",
+          "description": "Valeur maximale de l'intervalle de rafraîchissement. Gain de latence le plus élevé, marge thermique la plus faible : à réserver aux barrettes bien ventilées.",
           "risk": "Experimental",
           "recommended": false,
           "verified": false,
@@ -993,6 +669,7 @@
               "token": "301C",
               "offset": "22AE",
               "value": "65535",
+              "default": "Auto",
               "reason": "tREFI affiche au max 65535."
             },
             {
@@ -1007,7 +684,7 @@
         {
           "id": "twr_48",
           "name": "tWR 48",
-          "description": "Regle le timing d'ecriture DDR5 (tWR) a 48. Generalement benefique apres stabilisation du profil memoire de base.",
+          "description": "Réduit le délai de rétablissement après écriture. Petit gain de latence ; instabilité immédiate si la valeur est trop basse pour vos puces.",
           "risk": "Medium",
           "recommended": false,
           "verified": false,
@@ -1017,6 +694,7 @@
               "token": "301B",
               "offset": "2286",
               "value": "48",
+              "default": "Auto",
               "reason": "tWR affiche a 48."
             },
             {
@@ -1148,21 +826,20 @@
               "code": "01",
               "reason": "Désactive la limite d'offset Vref DFE (code 01 = Disable, plus de marge, comme l'outil)."
             }
-          ],
-          "exclusiveGroup": "nitro"
+          ]
         }
       ]
     },
     {
       "id": "pcie",
       "name": "PCIe",
-      "description": "Reglages PCIe orientes latence/performance peripherique (GPU, NVMe).",
+      "description": "Liaison PCIe et gestion d'énergie associée. Un lien Gen 5 forcé ou une politique PSPP agressive peuvent empêcher le POST avec certaines cartes : gardez un clear CMOS à portée.",
       "risk": "Medium",
       "tweaks": [
         {
           "id": "pcie_latency",
-          "name": "PCIe latence/performance (PSPP, Extended Tag, Gen5)",
-          "description": "Force la politique PCIe en mode performance, active les Extended Tags, desactive le hot-plug firmware et les liens non peuples, et force le slot GPU principal en Gen5. Verifier que le GPU reste detecte apres reboot.",
+          "name": "PCIe : latence et performance (PSPP, Extended Tag, Gen 5)",
+          "description": "Force la politique d'alimentation PCIe sur Performance, active l'Extended Tag et fixe le port principal en Gen 5. Certaines cartes ne postent pas en Gen 5 forcé : gardez un clear CMOS à portée.",
           "risk": "Experimental",
           "recommended": false,
           "verified": false,
@@ -1290,8 +967,7 @@
               "code": "01",
               "reason": "Désactive MONITOR/MWAIT."
             }
-          ],
-          "exclusiveGroup": "idle_mwait"
+          ]
         },
         {
           "id": "core_aggressive",
@@ -1572,8 +1248,7 @@
               "code": "00",
               "reason": "Désactive la sortie console ABL."
             }
-          ],
-          "exclusiveGroup": "ras"
+          ]
         },
         {
           "id": "ecc_off",
@@ -1729,8 +1404,7 @@
               "code": "01",
               "reason": "Duty VRM VDDSOC = Extreme."
             }
-          ],
-          "exclusiveGroup": "vrmphase"
+          ]
         },
         {
           "id": "vrm_protect",
@@ -1750,8 +1424,7 @@
               "code": "01",
               "reason": "Disable : désactive le Peak Current Control (comme l'outil)."
             }
-          ],
-          "exclusiveGroup": "vrmprot"
+          ]
         }
       ]
     },

@@ -73,6 +73,7 @@ public static partial class ScewinParser
                         case "Offset": block.Offset = value; break;
                         case "Width": block.Width = value; break;
                         case "Value": block.Value = value; break;
+                        case "BIOS Default": ReadDefault(block, value); break;
                     }
                     continue;
                 }
@@ -81,11 +82,15 @@ public static partial class ScewinParser
                 if (option.Success)
                 {
                     string code = option.Groups["code"].Value.ToUpperInvariant();
+                    string label = Clean(option.Groups["label"].Value);
                     block.OptionCodes.Add(code);
+                    block.OptionLabels[code] = label;
+                    if (label.Equals("Auto", StringComparison.OrdinalIgnoreCase))
+                        block.AutoCode = code;
                     if (option.Groups["star"].Success)
                     {
                         block.SelectedCode = code;
-                        block.SelectedLabel = Clean(option.Groups["label"].Value);
+                        block.SelectedLabel = label;
                     }
                 }
             }
@@ -96,12 +101,87 @@ public static partial class ScewinParser
         return blocks;
     }
 
+    /// <summary>Splits a "BIOS Default" payload into an option code ("[00]Auto") or a raw value ("&lt;0&gt;").</summary>
+    private static void ReadDefault(ScewinBlock block, string value)
+    {
+        var m = OptionRe().Match(value.Trim());
+        if (m.Success && m.Groups["code"].Success)
+            block.DefaultCode = m.Groups["code"].Value.ToUpperInvariant();
+        else
+            block.DefaultValue = value.Trim();
+    }
+
     public static string NormalizeCode(string code)
     {
         code = code.Trim().ToUpperInvariant();
         if (code.StartsWith("0X", StringComparison.Ordinal))
             code = code[2..];
         return code;
+    }
+
+    /// <summary>Where a resolved default came from, surfaced in the plan so the user can judge it.</summary>
+    public enum DefaultSource
+    {
+        /// <summary>No default could be determined — the setting must be left untouched.</summary>
+        None,
+        /// <summary>The catalog rule carries an explicit `default`.</summary>
+        Catalog,
+        /// <summary>The block's own "BIOS Default" line.</summary>
+        Bios,
+        /// <summary>The option literally labelled "Auto".</summary>
+        Auto,
+    }
+
+    /// <summary>
+    /// Value to write when a tweak is turned off. Resolution order: the rule's explicit default,
+    /// then the block's "BIOS Default" line, then an "Auto" option. Returns
+    /// <see cref="DefaultSource.None"/> when the BIOS exposes none of them — the caller must then
+    /// skip the setting rather than guess a value.
+    /// </summary>
+    public static (DefaultSource source, string? code, string? value) ResolveDefault(ScewinBlock block, Rule rule)
+    {
+        if (!string.IsNullOrWhiteSpace(rule.Default))
+        {
+            string raw = rule.Default.Trim();
+            if (block.IsOption)
+            {
+                string code = NormalizeCode(raw);
+                if (block.OptionCodes.Contains(code))
+                    return (DefaultSource.Catalog, code, null);
+                // A non-code default on an option block is a catalog error; fall through to the BIOS.
+            }
+            else
+            {
+                return (DefaultSource.Catalog, null, raw);
+            }
+        }
+
+        if (block.DefaultCode.Length > 0 && block.OptionCodes.Contains(block.DefaultCode))
+            return (DefaultSource.Bios, block.DefaultCode, null);
+
+        if (block.DefaultValue.Length > 0 && !block.IsOption)
+            return (DefaultSource.Bios, null, block.DefaultValue);
+
+        if (block.AutoCode.Length > 0)
+            return (DefaultSource.Auto, block.AutoCode, null);
+
+        return (DefaultSource.None, null, null);
+    }
+
+    /// <summary>True when the block currently holds exactly what the rule targets.</summary>
+    public static bool Matches(ScewinBlock block, Rule rule)
+    {
+        if (rule.Code is not null)
+            return string.Equals(block.SelectedCode, NormalizeCode(rule.Code), StringComparison.OrdinalIgnoreCase);
+
+        if (rule.Value is not null)
+        {
+            string current = block.Value.Trim().Trim('<', '>', '"').Trim();
+            string wanted = rule.Value.Trim().Trim('<', '>', '"').Trim();
+            return string.Equals(current, wanted, StringComparison.OrdinalIgnoreCase);
+        }
+
+        return false;
     }
 
     public static List<ScewinBlock> FindMatches(IReadOnlyList<ScewinBlock> blocks, Rule rule)

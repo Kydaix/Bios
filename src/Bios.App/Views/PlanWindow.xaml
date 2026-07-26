@@ -3,11 +3,21 @@
                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  Title="Plan"
-                 Width="980" Height="620"
+                 Width="1080" Height="680"
+                 MinWidth="900" MinHeight="520"
                  WindowStartupLocation="CenterOwner"
                  ExtendsContentIntoTitleBar="True"
                  WindowBackdropType="Mica"
                  ResizeMode="CanResize">
+
+    <ui:FluentWindow.Resources>
+        <Style x:Key="ValueCell" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Cascadia Mono, Consolas, Courier New" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+    </ui:FluentWindow.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,39 +29,79 @@
 
         <ui:TitleBar Grid.Row="0" x:Name="TitleBarControl" Title="Plan" />
 
-        <TextBlock Grid.Row="1"
-                   x:Name="HeaderText"
-                   Margin="20,8,20,12"
-                   FontSize="14"
-                   Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                   TextWrapping="Wrap" />
+        <!-- Counters first: the two directions must never blur together -->
+        <Border Grid.Row="1" Margin="16,4,16,12" Padding="18,14" CornerRadius="10"
+                Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
+                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+            <StackPanel>
+                <TextBlock x:Name="HeaderText" FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                <TextBlock x:Name="SubHeaderText" Margin="0,6,0,0" FontSize="12" TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+            </StackPanel>
+        </Border>
 
         <DataGrid Grid.Row="2"
                   x:Name="Grid"
-                  Margin="16,0,16,0"
+                  Margin="16,0"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   CanUserAddRows="False"
                   HeadersVisibility="Column"
                   GridLinesVisibility="Horizontal"
-                  SelectionMode="Single">
+                  RowHeaderWidth="0"
+                  SelectionMode="Single"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Réglage" Binding="{Binding TweakName}" Width="1.4*" />
-                <DataGridTextColumn Header="Paramètre" Binding="{Binding Question}" Width="1.6*" />
-                <DataGridTextColumn Header="Menu" Binding="{Binding Menu}" Width="1.2*" />
-                <DataGridTextColumn Header="Actuel" Binding="{Binding Old}" Width="1.2*" />
-                <DataGridTextColumn Header="Cible" Binding="{Binding Target}" Width="0.9*" />
-                <DataGridTextColumn Header="État" Binding="{Binding Status}" Width="0.8*" />
-                <DataGridTextColumn x:Name="VerifyColumn" Header="Vérifié" Binding="{Binding VerifyStatus}" Width="0.7*" />
+                <!-- Direction, as its own column and its own colour -->
+                <DataGridTemplateColumn Header="Sens" Width="130" SortMemberPath="Action">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                <Ellipse Width="7" Height="7" VerticalAlignment="Center"
+                                         Fill="{Binding IsRevert, Converter={StaticResource DirectionToBrush}}" />
+                                <TextBlock Text="{Binding Action}" Margin="7,0,0,0" FontSize="11.5"
+                                           VerticalAlignment="Center" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTextColumn Header="Réglage" Binding="{Binding TweakName}" Width="1.3*" />
+                <DataGridTextColumn Header="Paramètre BIOS" Binding="{Binding Question}" Width="1.5*" />
+                <DataGridTextColumn Header="Valeur actuelle" Binding="{Binding Old}" Width="1.1*"
+                                    ElementStyle="{StaticResource ValueCell}" />
+                <DataGridTextColumn Header="Valeur écrite" Binding="{Binding Target}" Width="1.1*"
+                                    ElementStyle="{StaticResource ValueCell}" />
+                <DataGridTextColumn Header="Résultat" Binding="{Binding Outcome}" Width="1.1*" />
+                <DataGridTextColumn x:Name="VerifyColumn" Header="Relu dans le BIOS" Binding="{Binding VerifyLabel}" Width="0.9*" />
             </DataGrid.Columns>
+
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow">
+                    <Setter Property="ToolTip" Value="{Binding Reason}" />
+                    <Style.Triggers>
+                        <!-- Settings this BIOS cannot reset stay visible but read as inert -->
+                        <DataTrigger Binding="{Binding Status}" Value="skipped">
+                            <Setter Property="Foreground" Value="{DynamicResource TextFillColorDisabledBrush}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding VerifyStatus}" Value="mismatch">
+                            <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.RowStyle>
         </DataGrid>
 
-        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="16">
-            <TextBlock x:Name="SummaryText"
-                       VerticalAlignment="Center"
-                       Margin="0,0,16,0"
+        <Grid Grid.Row="3" Margin="16,12,16,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="SummaryText" Grid.Column="0"
+                       VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,16,0"
                        Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-            <ui:Button Content="Fermer" MinWidth="100" Click="OnClose" />
-        </StackPanel>
+            <ui:Button Grid.Column="1" Content="Fermer" MinWidth="100" Click="OnClose" Appearance="Primary" />
+        </Grid>
     </Grid>
 </ui:FluentWindow>

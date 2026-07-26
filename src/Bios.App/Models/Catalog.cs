@@ -42,5 +42,13 @@ public sealed class Rule
     public int? Occurrence { get; set; }
     public string? Code { get; set; }
     public string? Value { get; set; }
+
+    /// <summary>
+    /// Value written when the tweak is turned OFF, for the blocks where SCEWIN exports no
+    /// "BIOS Default" line and offers no "Auto" option. Interpreted as an option code when the
+    /// block has options, as a raw value otherwise. Leave null to use the BIOS-provided default.
+    /// </summary>
+    public string? Default { get; set; }
+
     public string Reason { get; set; } = "";
 }

@@ -44,14 +44,15 @@ public sealed class RunStore
     public static void WritePlanCsv(string path, IEnumerable<PlanRow> rows)
     {
         var sb = new StringBuilder();
-        sb.AppendLine("tweak,question,token,offset,line,old,target,status,will_change,reason,actual,verify_status");
+        sb.AppendLine("tweak,direction,question,token,offset,line,old,target,default_source,status,will_change,reason,actual,verify_status");
         foreach (var r in rows)
         {
             sb.AppendLine(string.Join(",", new[]
             {
-                Csv(r.TweakName), Csv(r.Question), Csv(r.Token), Csv(r.Offset),
+                Csv(r.TweakName), r.IsRevert ? "revert" : "apply",
+                Csv(r.Question), Csv(r.Token), Csv(r.Offset),
                 r.Line.ToString(CultureInfo.InvariantCulture),
-                Csv(r.Old), Csv(r.Target), Csv(r.Status), r.WillChange ? "1" : "0",
+                Csv(r.Old), Csv(r.Target), Csv(r.DefaultSource), Csv(r.Status), r.WillChange ? "1" : "0",
                 Csv(r.Reason), Csv(r.Actual), Csv(r.VerifyStatus)
             }));
         }

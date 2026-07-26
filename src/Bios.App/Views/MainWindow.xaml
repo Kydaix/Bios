@@ -4,11 +4,40 @@
                  xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
                  xmlns:vm="clr-namespace:Bios.App.ViewModels"
                  Title="BIOS Tuner"
-                 Width="1180" Height="780"
-                 MinWidth="980" MinHeight="640"
+                 Width="1240" Height="820"
+                 MinWidth="1020" MinHeight="660"
                  WindowStartupLocation="CenterScreen"
                  ExtendsContentIntoTitleBar="True"
                  WindowBackdropType="Mica">
+
+    <ui:FluentWindow.Resources>
+        <!-- Values read from the BIOS are data, not prose: they get a monospaced face. -->
+        <Style x:Key="ValueText" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Cascadia Mono, Consolas, Courier New" />
+            <Setter Property="FontSize" Value="11.5" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+
+        <Style x:Key="ColumnHead" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="10.5" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+            <Setter Property="Foreground" Value="{DynamicResource TextFillColorTertiaryBrush}" />
+        </Style>
+
+        <!-- One tweak = one row, not a card inside a card. -->
+        <Style x:Key="TweakRow" TargetType="Border">
+            <Setter Property="Padding" Value="16,14" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0,0,0,1" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ControlStrokeColorDefaultBrush}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource SubtleFillColorSecondaryBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </ui:FluentWindow.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -18,47 +47,71 @@
 
         <ui:TitleBar Grid.Row="0" Title="BIOS Tuner" />
 
-        <Grid Grid.Row="1" Margin="0">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <!-- Header: hardware + status -->
-            <Border Grid.Row="0" Margin="16,4,16,8" Padding="18,14"
+            <!-- Header: what this is, what the switches mean, where the BIOS stands -->
+            <Border Grid.Row="0" Margin="16,4,16,10" Padding="20,16"
                     CornerRadius="10"
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
-                <StackPanel>
-                    <TextBlock Text="Optimiseur BIOS — ASUS X870-A / Ryzen 7 9800X3D"
-                               FontSize="18" FontWeight="SemiBold"
-                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                    <TextBlock Text="{Binding HardwareText}" Margin="0,4,0,0"
-                               FontSize="12" TextWrapping="Wrap"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                    <TextBlock Text="{Binding StatusText}" Margin="0,8,0,0"
-                               FontSize="13"
-                               Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}" />
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" Margin="0,0,24,0">
+                        <TextBlock Text="Réglages BIOS"
+                                   FontSize="19" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="{Binding HardwareText}" Margin="0,3,0,0"
+                                   FontSize="11.5" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                        <TextBlock Margin="0,10,0,0" FontSize="12.5" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}">
+                            <Run Text="L'interrupteur décide dans les deux sens :" />
+                            <Run Text="activé" FontWeight="SemiBold"
+                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <Run Text="écrit la valeur du réglage," />
+                            <Run Text="désactivé" FontWeight="SemiBold"
+                                 Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                            <Run Text="remet la valeur par défaut du BIOS. Rien n'est écrit avant « Appliquer »." />
+                        </TextBlock>
+                    </StackPanel>
+
+                    <!-- Only shown once there is something factual to report about the BIOS. -->
+                    <Border Grid.Column="1" VerticalAlignment="Top"
+                            CornerRadius="8" Padding="14,10" MaxWidth="330"
+                            Background="{DynamicResource SubtleFillColorSecondaryBrush}"
+                            Visibility="{Binding IsImported, Converter={StaticResource BoolToVis}}">
+                        <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    </Border>
+                </Grid>
             </Border>
 
             <!-- Body: categories | tweaks -->
             <Grid Grid.Row="1" Margin="16,0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="280" />
+                    <ColumnDefinition Width="268" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Categories -->
-                <Border Grid.Column="0" Margin="0,0,8,0" Padding="6"
+                <Border Grid.Column="0" Margin="0,0,10,0" Padding="6"
                         CornerRadius="10"
                         Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                         BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
                     <DockPanel>
-                        <TextBlock DockPanel.Dock="Top" Text="Catégories" Margin="10,8"
-                                   FontSize="14" FontWeight="SemiBold"
-                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock DockPanel.Dock="Top" Text="Catégories" Margin="12,10,12,8"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
                         <ListBox ItemsSource="{Binding Categories}"
                                  SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
                                  Background="Transparent" BorderThickness="0"
@@ -66,8 +119,8 @@
                             <ListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                    <Setter Property="Padding" Value="8" />
-                                    <Setter Property="Margin" Value="2" />
+                                    <Setter Property="Padding" Value="10,9" />
+                                    <Setter Property="Margin" Value="2,1" />
                                 </Style>
                             </ListBox.ItemContainerStyle>
                             <ListBox.ItemTemplate>
@@ -77,21 +130,31 @@
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="0">
+
+                                        <StackPanel Grid.Column="0" Margin="0,0,8,0">
                                             <TextBlock Text="{Binding Name}" FontWeight="SemiBold" TextWrapping="Wrap"
                                                        Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                            <Border CornerRadius="4" Padding="6,1" Margin="0,4,0,0"
-                                                    HorizontalAlignment="Left"
-                                                    Background="{Binding RiskBrush}">
-                                                <TextBlock Text="{Binding RiskLabel}" FontSize="10" Foreground="White" />
-                                            </Border>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <Ellipse Width="7" Height="7" VerticalAlignment="Center"
+                                                         Fill="{Binding RiskBrush}" />
+                                                <TextBlock Text="{Binding RiskLabel}" Margin="6,0,0,0"
+                                                           FontSize="10.5" VerticalAlignment="Center"
+                                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                                <TextBlock Text="{Binding CountLabel}" Margin="10,0,0,0"
+                                                           FontSize="10.5" VerticalAlignment="Center"
+                                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                                           Visibility="{Binding HasImport, Converter={StaticResource BoolToVis}}" />
+                                            </StackPanel>
                                         </StackPanel>
+
+                                        <!-- Pending writes in this category -->
                                         <Border Grid.Column="1" VerticalAlignment="Center"
-                                                CornerRadius="9" MinWidth="18" Height="18" Padding="5,0"
-                                                Background="{DynamicResource AccentFillColorDefaultBrush}"
-                                                Visibility="{Binding HasSelection, Converter={StaticResource BoolToVis}}">
-                                            <TextBlock Text="{Binding SelectedCount}" FontSize="10"
-                                                       Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                                CornerRadius="9" MinWidth="20" Height="19" Padding="6,0"
+                                                Background="{Binding PendingBrush}"
+                                                Visibility="{Binding HasPending, Converter={StaticResource BoolToVis}}">
+                                            <TextBlock Text="{Binding PendingCount}" FontSize="10.5" FontWeight="SemiBold"
+                                                       Foreground="#FF101215"
+                                                       HorizontalAlignment="Center" VerticalAlignment="Center" />
                                         </Border>
                                     </Grid>
                                 </DataTemplate>
@@ -100,114 +163,238 @@
                     </DockPanel>
                 </Border>
 
-                <!-- Tweaks of selected category -->
-                <Border Grid.Column="1" Margin="8,0,0,0"
+                <!-- Tweaks of the selected category -->
+                <Border Grid.Column="1"
                         CornerRadius="10"
                         Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                         BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
-                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="16">
-                        <StackPanel DataContext="{Binding SelectedCategory}">
-                            <TextBlock Text="{Binding Name}" FontSize="18" FontWeight="SemiBold"
-                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                            <TextBlock Text="{Binding Description}" Margin="0,6,0,14" TextWrapping="Wrap"
-                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                    <DockPanel>
+                        <!-- Category heading -->
+                        <Border DockPanel.Dock="Top" Padding="20,18,20,16"
+                                BorderThickness="0,0,0,1"
+                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}"
+                                DataContext="{Binding SelectedCategory}">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontSize="17" FontWeight="SemiBold"
+                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                <TextBlock Text="{Binding Description}" Margin="0,6,0,0" TextWrapping="Wrap"
+                                           FontSize="12.5" MaxWidth="820" HorizontalAlignment="Left"
+                                           Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                            </StackPanel>
+                        </Border>
 
-                            <ItemsControl ItemsSource="{Binding Tweaks}">
+                        <!-- Not imported yet: the switches cannot mean anything until the BIOS is read -->
+                        <Border DockPanel.Dock="Top" Margin="20,16,20,0" Padding="16,14" CornerRadius="8"
+                                Background="{DynamicResource SubtleFillColorSecondaryBrush}"
+                                Visibility="{Binding IsNotImported, Converter={StaticResource BoolToVis}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="⚑" FontSize="15" VerticalAlignment="Top" Margin="0,0,12,0"
+                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                <StackPanel>
+                                    <TextBlock Text="BIOS non lu"
+                                               FontWeight="SemiBold" FontSize="13"
+                                               Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                    <TextBlock Margin="0,4,0,0" TextWrapping="Wrap" MaxWidth="640" FontSize="12"
+                                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
+                                               Text="Lisez d'abord le BIOS : chaque réglage affichera alors son état réel, la valeur exacte qui serait écrite, et celle qui serait rétablie s'il est désactivé." />
+                                    <ui:Button Content="Lire le BIOS maintenant" Margin="0,12,0,0"
+                                               Command="{Binding ImportCommand}" Appearance="Primary" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto">
+                            <ItemsControl ItemsSource="{Binding SelectedCategory.Tweaks}" Margin="0,4,0,8">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate DataType="{x:Type vm:TweakViewModel}">
-                                        <Border Margin="0,0,0,10" Padding="14" CornerRadius="8"
-                                                Background="{DynamicResource ControlFillColorDefaultBrush}"
-                                                BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
+                                        <Border Style="{StaticResource TweakRow}">
                                             <Grid>
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
 
-                                                <ui:ToggleSwitch Grid.Column="0" Margin="0,2,14,0"
+                                                <ui:ToggleSwitch Grid.Column="0" Margin="0,1,16,0"
                                                                  VerticalAlignment="Top"
                                                                  IsChecked="{Binding IsSelected, Mode=TwoWay}" />
 
                                                 <StackPanel Grid.Column="1">
+                                                    <!-- Title + badges -->
                                                     <WrapPanel>
-                                                        <TextBlock Text="{Binding Name}" FontSize="15" FontWeight="SemiBold"
-                                                                   VerticalAlignment="Center"
+                                                        <TextBlock Text="{Binding Name}" FontSize="14.5" FontWeight="SemiBold"
+                                                                   VerticalAlignment="Center" Margin="0,0,10,0"
                                                                    Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
-                                                        <Border CornerRadius="4" Padding="6,1" Margin="10,0,0,0"
-                                                                VerticalAlignment="Center"
-                                                                Background="{Binding RiskBrush}">
-                                                            <TextBlock Text="{Binding RiskLabel}" FontSize="10" Foreground="White" />
-                                                        </Border>
-                                                        <Border CornerRadius="4" Padding="6,1" Margin="6,0,0,0"
-                                                                VerticalAlignment="Center"
-                                                                Background="{DynamicResource SystemFillColorSuccessBackgroundBrush}"
-                                                                Visibility="{Binding Recommended, Converter={StaticResource BoolToVis}}">
-                                                            <TextBlock Text="Recommandé" FontSize="10"
-                                                                       Foreground="{DynamicResource SystemFillColorSuccessBrush}" />
-                                                        </Border>
-                                                        <Border CornerRadius="4" Padding="6,1" Margin="6,0,0,0"
-                                                                VerticalAlignment="Center"
-                                                                Background="{DynamicResource SubtleFillColorSecondaryBrush}"
-                                                                Visibility="{Binding Verified, Converter={StaticResource BoolToVis}}">
-                                                            <TextBlock Text="Vérifié" FontSize="10"
-                                                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
-                                                        </Border>
+                                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,10,0">
+                                                            <Ellipse Width="7" Height="7" VerticalAlignment="Center"
+                                                                     Fill="{Binding RiskBrush}" />
+                                                            <TextBlock Text="{Binding RiskLabel}" Margin="6,0,0,0"
+                                                                       FontSize="10.5" VerticalAlignment="Center"
+                                                                       Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                                        </StackPanel>
+                                                        <TextBlock Text="Recommandé" Margin="0,0,10,0"
+                                                                   FontSize="10.5" VerticalAlignment="Center"
+                                                                   Foreground="{DynamicResource SystemFillColorSuccessBrush}"
+                                                                   Visibility="{Binding Recommended, Converter={StaticResource BoolToVis}}" />
                                                     </WrapPanel>
 
                                                     <TextBlock Text="{Binding Description}" Margin="0,6,0,0" TextWrapping="Wrap"
+                                                               FontSize="12.5" MaxWidth="720" HorizontalAlignment="Left"
                                                                Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
 
-                                                    <TextBlock Text="{Binding DiffSummary}" Margin="0,8,0,0"
-                                                               FontSize="12" FontWeight="SemiBold"
-                                                               Foreground="{DynamicResource AccentTextFillColorPrimaryBrush}"
-                                                               Visibility="{Binding HasImport, Converter={StaticResource BoolToVis}}" />
+                                                    <!-- Current BIOS state + what Apply would do -->
+                                                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0"
+                                                                Visibility="{Binding HasImport, Converter={StaticResource BoolToVis}}">
+                                                        <Ellipse Width="8" Height="8" VerticalAlignment="Center"
+                                                                 Fill="{Binding StateBrush}" />
+                                                        <TextBlock Text="{Binding StateLabel}" Margin="7,0,0,0"
+                                                                   FontSize="12" FontWeight="SemiBold" VerticalAlignment="Center"
+                                                                   Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                                        <TextBlock Text="·" Margin="8,0" VerticalAlignment="Center"
+                                                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                                        <TextBlock Text="{Binding PendingSummary}" VerticalAlignment="Center"
+                                                                   FontSize="12" TextWrapping="Wrap" MaxWidth="560"
+                                                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                                    </StackPanel>
+
+                                                    <!-- Per-setting detail -->
+                                                    <Expander Margin="0,10,0,0" Padding="0"
+                                                              Visibility="{Binding HasSettings, Converter={StaticResource BoolToVis}}"
+                                                              Header="Paramètres BIOS concernés">
+                                                        <Grid Margin="0,8,0,4">
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
+                                                            </Grid.RowDefinitions>
+
+                                                            <Grid Grid.Row="0" Margin="0,0,0,6">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="1.9*" />
+                                                                    <ColumnDefinition Width="1.2*" />
+                                                                    <ColumnDefinition Width="1.2*" />
+                                                                    <ColumnDefinition Width="1.2*" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Grid.Column="0" Text="Paramètre" Style="{StaticResource ColumnHead}" />
+                                                                <TextBlock Grid.Column="1" Text="Dans le BIOS" Style="{StaticResource ColumnHead}" />
+                                                                <TextBlock Grid.Column="2" Text="Si activé" Style="{StaticResource ColumnHead}" />
+                                                                <TextBlock Grid.Column="3" Text="Si désactivé" Style="{StaticResource ColumnHead}" />
+                                                            </Grid>
+
+                                                            <ItemsControl Grid.Row="1" ItemsSource="{Binding Settings}">
+                                                                <ItemsControl.ItemTemplate>
+                                                                    <DataTemplate DataType="{x:Type vm:SettingRow}">
+                                                                        <Grid Margin="0,3">
+                                                                            <Grid.ColumnDefinitions>
+                                                                                <ColumnDefinition Width="1.9*" />
+                                                                                <ColumnDefinition Width="1.2*" />
+                                                                                <ColumnDefinition Width="1.2*" />
+                                                                                <ColumnDefinition Width="1.2*" />
+                                                                            </Grid.ColumnDefinitions>
+
+                                                                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                                                                <TextBlock Text="{Binding Question}" FontSize="12"
+                                                                                           TextTrimming="CharacterEllipsis"
+                                                                                           ToolTip="{Binding Note}"
+                                                                                           Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                                                <TextBlock Text="{Binding Menu}" FontSize="10"
+                                                                                           Foreground="{DynamicResource TextFillColorTertiaryBrush}" />
+                                                                            </StackPanel>
+
+                                                                            <TextBlock Grid.Column="1" Text="{Binding Current}"
+                                                                                       Style="{StaticResource ValueText}" Margin="0,0,10,0"
+                                                                                       Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                                                                            <TextBlock Grid.Column="2" Text="{Binding Target}"
+                                                                                       Style="{StaticResource ValueText}" Margin="0,0,10,0"
+                                                                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                                                            <TextBlock Grid.Column="3" Text="{Binding Default}"
+                                                                                       Style="{StaticResource ValueText}"
+                                                                                       Foreground="{DynamicResource TextFillColorSecondaryBrush}" />
+                                                                        </Grid>
+                                                                    </DataTemplate>
+                                                                </ItemsControl.ItemTemplate>
+                                                            </ItemsControl>
+                                                        </Grid>
+                                                    </Expander>
                                                 </StackPanel>
+
+                                                <!-- Writes this tweak contributes to the plan -->
+                                                <Border Grid.Column="2" VerticalAlignment="Top" Margin="16,2,0,0"
+                                                        CornerRadius="6" Padding="8,4"
+                                                        Background="{Binding PendingBrush}"
+                                                        Visibility="{Binding HasPending, Converter={StaticResource BoolToVis}}">
+                                                    <TextBlock Text="{Binding PendingCount}" FontSize="12" FontWeight="SemiBold"
+                                                               Foreground="#FF101215" />
+                                                </Border>
                                             </Grid>
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                        </StackPanel>
-                    </ScrollViewer>
+                        </ScrollViewer>
+                    </DockPanel>
                 </Border>
             </Grid>
 
-            <!-- Footer: actions -->
-            <Border Grid.Row="2" Margin="16,8,16,12" Padding="14,10" CornerRadius="10"
+            <!-- Footer: what will be written, and the actions -->
+            <Border Grid.Row="2" Margin="16,10,16,12" Padding="18,12" CornerRadius="10"
                     Background="{DynamicResource CardBackgroundFillColorDefaultBrush}"
                     BorderBrush="{DynamicResource ControlStrokeColorDefaultBrush}" BorderThickness="1">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <ui:Button Grid.Column="0" Content="Importer le BIOS actuel"
-                               Command="{Binding ImportCommand}" Appearance="Secondary" MinWidth="170" />
+                    <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="0,0,20,0">
+                        <TextBlock Text="{Binding PendingSummary}"
+                                   FontSize="14" FontWeight="SemiBold" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource TextFillColorPrimaryBrush}" />
+                        <TextBlock Text="{Binding LockedNotice}" Margin="0,4,0,0"
+                                   FontSize="11.5" TextWrapping="Wrap"
+                                   Foreground="{DynamicResource SystemFillColorCautionBrush}"
+                                   Visibility="{Binding HasLockedNotice, Converter={StaticResource BoolToVis}}" />
+                    </StackPanel>
 
-                    <TextBlock Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center"
-                               Foreground="{DynamicResource TextFillColorSecondaryBrush}"
-                               Text="{Binding SelectedChangeCount, StringFormat='{}{0} changement(s) sélectionné(s)'}" />
+                    <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
+                        <ui:Button Content="Lire le BIOS" Command="{Binding ImportCommand}"
+                                   Appearance="Secondary" Margin="0,0,6,0" MinWidth="120" />
+                        <ui:Button Content="Aperçu" Command="{Binding PreviewCommand}" Margin="0,0,6,0" MinWidth="90" />
+                        <ui:Button Content="Appliquer" Command="{Binding ApplyCommand}"
+                                   Appearance="Primary" MinWidth="120" />
+                    </StackPanel>
 
-                    <StackPanel Grid.Column="2" Orientation="Horizontal">
-                        <ui:Button Content="Recommandé" Command="{Binding SelectRecommendedCommand}" Margin="0,0,6,0" />
-                        <ui:Button Content="Tout décocher" Command="{Binding ClearSelectionCommand}" Margin="0,0,6,0" />
-                        <ui:Button Content="Aperçu" Command="{Binding PreviewCommand}" Margin="0,0,6,0" />
-                        <ui:Button Content="Restaurer" Command="{Binding RestoreCommand}" Margin="0,0,6,0" />
-                        <ui:Button Content="Appliquer" Command="{Binding ApplyCommand}" Appearance="Primary" MinWidth="120" />
+                    <!-- Selection presets, secondary to the act of writing -->
+                    <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal"
+                                HorizontalAlignment="Right" Margin="0,10,0,0">
+                        <ui:Button Content="Sélection recommandée" Command="{Binding SelectRecommendedCommand}"
+                                   Appearance="Transparent" FontSize="12" Margin="0,0,4,0" />
+                        <ui:Button Content="Aligner sur le BIOS" Command="{Binding MatchBiosCommand}"
+                                   Appearance="Transparent" FontSize="12" Margin="0,0,4,0"
+                                   ToolTip="Positionne chaque interrupteur sur l'état réel du BIOS : plus rien à écrire." />
+                        <ui:Button Content="Tout désactiver" Command="{Binding ClearSelectionCommand}"
+                                   Appearance="Transparent" FontSize="12" Margin="0,0,4,0"
+                                   ToolTip="Programme le retour aux valeurs par défaut de tous les réglages actuellement actifs." />
+                        <ui:Button Content="Restaurer une sauvegarde" Command="{Binding RestoreCommand}"
+                                   Appearance="Transparent" FontSize="12" />
                     </StackPanel>
                 </Grid>
             </Border>
 
             <!-- Busy overlay -->
             <Border Grid.Row="0" Grid.RowSpan="3"
-                    Background="#AA000000"
+                    Background="#D0000000"
                     Visibility="{Binding IsBusy, Converter={StaticResource BoolToVis}}">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <ui:ProgressRing IsIndeterminate="True" Width="60" Height="60" />
-                    <TextBlock Text="{Binding BusyMessage}" Margin="0,16,0,0"
+                    <ui:ProgressRing IsIndeterminate="True" Width="56" Height="56" />
+                    <TextBlock Text="{Binding BusyMessage}" Margin="0,18,0,0"
                                FontSize="14" Foreground="White" HorizontalAlignment="Center" />
+                    <TextBlock Text="SCEWIN charge des pilotes noyau — cela peut prendre quelques secondes."
+                               Margin="0,6,0,0" FontSize="11.5" HorizontalAlignment="Center"
+                               Foreground="#B0FFFFFF" />
                 </StackPanel>
             </Border>
         </Grid>
