@@ -48,12 +48,28 @@ Les copies du menu **ASUS Ai/Extreme Tweaker** sont remises sur **Auto** (tweak
 
 | Catégorie | Contenu | Risque |
 |---|---|---|
+| **Stabilité** | Contreparties « retour sûr » : annuler CO/PBO/Boost, réactiver Prochot VRM + Peak Current Control, réactiver le watchdog & WHEA, FCLK Auto | Sûr |
 | **Système & Latence** | ReBAR, C-states, virtualisation, TSME, iGPU, ASPM, Spread Spectrum, firmware sécurité | Sûr → Moyen |
 | **CPU – PBO (AMD OC)** | PBO Advanced + Scalar 3X, Boost +200 MHz, Curve Optimizer −30, neutralisation ASUS | Sûr → Élevé |
 | **Mémoire DDR5** | Latence (UCLK/Gear Down…), FCLK 2067→2167 (exclusifs), tREFI, tWR, Nitro | Expérimental |
 | **PCIe** | PSPP, Extended Tag, Gen5 link mode… | Expérimental |
 
 Les paliers **FCLK** et **tREFI** sont mutuellement exclusifs (radio) : sélectionner l'un désélectionne l'autre.
+
+### Revenir en arrière : la catégorie « Stabilité »
+
+**Décocher un tweak n'annule rien** : seules les règles des tweaks *cochés* sont écrites dans
+le BIOS. Pour défaire un réglage, il faut cocher sa contrepartie dans la catégorie
+**Stabilité**, qui porte les valeurs de retour sûres (CO = 0, Boost +0 MHz, PBO stock,
+Prochot VRM & Peak Current Control réactivés, watchdog cœur & WHEA réactivés, FCLK Auto…).
+
+Chaque contrepartie partage un `exclusiveGroup` avec le tweak agressif qu'elle annule :
+cocher `stab_curve_off` décoche automatiquement `curve_neg30`, et inversement.
+
+À utiliser en cas de **BSOD `CLOCK_WATCHDOG_TIMEOUT` (0x101)**, de `WHEA 0x124`, ou de freeze
+sous charge en rafales (builds Node/Vite/TypeScript). Voir
+[`analysis/CLOCK_WATCHDOG_TIMEOUT_2026-07-26.md`](analysis/CLOCK_WATCHDOG_TIMEOUT_2026-07-26.md)
+pour la chaîne causale et l'ordre d'application recommandé.
 
 Le catalogue peut être édité sans recompiler : placez un `catalog.json` **à côté de l'exe**,
 il prime sur la version embarquée.
