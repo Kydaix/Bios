@@ -302,9 +302,9 @@
           ]
         },
         {
-          "id": "curve_neg30",
-          "name": "Curve Optimizer all-core −30",
-          "description": "Undervolt via Curve Optimizer, −30 sur tous les cœurs. Agressif pour un X3D : meilleures fréquences et températures, mais peut faire décrocher un cœur au repos ou en charge légère (BSOD CLOCK_WATCHDOG_TIMEOUT). À valider longuement (journal WHEA, y-cruncher, OCCT).",
+          "id": "curve_neg15",
+          "name": "Curve Optimizer all-core −15",
+          "description": "Undervolt via Curve Optimizer, −15 sur tous les cœurs. Peut améliorer les fréquences et les températures, mais la stabilité dépend du processeur : un cœur peut décrocher au repos ou en charge légère (BSOD CLOCK_WATCHDOG_TIMEOUT). À valider longuement (journal WHEA, y-cruncher, OCCT).",
           "risk": "High",
           "recommended": false,
           "verified": true,
@@ -329,9 +329,9 @@
               "question": "All Core Curve Optimizer Magnitude",
               "token": "B1",
               "offset": "B8",
-              "value": "30",
+              "value": "15",
               "default": "0",
-              "reason": "Magnitude CO -30 (menu AMD Overclocking)."
+              "reason": "Magnitude CO -15 (menu AMD Overclocking)."
             }
           ]
         },

@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-06",
+  "bios": "2503",
+  "profile": "curve_neg15",
+  "catalog_sha256": "8c95e01774b97401e854fe1270f5e3a3669d68b976b3bbc069076d2f4e72b634",
+  "previous_catalog_sha256": "82e50b690f8cfc75207bbef73474bb03f9098bfbd01c6f21850c765978ebda90",
+  "export_path": "runs\\bios2503_live_20261006T113225479894Z\\before.txt",
+  "export_sha256": "db20919e6148d2755ca05b7769cf2b76e9ba9984e92931c38dfb410bc2b69944",
+  "co_magnitude_range": {
+    "min": 0,
+    "max": 50,
+    "width_bits": 16
+  },
+  "rules": [
+    {
+      "question": "Curve Optimizer",
+      "token": "AF",
+      "offset": "B6",
+      "current": "[01]All Cores",
+      "target": "[01]All Cores",
+      "export_line": 11496
+    },
+    {
+      "question": "All Core Curve Optimizer Sign",
+      "token": "B0",
+      "offset": "B7",
+      "current": "[01]Negative",
+      "target": "[01]Negative",
+      "export_line": 11506
+    },
+    {
+      "question": "All Core Curve Optimizer Magnitude",
+      "token": "B1",
+      "offset": "B8",
+      "current": "<5>",
+      "target": "15",
+      "export_line": 11514
+    }
+  ],
+  "unrelated_catalog_rules_unchanged": true,
+  "bios_written": false
+}

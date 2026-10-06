@@ -1,0 +1,187 @@
+﻿category,tweak,question,token,offset,line,current,target,status,default_source,default
+base,rebar,Above 4G Decoding,317,90,21358,[01]Enabled,[01]Enabled,conform,bios,01
+base,rebar,Resize BAR Support,319,91,21376,[01]Enabled,[01]Enabled,conform,bios,01
+base,rebar,Launch CSM,2D50,BF,26131,[00]Disabled,[00]Disabled,conform,bios,00
+base,cstates,Global C-state Control,01,29,960,[00]Disabled,[00]Disabled,conform,bios,03
+base,cstates,Power Supply Idle Control,15,2DE,1044,[00]Typical Current Idle,[00]Typical Current Idle,conform,bios,FF
+base,virt,IOMMU,7034,3D,970,[00]Disabled,[00]Disabled,conform,bios,0F
+base,virt,SVM Mode,30C,F1,21173,[00]Disabled,[00]Disabled,conform,bios,01
+base,tsme,TSME,7024,172,2959,[00]Disabled,[00]Disabled,conform,bios,FF
+base,igpu,Integrated Graphics,376,EC,22371,[00]Disabled,[00]Disabled,conform,bios,FF
+base,igpu,iGPU Configuration,F1,44,3603,[00]iGPU Disabled,[00]iGPU Disabled,conform,bios,0F
+base,aspm,ASPM Support,325,9E,21467,[00]Disabled,[00]Disabled,conform,bios,00
+base,aspm,Native ASPM,37B,E2,22485,[00]Disabled,[00]Disabled,conform,bios,02
+base,aspm,CPU PCIE ASPM Mode Control,37C,E3,22495,[00]Disabled,[00]Disabled,conform,bios,FF
+base,aspm,PCIe Power Management Features,177,1CA,4875,[00]Disable,[00]Disable,conform,bios,0F
+base,aspm,Clock Power Management(CLKREQ#),0A,04,17,[00]Disabled,[00]Disabled,conform,unknown,
+base,aspm,Clock Power Management,333,AF,21601,[00]Disabled,[00]Disabled,conform,bios,00
+base,aspm,PM L1 SS,0B,12,25,[00]Disabled,[00]Disabled,conform,unknown,
+base,spread,FCH Spread Spectrum,FB,63,3674,[00]Disabled,[00]Disabled,conform,bios,0F
+base,spread,Clock Spread Spectrum,61,466,14471,[02]Disabled,[02]Disabled,conform,bios,00
+base,lul,Latency Under Load (LUL),2F,3DE,1333,[00]Enabled,[00]Enabled,conform,bios,FF
+base,security_off,Pluton Support,7051,486,4612,[00]Disabled,[00]Disabled,conform,bios,0F
+base,security_off,Secured-core Auto enablement,158,2D0,4642,[00]Disabled,[00]Disabled,conform,bios,FF
+base,security_off,DRTM Support,159,37D,4652,[00]Disabled,[00]Disabled,conform,bios,FF
+base,security_off,SMM Isolation Support,15A,37E,4662,[00]Disabled,[00]Disabled,conform,bios,FF
+base,security_off,SecureBio Support,,,,,00,question_missing,,
+base,security_off,SecureBio Camera Support,,,,,00,question_missing,,
+cpu,pbo_base,Precision Boost Overdrive,9D,9A,11370,[02]Advanced,[02]Advanced,conform,auto,FF
+cpu,pbo_base,PBO Limits,9E,9B,11380,[01]Motherboard,[01]Motherboard,conform,auto,FF
+cpu,pbo_base,Precision Boost Overdrive Scalar Ctrl,A2,A8,11411,[01]Manual,[01]Manual,conform,auto,FF
+cpu,pbo_base,Precision Boost Overdrive Scalar,A3,A9,11419,[3E8]10X,[3E8]10X,conform,catalog,64
+cpu,pbo_boost,CPU Boost Clock Override,A4,AD,11435,[01]Enabled (Positive),[01]Enabled (Positive),conform,catalog,00
+cpu,pbo_boost,Max CPU Boost Clock Override(+),A5,AE,11444,<200>,200,conform,catalog,0
+cpu,curve_neg30,Curve Optimizer,AF,B6,11496,[01]All Cores,[01]All Cores,conform,catalog,00
+cpu,curve_neg30,All Core Curve Optimizer Sign,B0,B7,11506,[01]Negative,[01]Negative,conform,catalog,00
+cpu,curve_neg30,All Core Curve Optimizer Magnitude,B1,B8,11514,<5>,30,different,catalog,0
+cpu,asus_neutralize,Precision Boost Overdrive,2FD0,46C,14764,[02]Manual,[FF]Auto,different,bios,FF
+cpu,asus_neutralize,Precision Boost Overdrive Scalar,7D,485,14883,[00]Auto,[00]Auto,conform,bios,00
+cpu,asus_neutralize,CPU Boost Clock Override,7F,48A,14909,[01]Enabled (Positive),[FF]Auto,different,bios,FF
+cpu,asus_neutralize,Max CPU Boost Clock Override(+),2FD6,D46,14920,"""199""",Auto,different,catalog,Auto
+cpu,asus_neutralize,Max CPU Boost Clock Override(+),80,48B,14927,<200>,0,different,bios,<0>
+cpu,asus_neutralize,Curve Optimizer,C9,6BC,15845,[01]All Cores,[00]Auto,different,bios,00
+cpu,asus_neutralize,All Core Curve Optimizer Sign,CA,6BD,15856,[01]Negative,[00]Positive,different,bios,00
+cpu,asus_neutralize,All Core Curve Optimizer Magnitude,CB,6BE,15865,<5>,0,different,bios,<0>
+memory,mem_latency,Power Down Enable,BF,16F,2891,[FF]Auto,[00]Disabled,different,bios,FF
+memory,mem_latency,Power Down Enable,8B,93,11126,[FF]Auto,[00]Disabled,different,auto,FF
+memory,mem_latency,Power Down Enable,1B7,8C2,18450,[FF]Auto,[00]Disabled,different,bios,FF
+memory,mem_latency,UCLK DIV1 MODE,9B,96,11353,[01]UCLK=MEMCLK,[01]UCLK=MEMCLK,conform,auto,FF
+memory,mem_latency,UCLK DIV1 MODE,1B8,8C4,18460,[01]UCLK=MEMCLK,[01]UCLK=MEMCLK,conform,bios,FF
+memory,mem_latency,Gear Down Mode,1B9,8CB,18470,[FF]Auto,[01]Disabled,different,bios,FF
+memory,mem_latency,Memory Context Restore,E3,26C,3290,[FF]Auto,[00]Disabled,different,bios,FF
+memory,mem_latency,Memory Context Restore,3033,8C3,18425,[FF]Auto,[00]Disabled,different,bios,FF
+memory,mem_latency,Fclk VDCI Mode Pref,9C,216,11362,[FF]Auto,[FF]Auto,conform,auto,FF
+memory,fclk_2067,Infinity Fabric Frequency and Dividers,149,269,4371,[33]2100 MHz,[32]2067 MHz,different,bios,FF
+memory,fclk_2067,Infinity Fabric Frequency and Dividers,9A,94,11269,[FFFF]Auto,[813]2067 MHz,different,auto,FFFF
+memory,fclk_2067,FCLK Frequency,3013,862,13254,[00]Auto,[813]2067 MHz,different,bios,00
+memory,fclk_2067,Fclk VDCI Mode Pref,9C,216,11362,[FF]Auto,[FF]Auto,conform,auto,FF
+memory,fclk_2067,SyncFifo Mode Override,14A,26D,4457,[01]Disable,[01]Disable,conform,bios,FF
+memory,fclk_2100,Infinity Fabric Frequency and Dividers,149,269,4371,[33]2100 MHz,[33]2100 MHz,conform,bios,FF
+memory,fclk_2100,Infinity Fabric Frequency and Dividers,9A,94,11269,[FFFF]Auto,[834]2100 MHz,different,auto,FFFF
+memory,fclk_2100,FCLK Frequency,3013,862,13254,[00]Auto,[834]2100 MHz,different,bios,00
+memory,fclk_2100,Fclk VDCI Mode Pref,9C,216,11362,[FF]Auto,[FF]Auto,conform,auto,FF
+memory,fclk_2100,SyncFifo Mode Override,14A,26D,4457,[01]Disable,[01]Disable,conform,bios,FF
+memory,fclk_2133,Infinity Fabric Frequency and Dividers,149,269,4371,[33]2100 MHz,[34]2133 MHz,different,bios,FF
+memory,fclk_2133,Infinity Fabric Frequency and Dividers,9A,94,11269,[FFFF]Auto,[855]2133 MHz,different,auto,FFFF
+memory,fclk_2133,FCLK Frequency,3013,862,13254,[00]Auto,[855]2133 MHz,different,bios,00
+memory,fclk_2133,Fclk VDCI Mode Pref,9C,216,11362,[FF]Auto,[FF]Auto,conform,auto,FF
+memory,fclk_2133,SyncFifo Mode Override,14A,26D,4457,[01]Disable,[01]Disable,conform,bios,FF
+memory,fclk_2167,Infinity Fabric Frequency and Dividers,149,269,4371,[33]2100 MHz,[35]2167 MHz,different,bios,FF
+memory,fclk_2167,Infinity Fabric Frequency and Dividers,9A,94,11269,[FFFF]Auto,[877]2167 MHz,different,auto,FFFF
+memory,fclk_2167,FCLK Frequency,3013,862,13254,[00]Auto,[877]2167 MHz,different,bios,00
+memory,fclk_2167,Fclk VDCI Mode Pref,9C,216,11362,[FF]Auto,[FF]Auto,conform,auto,FF
+memory,fclk_2167,SyncFifo Mode Override,14A,26D,4457,[01]Disable,[01]Disable,conform,bios,FF
+memory,trefi_60000,Refresh Interval,301C,22AE,18611,"""Auto""",60000,different,catalog,Auto
+memory,trefi_60000,Refresh Interval,1C3,878,18618,<0>,60000,different,bios,<0>
+memory,trefi_65535,Refresh Interval,301C,22AE,18611,"""Auto""",65535,different,catalog,Auto
+memory,trefi_65535,Refresh Interval,1C3,878,18618,<0>,65535,different,bios,<0>
+memory,twr_48,Twr,301B,2286,18596,"""Auto""",48,different,catalog,Auto
+memory,twr_48,Twr,1C2,876,18603,<0>,48,different,bios,<0>
+memory,nitro,DDR5 Nitro Mode,20,1B2,10047,[01]Enable,[01]Enable,conform,auto,FF
+memory,nitro,DDR5 Nitro Mode,20C,8D7,19589,[01]Enabled,[01]Enabled,conform,bios,FF
+memory,nitro,DDR5 Robust Training Mode,21,1B3,10056,[01]Enable,[01]Enable,conform,auto,FF
+memory,nitro,DDR5 Robust Training Mode,20D,8D8,19599,[01]Enabled,[01]Enabled,conform,bios,FF
+memory,nitro,Nitro RX Data,22,1B4,10065,[01]1,[01]1,conform,auto,FF
+memory,nitro,Nitro RX Data,20E,8D9,19609,[01]1,[01]1,conform,bios,FF
+memory,nitro,Nitro TX Data,23,1B5,10075,[03]3,[03]3,conform,auto,FF
+memory,nitro,Nitro TX Data,20F,8DA,19620,[03]3,[03]3,conform,bios,FF
+memory,nitro,Nitro Control Line,24,1B6,10087,[01]1,[01]1,conform,auto,FF
+memory,nitro,Nitro Control Line,210,8DB,19633,[01]1,[01]1,conform,bios,FF
+memory,nitro,Nitro Rx Burst Length,25,1B7,10097,[03]8X,[03]8X,conform,auto,FF
+memory,nitro,Nitro Rx Burst Length,211,8DC,19644,[03]8x,[03]8x,conform,bios,FF
+memory,nitro,Nitro Tx Burst Length,26,1B8,10108,[03]8X,[03]8X,conform,auto,FF
+memory,nitro,Nitro Tx Burst Length,212,8DD,19656,[03]8x,[03]8x,conform,bios,FF
+memory,nitro,Nitro DFE Vref Offset Limits,27,1D8,10119,[01]Disable,[01]Disable,conform,auto,FF
+memory,nitro,Nitro DFE Vref Offset Limits,213,8DE,19668,[01]Disabled,[01]Disabled,conform,bios,FF
+pcie,pcie_latency,PSPP Policy,7036,43,3542,[00]Disabled,[01]Performance,different,bios,0F
+pcie,pcie_latency,Extended Tag,321,9A,21421,[01]Enabled,[01]Enabled,conform,bios,00
+pcie,pcie_latency,BIOS Hot-Plug Support,337,B3,21637,[00]Disabled,[00]Disabled,conform,bios,01
+pcie,pcie_latency,Unpopulated Links,329,A3,21505,[01]Disabled,[01]Disabled,conform,bios,00
+pcie,pcie_latency,Chipset PCIE(G1) CTLE Optimization,392,129,22765,[01]Enabled,[01]Enabled,conform,bios,00
+pcie,pcie_latency,PCIEX16(G5) Link Mode,388,F9,22641,[05]GEN 5,[05]GEN 5,conform,bios,00
+cpu_perf,prefetchers,L1 Stream HW Prefetcher,30,21,1343,[01]Enable,[01]Enable,conform,bios,03
+cpu_perf,prefetchers,L2 Stream HW Prefetcher,31,22,1353,[01]Enable,[01]Enable,conform,bios,03
+cpu_perf,prefetchers,L1 Stride Prefetcher,32,AF,1363,[01]Enable,[01]Enable,conform,bios,03
+cpu_perf,prefetchers,L1 Region Prefetcher,33,B0,1373,[01]Enable,[01]Enable,conform,bios,03
+cpu_perf,prefetchers,L1 Burst Prefetch Mode,34,369,1383,[01]Enable,[01]Enable,conform,bios,03
+cpu_perf,prefetchers,L2 Up/Down Prefetcher,35,B1,1393,[01]Enable,[01]Enable,conform,bios,03
+cpu_perf,core_perf,CPPC Dynamic Preferred Cores,704A,2D9,4000,[01]Cache,[01]Cache,conform,bios,FF
+cpu_perf,core_perf,ACPI SRAT L3 Cache As NUMA Domain,44,1C6,1547,[01]Enabled,[01]Enabled,conform,bios,FF
+cpu_perf,core_perf,Corrector Branch Predictor,2A,375,1279,[01]Enabled,[01]Enabled,conform,bios,FF
+cpu_perf,core_perf,SoC/Uncore OC Mode,1029,18A,12472,[01]Enabled,[01]Enabled,conform,auto,FF
+cpu_perf,mwait_off,MONITOR and MWAIT disable,29,374,1269,[01]Enabled,[01]Enabled,conform,bios,FF
+cpu_perf,core_aggressive,Opcache Control,700E,2B,1082,[00]Enabled,[00]Enabled,conform,bios,FF
+cpu_perf,core_aggressive,Streaming Stores Control,18,2C,1092,[00]Enabled,[00]Enabled,conform,bios,FF
+cpu_perf,core_aggressive,Stretch mode for L3 DFLL,62,8F6,14481,[00]Disabled,[00]Disabled,conform,bios,FF
+cpu_perf,core_aggressive,Core tunings Configuration for gaming,1E,8F7,13312,[00]Legacy,[00]Legacy,conform,bios,FF
+power_adv,soc_d3_off,ACPI D3 Support,41,55,605,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,ACPI D3 Support,41,55,605,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,Internal PCIe GPP 0 D3,4A,68,680,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,Internal PCIe GPP 2 D3,50,6E,728,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC GPU D3,4B,69,688,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC HD Audio D3,4C,6B,696,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC USB3.1 D3,4D,6A,704,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC ACP D3,4E,6C,712,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC Azalia D3,4F,6D,720,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC USB2.0 D3,51,6F,736,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC USB3.1 for USB4 D3,52,70,744,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC USB4 D3,53,71,752,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,Internal USB4 PCIe Tunneling D3,54,72,760,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,soc_d3_off,SOC USB4 PCIe Endpoint D3,55,73,768,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,power_gating_off,ACP Power Gating,12,1A,87,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,power_gating_off,ACP CLock Gating,13,1B,95,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,power_gating_off,D3Cold Support,2B,29,412,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,power_gating_off,ACPI Sleep State,2FD,52,21028,[02]S3 (Suspend to RAM),[00]Suspend Disabled,different,bios,02
+power_adv,power_gating_off,ACPI _CST C1 Declaration,19,2E,1113,[00]Disabled,[00]Disabled,conform,bios,03
+power_adv,power_gating_off,DF Cstates,3E,3C,1485,[00]Disabled,[00]Disabled,conform,bios,FF
+power_adv,power_gating_off,NPU Deep Sleep Enable,7039,359,3573,[00]Disabled,[00]Disabled,conform,bios,01
+power_adv,misc_power,Enable Hibernation,2FC,54,21020,0,0,conform,bios,1
+power_adv,misc_power,SmartShift Enable,150,270,4508,[00]Disable,[00]Disable,conform,bios,0F
+power_adv,misc_power,STAPM Boost,155,274,4555,[00]0,[00]0,conform,bios,0F
+power_adv,misc_power,PME Turn Off Support,2E,2C,438,[00]Disabled,[00]Disabled,conform,unknown,
+power_adv,misc_power,Unused GPP Clocks Off,09,03,9,[01]Enabled,[01]Enabled,conform,unknown,
+power_adv,misc_power,GFXOFF,704E,2DB,4573,[01]Enable,[01]Enable,conform,bios,0F
+ras,error_reporting_off,Core Watchdog Timer Enable,36,23,1403,[00]Disabled,[00]Disabled,conform,bios,03
+ras,error_reporting_off,Freeze DF module queues on error,3D,3B,1475,[00]Disabled,[00]Disabled,conform,bios,03
+ras,error_reporting_off,PCIe All Port ECRC,E8,2D4,3512,[00]Disabled,[00]Disabled,conform,bios,0F
+ras,error_reporting_off,Advanced Error Reporting (AER),E9,2D6,3522,[00]Not Supported,[00]Not Supported,conform,bios,0F
+ras,error_reporting_off,Log Transparent Errors,27,372,1249,[00]Disabled,[00]Disabled,conform,bios,03
+ras,error_reporting_off,Platform First Error Handling,1A,27,1123,[00]Disabled,[00]Disabled,conform,bios,03
+ras,error_reporting_off,MCA error thresh enable,1B,2F,1133,[00]False,[00]False,conform,bios,FF
+ras,error_reporting_off,MCA FruText,1D,370,1151,[00]False,[00]False,conform,bios,01
+ras,error_reporting_off,Persistence mode for legacy endpoints,EE,358,3563,[00]Disabled,[00]Disabled,conform,bios,FF
+ras,error_reporting_off,SMART Self Test,300,5D,21046,0,0,conform,bios,1
+ras,error_reporting_off,Option ROM Messages,3C3,BC,26149,[00]Keep Current,[00]Keep Current,conform,bios,01
+ras,error_reporting_off,ABL Console Out Control,15D,A9,4681,[00]Disable,[00]Disable,conform,bios,02
+ras,ecc_off,ECC,02,171,980,[00]Disabled,[00]Disabled,conform,bios,FF
+ras,ecc_off,Data Scramble,7025,173,2969,[00]Disabled,[00]Disabled,conform,bios,FF
+ras,ecc_off,Disable Memory Error Injection,C4,170,2949,[01]True,[01]True,conform,bios,FF
+ras,ecc_off,PPIN Opt-in,1F,33,1170,[00]Disabled,[00]Disabled,conform,bios,FF
+ras,pcie_ari,PCIe ARI Support,E7,41,3502,[00]Disabled,[00]Disabled,conform,bios,0F
+ras,pcie_ari,PCIe ARI Enumeration,EA,42,3532,[00]Disable,[00]Disable,conform,bios,0F
+connectivity,usb4_off,USB4 (ASM4242 Controller) Support,7E9,4E,568,[00]Disabled,[00]Disabled,conform,unknown,
+connectivity,usb4_off,Native USB4,43,56,620,[00]Disabled,[00]Disabled,conform,unknown,
+connectivity,io_off,SR-IOV Support,31A,92,21385,[00]Disabled,[00]Disabled,conform,bios,00
+connectivity,io_off,Network Stack,369,00,22212,[00]Disabled,[00]Disabled,conform,bios,00
+connectivity,io_off,Onboard PCIE LAN PXE ROM,2FF,59,21037,[00]Disabled,[00]Disabled,conform,bios,01
+connectivity,io_off,USB power delivery in S4 state,2F20,D2,22623,[00]Disabled,[00]Disabled,conform,bios,01
+connectivity,io_off,USB power delivery in Soft Off state (S5),2F1F,D1,22614,[00]Disabled,[00]Disabled,conform,bios,01
+connectivity,io_off,Auto Install ASUS Utilities,3F1,CE,26596,[00]Disabled,[00]Disabled,conform,bios,01
+vrm,vrm_extreme,CPU Power Phase Control,92,945,15092,[03]Extreme,[03]Extreme,conform,bios,00
+vrm,vrm_extreme,CPU Power Duty Control,91,944,15083,[01]Extreme,[01]Extreme,conform,bios,00
+vrm,vrm_extreme,VDDSOC Power Phase Control,99,94F,15170,[03]Extreme,[03]Extreme,conform,bios,00
+vrm,vrm_extreme,VDDSOC Power Duty Control,98,950,15161,[01]Extreme,[01]Extreme,conform,bios,00
+vrm,vrm_protect,Prochot VRM Throttling,13,1A8,9999,[01]Disable,[01]Disable,conform,auto,FF
+vrm,vrm_protect,Prochot VRM Throttling,73,789,14734,[01]Disable,[01]Disable,conform,bios,FF
+vrm,vrm_protect,Peak Current Control,14,1AA,10008,[01]Disable,[01]Disable,conform,auto,FF
+vrm,vrm_protect,Peak Current Control,74,78A,14744,[01]Disable,[01]Disable,conform,bios,FF
+misc,misc_flags,App Compatibility Database,05,482,1008,[00]Disabled,[00]Disabled,conform,bios,02
+misc,misc_flags,Processor Aggregator Device,7E5,60,244,[00]Disabled,[00]Disabled,conform,unknown,
+misc,misc_flags,Setup Mode,3D4,89,26361,[00]Advanced Mode,[00]Advanced Mode,conform,bios,01
+misc,misc_flags,SMEE,25,B8,1229,[00]Disable,[00]Disable,conform,bios,03
+misc,misc_flags,LN2 Mode,E5,18F,12495,[00]Disabled,[00]Disabled,conform,auto,FF
+misc,misc_flags,PCIe loopback Mode,ED,1C7,3553,[00]Disabled,[00]Disabled,conform,bios,0F
+misc,misc_flags,Memory P-state,E4,3E0,3300,[00]Disabled,[00]Disabled,conform,bios,FF
+misc,misc_flags,Memory P-state,20B,8A6,19579,[00]Disabled,[00]Disabled,conform,bios,FF
+misc,misc_flags,SEV Control,16,36B,1054,[01]Disable,[01]Disable,conform,bios,FF
+misc,led_state,When system is in working state,2F17,04,22583,[03]Aura Off,[03]Aura Off,conform,bios,00

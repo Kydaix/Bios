@@ -1,0 +1,180 @@
+﻿category,tweak,question,catalog_token,catalog_offset,target,status,target_supported,all_ifr_variants_support_target,ifr_candidates
+base,rebar,Above 4G Decoding,,,01,present,True,True,Setup:317@90
+base,rebar,Resize BAR Support,,,01,present,True,True,Setup:319@91
+base,rebar,Launch CSM,,,00,present,True,True,Setup:2D50@BF
+base,cstates,Global C-state Control,,,00,present,True,True,AmdSetupSTXKRK:1@44 | AmdSetupRPL:1@29 | AmdSetupPHX:1@25
+base,cstates,Power Supply Idle Control,,,00,present,True,True,AmdSetupRPL:15@2DE
+base,virt,IOMMU,,,00,present,True,True,AmdSetupSTXKRK:2@21 | AmdSetupRPL:7034@3D | AmdSetupPHX:2@164
+base,virt,SVM Mode,,,00,present,True,True,Setup:30C@F1
+base,tsme,TSME,,,00,present,True,True,AmdSetupSTXKRK:7029@C2 | AmdSetupSTXKRK:7039@151 | AmdSetupRPL:7024@172 | AmdSetupPHX:7029@BF | AmdSetupPHX:7039@150
+base,igpu,Integrated Graphics,,,00,present,True,True,Setup:376@EC
+base,igpu,iGPU Configuration,,,00,present,True,True,AmdSetupSTXKRK:7042@26 | AmdSetupRPL:F1@44 | AmdSetupPHX:128@16C
+base,aspm,ASPM Support,,,00,present,True,True,Setup:325@9E
+base,aspm,Native ASPM,,,00,present,True,True,Setup:37B@E2
+base,aspm,CPU PCIE ASPM Mode Control,,,00,present,True,True,Setup:37C@E3
+base,aspm,PCIe Power Management Features,,,00,present,True,True,AmdSetupSTXKRK:1D5@49F | AmdSetupRPL:177@1CA | AmdSetupPHX:1D8@279
+base,aspm,Clock Power Management(CLKREQ#),,,00,present,True,True,AMD_PBS_SETUP:A@4
+base,aspm,Clock Power Management,,,00,present,True,True,Setup:333@AF
+base,aspm,PM L1 SS,,,00,present,True,True,AMD_PBS_SETUP:B@12
+base,spread,FCH Spread Spectrum,,,00,present,True,True,AmdSetupRPL:FB@63 | AmdSetupPHX:137@43B
+base,spread,Clock Spread Spectrum,,,02,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:61@466
+base,lul,Latency Under Load (LUL),,,00,present,True,True,AmdSetupSTXKRK:23@253 | AmdSetupRPL:2F@3DE
+base,security_off,Pluton Support,,,00,present,True,True,AmdSetupSTXKRK:7067@26C | AmdSetupRPL:7051@486 | AmdSetupPHX:7058@4D2
+base,security_off,Secured-core Auto enablement,,,00,present,True,True,AmdSetupSTXKRK:1B0@233 | AmdSetupRPL:158@2D0 | AmdSetupPHX:1B5@24C
+base,security_off,DRTM Support,,,00,present,True,True,AmdSetupSTXKRK:1B1@249 | AmdSetupRPL:159@37D | AmdSetupPHX:1B6@24D
+base,security_off,SMM Isolation Support,,,00,present,True,True,AmdSetupSTXKRK:1B2@24A | AmdSetupRPL:15A@37E | AmdSetupPHX:1B7@24E
+base,security_off,SecureBio Support,,,00,question_removed,False,False,
+base,security_off,SecureBio Camera Support,,,00,question_removed,False,False,
+cpu,pbo_base,Precision Boost Overdrive,9D,9A,02,present,True,True,AodSetupRpl:9D@9A
+cpu,pbo_base,PBO Limits,9E,9B,01,present,True,True,AodSetupRpl:9E@9B
+cpu,pbo_base,Precision Boost Overdrive Scalar Ctrl,A2,A8,01,present,True,True,AodSetupRpl:A2@A8
+cpu,pbo_base,Precision Boost Overdrive Scalar,A3,A9,3E8,present,True,True,AodSetupRpl:A3@A9
+cpu,pbo_boost,CPU Boost Clock Override,A4,AD,01,present,True,True,AodSetupRpl:A4@AD
+cpu,pbo_boost,Max CPU Boost Clock Override(+),A5,AE,200,present,True,True,AodSetupRpl:A5@AE
+cpu,curve_neg30,Curve Optimizer,AF,B6,01,present,True,True,AodSetupRpl:AF@B6
+cpu,curve_neg30,All Core Curve Optimizer Sign,B0,B7,01,present,True,True,AodSetupRpl:B0@B7
+cpu,curve_neg30,All Core Curve Optimizer Magnitude,B1,B8,30,present,True,True,AodSetupRpl:B1@B8
+cpu,asus_neutralize,Precision Boost Overdrive,2FD0,46C,FF,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:2FD0@46C
+cpu,asus_neutralize,Precision Boost Overdrive Scalar,7D,485,00,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:7D@485
+cpu,asus_neutralize,CPU Boost Clock Override,7F,48A,FF,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:7F@48A
+cpu,asus_neutralize,Max CPU Boost Clock Override(+),2FD6,D46,Auto,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:2FD6@D46
+cpu,asus_neutralize,Max CPU Boost Clock Override(+),80,48B,0,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:80@48B
+cpu,asus_neutralize,Curve Optimizer,C9,6BC,00,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:C9@6BC
+cpu,asus_neutralize,All Core Curve Optimizer Sign,CA,6BD,00,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:CA@6BD
+cpu,asus_neutralize,All Core Curve Optimizer Magnitude,CB,6BE,0,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:CB@6BE
+memory,mem_latency,Power Down Enable,,,00,present,True,True,AodSetupStx:82@90 | AodSetupRpl:8B@93 | AmdSetupSTXKRK:8F@BF | AmdSetupSTXKRK:F5@136 | AmdSetupRPL:BF@16F | AmdSetupPHX:90@BB | AmdSetupPHX:F4@139 | VARSTORE_OCMR_SETTINGS_NAME:1B7@8C2 | AodSetupPhx:69@91
+memory,mem_latency,UCLK DIV1 MODE,,,01,present,True,True,AodSetupStx:92@93 | AodSetupRpl:9B@96 | VARSTORE_OCMR_SETTINGS_NAME:1B8@8C4 | AodSetupPhx:77@94
+memory,mem_latency,Gear Down Mode,,,01,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:1B9@8CB
+memory,mem_latency,Memory Context Restore,,,00,present,True,True,AmdSetupSTXKRK:A4@4CF | AmdSetupRPL:E3@26C | AmdSetupPHX:A3@437 | VARSTORE_OCMR_SETTINGS_NAME:3033@8C3
+memory,mem_latency,Fclk VDCI Mode Pref,,,FF,present,True,True,AodSetupRpl:9C@216
+memory,fclk_2067,Infinity Fabric Frequency and Dividers,149,269,32,present,True,True,AmdSetupRPL:149@269
+memory,fclk_2067,Infinity Fabric Frequency and Dividers,9A,94,813,present,True,True,AodSetupRpl:9A@94
+memory,fclk_2067,FCLK Frequency,3013,862,813,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:3013@862
+memory,fclk_2067,Fclk VDCI Mode Pref,9C,216,FF,present,True,True,AodSetupRpl:9C@216
+memory,fclk_2067,SyncFifo Mode Override,14A,26D,01,present,True,True,AmdSetupRPL:14A@26D
+memory,fclk_2100,Infinity Fabric Frequency and Dividers,149,269,33,present,True,True,AmdSetupRPL:149@269
+memory,fclk_2100,Infinity Fabric Frequency and Dividers,9A,94,834,present,True,True,AodSetupRpl:9A@94
+memory,fclk_2100,FCLK Frequency,3013,862,834,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:3013@862
+memory,fclk_2100,Fclk VDCI Mode Pref,9C,216,FF,present,True,True,AodSetupRpl:9C@216
+memory,fclk_2100,SyncFifo Mode Override,14A,26D,01,present,True,True,AmdSetupRPL:14A@26D
+memory,fclk_2133,Infinity Fabric Frequency and Dividers,149,269,34,present,True,True,AmdSetupRPL:149@269
+memory,fclk_2133,Infinity Fabric Frequency and Dividers,9A,94,855,present,True,True,AodSetupRpl:9A@94
+memory,fclk_2133,FCLK Frequency,3013,862,855,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:3013@862
+memory,fclk_2133,Fclk VDCI Mode Pref,9C,216,FF,present,True,True,AodSetupRpl:9C@216
+memory,fclk_2133,SyncFifo Mode Override,14A,26D,01,present,True,True,AmdSetupRPL:14A@26D
+memory,fclk_2167,Infinity Fabric Frequency and Dividers,149,269,35,present,True,True,AmdSetupRPL:149@269
+memory,fclk_2167,Infinity Fabric Frequency and Dividers,9A,94,877,present,True,True,AodSetupRpl:9A@94
+memory,fclk_2167,FCLK Frequency,3013,862,877,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:3013@862
+memory,fclk_2167,Fclk VDCI Mode Pref,9C,216,FF,present,True,True,AodSetupRpl:9C@216
+memory,fclk_2167,SyncFifo Mode Override,14A,26D,01,present,True,True,AmdSetupRPL:14A@26D
+memory,trefi_60000,Refresh Interval,301C,22AE,60000,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:301C@22AE
+memory,trefi_60000,Refresh Interval,1C3,878,60000,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:1C3@878
+memory,trefi_65535,Refresh Interval,301C,22AE,65535,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:301C@22AE
+memory,trefi_65535,Refresh Interval,1C3,878,65535,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:1C3@878
+memory,twr_48,Twr,301B,2286,48,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:301B@2286
+memory,twr_48,Twr,1C2,876,48,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:1C2@876
+memory,nitro,DDR5 Nitro Mode,20,1B2,01,present,True,True,AodSetupRpl:20@1B2
+memory,nitro,DDR5 Nitro Mode,20C,8D7,01,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:20C@8D7
+memory,nitro,DDR5 Robust Training Mode,21,1B3,01,present,True,True,AodSetupRpl:21@1B3
+memory,nitro,DDR5 Robust Training Mode,20D,8D8,01,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:20D@8D8
+memory,nitro,Nitro RX Data,22,1B4,01,present,True,True,AodSetupRpl:22@1B4
+memory,nitro,Nitro RX Data,20E,8D9,01,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:20E@8D9
+memory,nitro,Nitro TX Data,23,1B5,03,present,True,True,AodSetupRpl:23@1B5
+memory,nitro,Nitro TX Data,20F,8DA,03,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:20F@8DA
+memory,nitro,Nitro Control Line,24,1B6,01,present,True,True,AodSetupRpl:24@1B6
+memory,nitro,Nitro Control Line,210,8DB,01,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:210@8DB
+memory,nitro,Nitro Rx Burst Length,25,1B7,03,present,True,True,AodSetupRpl:25@1B7
+memory,nitro,Nitro Rx Burst Length,211,8DC,03,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:211@8DC
+memory,nitro,Nitro Tx Burst Length,26,1B8,03,present,True,True,AodSetupRpl:26@1B8
+memory,nitro,Nitro Tx Burst Length,212,8DD,03,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:212@8DD
+memory,nitro,Nitro DFE Vref Offset Limits,27,1D8,01,present,True,True,AodSetupRpl:27@1D8
+memory,nitro,Nitro DFE Vref Offset Limits,213,8DE,01,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:213@8DE
+pcie,pcie_latency,PSPP Policy,,,01,present,True,False,AmdSetupSTXKRK:122@248 | AmdSetupRPL:7036@43 | AmdSetupPHX:122@16A
+pcie,pcie_latency,Extended Tag,,,01,present,True,True,Setup:321@9A
+pcie,pcie_latency,BIOS Hot-Plug Support,,,00,present,True,True,Setup:337@B3
+pcie,pcie_latency,Unpopulated Links,,,01,present,True,True,Setup:329@A3
+pcie,pcie_latency,Chipset PCIE(G1) CTLE Optimization,,,01,present,True,True,Setup:392@129
+pcie,pcie_latency,PCIEX16(G5) Link Mode,,,05,present,True,False,Setup:388@F9 | Setup:389@F9
+cpu_perf,prefetchers,L1 Stream HW Prefetcher,,,01,present,True,True,AmdSetupRPL:30@21 | AmdSetupPHX:2A@47
+cpu_perf,prefetchers,L2 Stream HW Prefetcher,,,01,present,True,True,AmdSetupSTXKRK:28@3B | AmdSetupRPL:31@22 | AmdSetupPHX:2D@4A
+cpu_perf,prefetchers,L1 Stride Prefetcher,,,01,present,True,True,AmdSetupRPL:32@AF | AmdSetupPHX:2B@48
+cpu_perf,prefetchers,L1 Region Prefetcher,,,01,present,True,True,AmdSetupRPL:33@B0 | AmdSetupPHX:2C@49
+cpu_perf,prefetchers,L1 Burst Prefetch Mode,,,01,present,True,True,AmdSetupRPL:34@369
+cpu_perf,prefetchers,L2 Up/Down Prefetcher,,,01,present,True,True,AmdSetupSTXKRK:29@3C | AmdSetupRPL:35@B1 | AmdSetupPHX:2E@4B
+cpu_perf,core_perf,CPPC Dynamic Preferred Cores,,,01,present,True,True,AmdSetupRPL:704A@2D9
+cpu_perf,core_perf,ACPI SRAT L3 Cache As NUMA Domain,,,01,present,True,True,AmdSetupRPL:44@1C6
+cpu_perf,core_perf,Corrector Branch Predictor,,,01,present,True,True,AmdSetupRPL:2A@375
+cpu_perf,core_perf,SoC/Uncore OC Mode,,,01,present,True,True,AodSetupStx:DB@187 | AodSetupRpl:1029@18A | AodSetupPhx:1026@183
+cpu_perf,mwait_off,MONITOR and MWAIT disable,,,01,present,True,True,AmdSetupSTXKRK:1F@51 | AmdSetupRPL:29@374 | AmdSetupPHX:25@3A
+cpu_perf,core_aggressive,Opcache Control,,,00,present,True,True,AmdSetupSTXKRK:700E@46 | AmdSetupRPL:700E@2B | AmdSetupPHX:700E@27
+cpu_perf,core_aggressive,Streaming Stores Control,,,00,present,True,True,AmdSetupSTXKRK:17@47 | AmdSetupRPL:18@2C | AmdSetupPHX:1A@2E
+cpu_perf,core_aggressive,Stretch mode for L3 DFLL,,,00,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:62@8F6
+cpu_perf,core_aggressive,Core tunings Configuration for gaming,,,00,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:1E@8F7
+power_adv,soc_d3_off,ACPI D3 Support,,,00,present,True,True,AMD_PBS_SETUP:41@55
+power_adv,soc_d3_off,ACPI D3 Support,,,00,present,True,True,AMD_PBS_SETUP:41@55
+power_adv,soc_d3_off,Internal PCIe GPP 0 D3,,,00,present,True,True,AMD_PBS_SETUP:4A@68
+power_adv,soc_d3_off,Internal PCIe GPP 2 D3,,,00,present,True,True,AMD_PBS_SETUP:50@6E
+power_adv,soc_d3_off,SOC GPU D3,,,00,present,True,True,AMD_PBS_SETUP:4B@69
+power_adv,soc_d3_off,SOC HD Audio D3,,,00,present,True,True,AMD_PBS_SETUP:4C@6B
+power_adv,soc_d3_off,SOC USB3.1 D3,,,00,present,True,True,AMD_PBS_SETUP:4D@6A
+power_adv,soc_d3_off,SOC ACP D3,,,00,present,True,True,AMD_PBS_SETUP:4E@6C
+power_adv,soc_d3_off,SOC Azalia D3,,,00,present,True,True,AMD_PBS_SETUP:4F@6D
+power_adv,soc_d3_off,SOC USB2.0 D3,,,00,present,True,True,AMD_PBS_SETUP:51@6F
+power_adv,soc_d3_off,SOC USB3.1 for USB4 D3,,,00,present,True,True,AMD_PBS_SETUP:52@70
+power_adv,soc_d3_off,SOC USB4 D3,,,00,present,True,True,AMD_PBS_SETUP:53@71
+power_adv,soc_d3_off,Internal USB4 PCIe Tunneling D3,,,00,present,True,True,AMD_PBS_SETUP:54@72
+power_adv,soc_d3_off,SOC USB4 PCIe Endpoint D3,,,00,present,True,True,AMD_PBS_SETUP:55@73
+power_adv,power_gating_off,ACP Power Gating,,,00,present,True,True,AMD_PBS_SETUP:12@1A
+power_adv,power_gating_off,ACP CLock Gating,,,00,present,True,True,AMD_PBS_SETUP:13@1B
+power_adv,power_gating_off,D3Cold Support,,,00,present,True,True,AMD_PBS_SETUP:2B@29
+power_adv,power_gating_off,ACPI Sleep State,,,00,present,True,True,Setup:2FD@52
+power_adv,power_gating_off,ACPI _CST C1 Declaration,,,00,present,True,True,AmdSetupSTXKRK:18@49 | AmdSetupRPL:19@2E | AmdSetupPHX:1C@30
+power_adv,power_gating_off,DF Cstates,,,00,present,True,True,AmdSetupSTXKRK:34@5F | AmdSetupRPL:3E@3C | AmdSetupPHX:39@57
+power_adv,power_gating_off,NPU Deep Sleep Enable,,,00,present,True,True,AmdSetupRPL:7039@359
+power_adv,misc_power,Enable Hibernation,,,0,present,True,True,Setup:2FC@54
+power_adv,misc_power,SmartShift Enable,,,00,present,True,True,AmdSetupSTXKRK:1AB@256 | AmdSetupRPL:150@270 | AmdSetupPHX:1B0@238
+power_adv,misc_power,STAPM Boost,,,00,present,True,True,AmdSetupSTXKRK:176@1AA | AmdSetupRPL:155@274 | AmdSetupPHX:17C@1C2
+power_adv,misc_power,PME Turn Off Support,,,00,present,True,True,AMD_PBS_SETUP:2E@2C
+power_adv,misc_power,Unused GPP Clocks Off,,,01,present,True,True,AMD_PBS_SETUP:9@3
+power_adv,misc_power,GFXOFF,,,01,present,True,True,AmdSetupRPL:704E@2DB
+ras,error_reporting_off,Core Watchdog Timer Enable,,,00,present,True,True,AmdSetupSTXKRK:7016@3D | AmdSetupRPL:36@23 | AmdSetupPHX:7015@4C
+ras,error_reporting_off,Freeze DF module queues on error,,,00,present,True,True,AmdSetupSTXKRK:30@5B | AmdSetupRPL:3D@3B | AmdSetupPHX:35@53
+ras,error_reporting_off,PCIe All Port ECRC,,,00,present,True,True,AmdSetupRPL:E8@2D4
+ras,error_reporting_off,Advanced Error Reporting (AER),,,00,present,True,True,AmdSetupSTXKRK:123@4CD | AmdSetupRPL:E9@2D6 | AmdSetupPHX:126@439
+ras,error_reporting_off,Log Transparent Errors,,,00,present,True,True,AmdSetupSTXKRK:1D@4F | AmdSetupRPL:27@372 | AmdSetupPHX:23@38
+ras,error_reporting_off,Platform First Error Handling,,,00,present,True,True,AmdSetupSTXKRK:16@42 | AmdSetupRPL:1A@27 | AmdSetupPHX:16@23
+ras,error_reporting_off,MCA error thresh enable,,,00,present,True,True,AmdSetupSTXKRK:19@4A | AmdSetupRPL:1B@2F | AmdSetupPHX:1D@31
+ras,error_reporting_off,MCA FruText,,,00,present,True,True,AmdSetupRPL:1D@370
+ras,error_reporting_off,Persistence mode for legacy endpoints,,,00,present,True,True,AmdSetupRPL:EE@358
+ras,error_reporting_off,SMART Self Test,,,0,present,True,True,Setup:300@5D | Setup:371@5D
+ras,error_reporting_off,Option ROM Messages,,,00,present,True,True,Setup:3C3@BC | Setup:3D1@BC
+ras,error_reporting_off,ABL Console Out Control,,,00,present,True,True,AmdSetupSTXKRK:1B5@22D | AmdSetupRPL:15D@A9 | AmdSetupPHX:1BC@24F
+ras,ecc_off,ECC,,,00,present,True,True,AmdSetupSTXKRK:3@C1 | AmdSetupRPL:2@171 | AmdSetupPHX:3@BD
+ras,ecc_off,Data Scramble,,,00,present,True,True,AmdSetupSTXKRK:702A@C3 | AmdSetupSTXKRK:703A@152 | AmdSetupRPL:7025@173 | AmdSetupPHX:702A@C0 | AmdSetupPHX:703A@151
+ras,ecc_off,Disable Memory Error Injection,,,01,present,True,True,AmdSetupSTXKRK:91@C0 | AmdSetupSTXKRK:10A@150 | AmdSetupRPL:C4@170 | AmdSetupPHX:91@BC | AmdSetupPHX:109@14E
+ras,ecc_off,PPIN Opt-in,,,00,present,True,True,AmdSetupRPL:1F@33
+ras,pcie_ari,PCIe ARI Support,,,00,present,True,True,AmdSetupSTXKRK:11E@25 | AmdSetupRPL:E7@41 | AmdSetupPHX:120@168
+ras,pcie_ari,PCIe ARI Enumeration,,,00,present,True,True,AmdSetupRPL:EA@42 | AmdSetupPHX:121@169
+connectivity,usb4_off,USB4 (ASM4242 Controller) Support,,,00,present,True,True,AMD_PBS_SETUP:7E9@4E
+connectivity,usb4_off,Native USB4,,,00,present,True,True,AMD_PBS_SETUP:43@56
+connectivity,io_off,SR-IOV Support,,,00,present,True,True,Setup:31A@92
+connectivity,io_off,Network Stack,,,00,present,True,True,NetworkStackVar:369@0
+connectivity,io_off,Onboard PCIE LAN PXE ROM,,,00,present,True,True,Setup:2FF@59
+connectivity,io_off,USB power delivery in S4 state,,,00,present,True,True,Setup:2F20@D2
+connectivity,io_off,USB power delivery in Soft Off state (S5),,,00,present,True,True,Setup:2F1F@D1
+connectivity,io_off,Auto Install ASUS Utilities,,,00,present,True,True,Setup:3F1@CE
+vrm,vrm_extreme,CPU Power Phase Control,,,03,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:92@945
+vrm,vrm_extreme,CPU Power Duty Control,,,01,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:91@944
+vrm,vrm_extreme,VDDSOC Power Phase Control,,,03,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:99@94F
+vrm,vrm_extreme,VDDSOC Power Duty Control,,,01,present,True,True,VARSTORE_OCMR_SETTINGS_NAME:98@950
+vrm,vrm_protect,Prochot VRM Throttling,,,01,present,True,True,AodSetupRpl:13@1A8 | VARSTORE_OCMR_SETTINGS_NAME:73@789
+vrm,vrm_protect,Peak Current Control,,,01,present,True,True,AodSetupRpl:14@1AA | VARSTORE_OCMR_SETTINGS_NAME:74@78A
+misc,misc_flags,App Compatibility Database,,,00,present,True,True,AmdSetupRPL:5@482
+misc,misc_flags,Processor Aggregator Device,,,00,present,True,True,AMD_PBS_SETUP:7E5@60
+misc,misc_flags,Setup Mode,,,00,present,True,True,Setup:3D4@89 | Setup:3E4@89
+misc,misc_flags,SMEE,,,00,present,True,True,AmdSetupRPL:25@B8
+misc,misc_flags,LN2 Mode,,,00,present,True,True,AodSetupStx:DD@18D | AodSetupRpl:E5@18F | AodSetupPhx:93@189
+misc,misc_flags,PCIe loopback Mode,,,00,present,True,True,AmdSetupSTXKRK:11F@244 | AmdSetupRPL:ED@1C7 | AmdSetupPHX:125@16B
+misc,misc_flags,Memory P-state,,,00,present,True,True,AmdSetupRPL:E4@3E0 | VARSTORE_OCMR_SETTINGS_NAME:20B@8A6
+misc,misc_flags,SEV Control,,,01,present,True,True,AmdSetupRPL:16@36B
+misc,led_state,When system is in working state,,,03,present,True,True,SetupLedData:2F17@4

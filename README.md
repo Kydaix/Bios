@@ -49,11 +49,23 @@ Les copies du menu **ASUS Ai/Extreme Tweaker** sont remises sur **Auto** (tweak
 | Catégorie | Contenu | Risque |
 |---|---|---|
 | **Système & Latence** | ReBAR, C-states, virtualisation, TSME, iGPU, ASPM, Spread Spectrum, firmware sécurité | Sûr → Moyen |
-| **CPU – PBO (AMD OC)** | PBO Advanced + Scalar 3X, Boost +200 MHz, Curve Optimizer −30, neutralisation ASUS | Sûr → Élevé |
+| **CPU – PBO (AMD OC)** | PBO Advanced + Scalar 10X, Boost +200 MHz, Curve Optimizer −15, neutralisation ASUS | Sûr → Élevé |
 | **Mémoire DDR5** | Latence (UCLK/Gear Down…), FCLK 2067→2167 (exclusifs), tREFI, tWR, Nitro | Expérimental |
 | **PCIe** | PSPP, Extended Tag, Gen5 link mode… | Expérimental |
 
 Les paliers **FCLK** et **tREFI** sont mutuellement exclusifs (radio) : sélectionner l'un désélectionne l'autre.
+
+Le profil `curve_neg15` cible **All Cores / Negative / 15** dans AMD Overclocking.
+Il reste exclu de la sélection recommandée ; la remise par défaut conserve une magnitude de 0.
+
+### Compatibilité BIOS 2503
+
+L'[audit du firmware](analysis/VERIF_BIOS2503_2026-10-06.md) et l'[export live du 6 octobre 2026](analysis/VERIF_LIVE_BIOS2503_2026-10-06.md)
+confirment 177 règles présentes sur 179 et les 59 sélecteurs token/offset explicites.
+Les deux règles SecureBio, supprimées du BIOS 2503, sont signalées absentes et ignorées.
+Les rapports enregistrent le catalogue au moment de l'audit, avant le changement du CO de −30 à −15.
+Le [contrôle de la nouvelle cible −15](analysis/BIOS2503_curve_neg15_validation.json) utilise le même export et les définitions IFR ;
+les valeurs de la machine sont restées inchangées (CO −5 lors de l'export).
 
 ### L'interrupteur décide dans les deux sens
 
